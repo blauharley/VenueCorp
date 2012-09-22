@@ -67,4 +67,24 @@
     end
   end
   
+  def get_events_by_format
+    @events = []
+    values = params[:value].split(',')
+    values.each do |val|
+      event = Event.where(params[:attr] => val)
+      if !event.empty?
+        event.each do |e|
+          @events << e
+        end
+      end
+    end
+    
+    @events = @events.sort
+    
+    respond_to do |format|
+      format.xml { render xml: @events.to_xml }
+      format.json { render json: @events.to_json }
+    end
+  end
+  
 end

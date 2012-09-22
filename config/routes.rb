@@ -7,6 +7,7 @@ EventApp::Application.routes.draw do
     match 'csv_upload' => 'Events#upload_csv', :as => 'csv_upload'
     match 'eventFeedRss/:ids' => 'Events#get_rss_feed', :as => 'event_feed'
     match 'allEventFeedRss' => 'Events#get_all_rss_feed', :as => 'all_event_feed'
+    match 'getEventsByFormat/:attr/:value' => 'Events#get_events_by_format'
     
   controller :Venue do
     match 'earlyEvents' => :show_early_events, :as => 'early_events'
