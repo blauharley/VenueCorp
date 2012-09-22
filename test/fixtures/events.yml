@@ -1,0 +1,41 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  province: MyString
+  region: MyString
+  city: MyString
+  main_category: MyString
+  sub_category: MyString
+  highlight: false
+  venue: MyString
+  start_date: 2012-09-21
+  end_date: 2012-09-21
+  start_date_time: 2012-09-21 16:01:56
+  end_date_time: 2012-09-21 16:01:56
+  photo_url: MyString
+  title: MyString
+  short_description: MyText
+  long_description: MyText
+  venue_url: MyString
+  email: MyString
+  tel_nr: MyString
+
+two:
+  province: MyString
+  region: MyString
+  city: MyString
+  main_category: MyString
+  sub_category: MyString
+  highlight: false
+  venue: MyString
+  start_date: 2012-09-21
+  end_date: 2012-09-21
+  start_date_time: 2012-09-21 16:01:56
+  end_date_time: 2012-09-21 16:01:56
+  photo_url: MyString
+  title: MyString
+  short_description: MyText
+  long_description: MyText
+  venue_url: MyString
+  email: MyString
+  tel_nr: MyString

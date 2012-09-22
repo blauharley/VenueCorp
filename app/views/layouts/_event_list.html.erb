@@ -1,0 +1,49 @@
+﻿<% if !events.empty? %>
+  <h2>Veranstaltungen</h2>
+  <table>
+    <tr>
+      <td>Bundesland</td>
+      <td>Region</td>
+      <td>Ort</td>
+      <td>Haupt-Kategorie</td>
+      <td>Unter-Kategorie</td>
+      <td>Highlight</td>
+      <td>Veranstaltungsort</td>
+      <td>Veranstaltung Start Tag</td>
+      <td>Veranstaltung Ende Tag</td>
+      <td>Veranstaltung Start Uhrzeit</td>
+      <td>Veranstaltung Ende Uhrzeit</td>
+      <td>Foto</td>
+      <td>Titel</td>
+      <td>Kurzbeschreibung</td>
+      <td>Langbeschreibung</td>
+      <td>Website</td>
+      <td>Email</td>
+      <td>Telefon Nr.</td>
+    </tr>
+    
+    <% for event in events %>
+      <tr>
+        <td><%= event.province %></td>
+        <td><%= event.region %></td>
+        <td><%= event.city %></td>
+        <td><%= event.main_category %></td>
+        <td><%= event.sub_category %></td>
+        <td><%= event.highlight %></td>
+        <td><%= event.venue %></td>
+        <td><%= event.start_date %></td>
+        <td><%= event.end_date %></td>
+        <td><%= event.start_date_time %></td>
+        <td><%= event.end_date_time %></td>
+        <td><%= event.photo_url %></td>
+        <td><%= event.title %></td>
+        <td><%= event.short_description %></td>
+        <td><%= event.long_description %></td>
+        <td><%= event.venue_url %></td>
+        <td><%= event.email %></td>
+        <td><%= event.tel_nr %></td>
+      </tr>
+    
+    <% end %>
+  </table>
+<% end %>

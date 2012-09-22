@@ -1,0 +1,20 @@
+﻿<h1>Event-Kalender</h1>
+
+<p>Hier login</p>
+
+<h3>Suche</h3>
+<%= render 'layouts/search_form' %>
+<%= render 'layouts/csv_upload_form' %>
+
+<table>
+  <tr><td><%= link_to 'Alle Veranstaltungen', events_path %></td></tr>
+  <tr><td><%= link_to 'Früheste Veranstaltungen', early_events_path %></td></tr>
+  <tr><td><%= link_to 'Nach Orte', place_events_path %></td></tr>
+  <tr><td><%= link_to 'Gruppen', group_events_path  %></td></tr>
+  <tr><td><%= link_to 'Verstanstaltung hinzufügen', new_event_path %></td></tr>
+</table>
+
+<%= link_to 'RSS Feed', event_feed_path( get_event_ids(@events) ) %>
+<%= render 'layouts/event_list', :events => @events %>
+
+

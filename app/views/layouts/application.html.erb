@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>EventApp</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  <%= auto_discovery_link_tag(:rss, {:controller => "Events", :action => "get_all_rss_feed"}) %>
+</head>
+<body>
+
+<div><%= notice %></div>
+
+<%= yield %>
+
+</body>
+</html>
