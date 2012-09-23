@@ -9,15 +9,34 @@
   end
   
   def create
-    if @event.save
+    event = Event.new(:province => params[:event][:province], :region => params[:event][:region], :city => params[:event][:city], :main_category => params[:event][:main_category], :sub_category => params[:event][:sub_category], :venue => params[:event][:venue], :start_date => params[:event][:start_date], :end_date => params[:event][:end_date], :photo_url => params[:event][:photo_url], :title => params[:event][:title], :short_description => params[:event][:short_description], :long_description => params[:event][:long_description], :venue_url => params[:event][:venue_url], :email => params[:event][:email], :tel_nr => params[:event][:tel_nr] )
+    
+    event_start_time = (Time.parse(params[:event][:start_date])).strftime('%Y-%m-%d ') + (Time.parse(params[:event][:start_date_time])).strftime('%H:%M:%S')
+    event_end_time = (Time.parse(params[:event][:end_date])).strftime('%Y-%m-%d') + (Time.parse(params[:event][:end_date_time])).strftime('%H:%M:%S')
+    highlight = if params[:event][:highlight].to_i == 0 then false else true end
+    
+    event.update_attributes(:start_date_time => event_start_time, :end_date_time => event_end_time, :highlight => highlight)
+    
+    if event.save
       redirect_to :root, :notice => 'Veranstaltung erfolgreich angelegt.'
     else
       redirect_to :root, :notice => 'Veranstaltung konnte nicht angelegt werden'
     end
   end
   
+  def edit
+    @event = Event.find(params[:id])
+  end
+  
+  def update
+    Event.find(params[:id]).update_attributes(params[:event])
+    redirect_to :root, :notice => 'Veranstaltung erfolgreich bearbeitet.'
+  end
+  
   def upload_csv
- 
+    
+    redirect_to :back, :notice => 'Zurzeit außer Betrieb!'
+    return
     if params[:csv_file].content_type != 'text/csv'
       redirect_to :back, :notice => 'Datei: ' << params[:csv_file].original_filename << ' muss eine *.csv-Datei sein.'
       return

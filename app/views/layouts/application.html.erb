@@ -1,10 +1,16 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
   <title>EventApp</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
+  
+  <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
   <%= javascript_include_tag "application" %>
+  
   <%= csrf_meta_tags %>
+  
   <%= auto_discovery_link_tag(:rss, {:controller => "Events", :action => "get_all_rss_feed"}) %>
 </head>
 <body>
@@ -14,4 +20,50 @@
 <%= yield %>
 
 </body>
+<script>
+  
+  $(document).ready(function() {
+    /*
+    jQuery(function($){
+      $.datepicker.regional['de'] = {
+        closeText: 'schließen',
+        prevText: '&#x3c;zurück',
+        nextText: 'Vor&#x3e;',
+        currentText: 'heute',
+        monthNames: ['Januar','Februar','März','April','Mai','Juni',
+        'Juli','August','September','Oktober','November','Dezember'],
+        monthNamesShort: ['Jan','Feb','Mär','Apr','Mai','Jun',
+        'Jul','Aug','Sep','Okt','Nov','Dez'],
+        dayNames: ['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'],
+        dayNamesShort: ['So','Mo','Di','Mi','Do','Fr','Sa'],
+        dayNamesMin: ['So','Mo','Di','Mi','Do','Fr','Sa'],
+        weekHeader: 'KW',
+        dateFormat: 'yy,mm,dd',
+        firstDay: 1,
+        isRTL: false,
+        showMonthAfterYear: false,
+        yearSuffix: ''};
+      $.datepicker.setDefaults($.datepicker.regional['de']);
+    });*/
+
+    $("#event_start_date").datepicker({ 'format': 'yyyy/mm/dd' });
+    $("#event_end_date").datepicker({ 'format': 'yyyy/mm/dd' });
+    
+    /*
+    jQuery(function($){
+        $.timepicker.regional['de'] = {
+                    hourText: 'Stunde',
+                    minuteText: 'Minuten',
+                    amPmText: ['AM', 'PM'] ,
+                    closeButtonText: 'Beenden',
+                    nowButtonText: 'Aktuelle Zeit',
+                    deselectButtonText: 'Wischen' }
+        $.timepicker.setDefaults($.timepicker.regional['de']);
+    });*/
+
+    $("#event_start_date_time").timepicker({ 'timeFormat': 'H:i:s' });
+    $("#event_end_date_time").timepicker({ 'timeFormat': 'H:i:s' });
+    
+  });
+</script>
 </html>

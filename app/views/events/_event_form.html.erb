@@ -1,0 +1,60 @@
+﻿
+<%= form_for(@event) do |e| %>
+
+<p><%= label_tag :title, 'Titel' %>
+<%= e.text_field :title %></p>
+
+<p><%= label_tag :city, 'Ort' %>
+<%= e.text_field :city %><p>
+
+<p><%= label_tag :region, 'Region' %>
+<%= e.text_field :region %></p>
+
+<p><%= label_tag :province, 'Bundesland' %>
+<%= e.text_field :province %></p>
+
+<p><%= label_tag :main_category, 'Hauptkategorie' %>
+<%= e.text_field :main_category %></p>
+
+<p><%= label_tag :sub_category, 'Unterkategorie' %>
+<%= e.text_field :sub_category %></p>
+
+<p><%= label_tag :highlight, 'Highlight' %>
+<%= e.check_box :highlight  %></p>
+
+<p><%= label_tag :venue, 'Veranstaltungsort' %>
+<%= e.text_field :venue %></p>
+
+<p><%= label_tag :start_date, 'Start-Datum' %>
+<%= e.text_field :start_date %></p>
+
+<p><%= label_tag :start_date, 'Ende-Datum' %>
+<%= e.text_field :end_date %></p>
+
+<p><%= label_tag :start_date_time, 'Start-Tageszeit' %>
+<%= e.text_field :start_date_time %></p>
+
+<p><%= label_tag :end_date_time, 'Ende-Tageszeit' %>
+<%= e.text_field :end_date_time %></p>
+
+<p><%= label_tag :photo_url, 'Bild-Url' %>
+<%= e.text_field :photo_url %></p>
+
+<p><%= label_tag :short_description, 'Kurzbeschreibung' %>
+<%= e.text_field :short_description %></p>
+
+<p><%= label_tag :long_description, 'Langbeschreibung' %>
+<%= e.text_field :long_description %></p>
+
+<p><%= label_tag :venue_url, 'Website-Url' %>
+<%= e.text_field :venue_url %></p>
+
+<p><%= label_tag :email, 'E-mail Adresse' %>
+<%= e.text_field :email %></p>
+
+<p><%= label_tag :tel_nr, 'Tel. Nr.' %>
+<%= e.text_field :tel_nr %></p>
+
+<p><%= e.submit 'OK', :name => nil %></p>
+
+<% end %>

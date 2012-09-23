@@ -14,7 +14,7 @@
   <tr><td><%= link_to 'Verstanstaltung hinzufügen', new_event_path %></td></tr>
 </table>
 
-<%= link_to 'RSS Feed', event_feed_path( get_event_ids(@events) ) %>
+<%= link_to 'RSS Feed', event_feed_path( get_event_ids(@events) ) << '.rss' %>
 <%= render 'layouts/event_list', :events => @events %>
 
 
