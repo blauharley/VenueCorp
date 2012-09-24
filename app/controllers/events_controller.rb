@@ -4,6 +4,13 @@
     redirect_to :root, :notice => ''
   end
   
+  def show
+    @event = Event.find(params[:id])
+    if File.file? (Dir.pwd + '/' + @event.title + ".pdf")
+      File.delete( (Dir.pwd + '/' + @event.title + ".pdf") )
+    end
+  end
+  
   def new
     @event = Event.new(params[:event])
   end
@@ -68,6 +75,37 @@
     else
       redirect_to :root, :notice => 'Alle Einträge wurden erfolgreich in die Datenbank übernommen.'
     end
+  end
+  
+  
+  def pdf_event
+    event = Event.find(params[:id])
+    pdf_path = (Prawn::Document.generate((event.title + ".pdf")) do
+              move_down 10
+              text 'Veranstaltung:'
+              move_down 3
+              t = make_table([ ['Titel', event.title],
+                             ['Beschreibung', event.description],
+                             ['Hauptkategorie', event.main_category],
+                             ['Unterkategorie', event.sub_category],
+                             ['Ort', event.venue],
+                             ['Veranstaltungsort', event.venue],
+                             ['Region', event.region],
+                             ['Bundesland', event.province],
+                             ['Highlight', event.highlight.to_s],
+                             ['Start-Datum', event.start_date.strftime('%Y/%m/%d')],
+                             ['End-Datum', event.end_date.strftime('%Y/%m/%d')],
+                             ['Start-Tageszeit', event.start_date_time.strftime('%H:%M:%S')],
+                             ['Ende-Tageszeit', event.end_date_time.strftime('%H:%M:%S')],
+                             ['Bild-Url', event.photo_url],
+                             ['Veranstaltungsort-Url', event.venue_url],
+                             ['Email', event.email],
+                             ['Tel. Nr.', event.tel_nr],
+                             ['Adresse', event.address],
+                             ['Kosten', event.costs] ])
+              t.draw
+           end).path
+    send_file( pdf_path, :type => 'application/pdf',:disposition => 'inline')
   end
   
   def get_all_rss_feed

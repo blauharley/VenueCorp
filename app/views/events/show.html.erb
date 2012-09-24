@@ -1,0 +1,22 @@
+﻿<h3>Veranstaltung:</h3>
+<%= @event.province %>
+<%= @event.region %>
+<%= @event.city %>
+<%= @event.main_category %>
+<%= @event.sub_category %>
+<%= @event.highlight %>
+<%= @event.venue %>
+<%= @event.start_date %>
+<%= @event.end_date %>
+<%= @event.start_date_time %>
+<%= @event.end_date_time %>
+<%= @event.photo_url %>
+<%= @event.title %>
+<%= @event.description %>
+<%= @event.costs %>
+<%= @event.address %>
+<%= @event.venue_url %>
+<%= @event.email %>
+<%= @event.tel_nr %>
+
+<%= link_to 'Als PDF anzeigen', pdf_event_path(@event.id) %>

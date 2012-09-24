@@ -44,6 +44,10 @@
         <td><%= event.venue_url %></td>
         <td><%= event.email %></td>
         <td><%= event.tel_nr %></td>
+        <td><%= link_to 'Zeigen', event_path(event.id) %></td>
+        <td><%= link_to 'Als PDF anzeigen', pdf_event_path(event.id) %></td>
+        <td><%= link_to 'Bearbeiten', edit_event_path(event.id) %></td>
+        <td><%= link_to 'Löschen', event_path(event.id), :method => :delete %></td>
       </tr>
     
     <% end %>
