@@ -8,9 +8,8 @@
 
 <table>
   <tr><td><%= link_to 'Alle Veranstaltungen', events_path %></td></tr>
-  <tr><td><%= link_to 'Früheste Veranstaltungen', early_events_path %></td></tr>
+  <tr><td><%= link_to 'Highlights', event_highlight_path('true') %></td></tr>
   <tr><td><%= link_to 'Nach Orte', place_events_path %></td></tr>
-  <tr><td><%= link_to 'Gruppen', group_events_path  %></td></tr>
   <tr><td><%= link_to 'Verstanstaltung hinzufügen', new_event_path %></td></tr>
 </table>
 

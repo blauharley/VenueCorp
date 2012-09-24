@@ -10,6 +10,7 @@ EventApp::Application.routes.draw do
     match 'getEventsByFormat/:attr/:value' => 'Events#get_events_by_format'
     
   controller :Venue do
+    match 'event_highlight/:highlight' => :index, :as => 'event_highlight'
     match 'earlyEvents' => :show_early_events, :as => 'early_events'
     match 'placeEvents' => :show_place_events, :as => 'place_events'
     match 'groupEvents' => :show_group_events, :as => 'group_events'

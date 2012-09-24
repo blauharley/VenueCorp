@@ -1,7 +1,7 @@
 ﻿class EventsController < ApplicationController
 
   def index
-    @events = Event.search(params[:attr], params[:search])
+    redirect_to :root, :notice => ''
   end
   
   def new
@@ -9,16 +9,16 @@
   end
   
   def create
-    event = Event.new(:province => params[:event][:province], :region => params[:event][:region], :city => params[:event][:city], :main_category => params[:event][:main_category], :sub_category => params[:event][:sub_category], :venue => params[:event][:venue], :start_date => params[:event][:start_date], :end_date => params[:event][:end_date], :photo_url => params[:event][:photo_url], :title => params[:event][:title], :short_description => params[:event][:short_description], :long_description => params[:event][:long_description], :venue_url => params[:event][:venue_url], :email => params[:event][:email], :tel_nr => params[:event][:tel_nr] )
+    event = Event.new(:province => params[:event][:province], :region => params[:event][:region], :city => params[:event][:city], :main_category => params[:event][:main_category], :sub_category => params[:event][:sub_category], :venue => params[:event][:venue], :start_date => params[:event][:start_date], :end_date => params[:event][:end_date], :photo_url => params[:event][:photo_url], :title => params[:event][:title], :description => params[:event][:description], :venue_url => params[:event][:venue_url], :email => params[:event][:email], :tel_nr => params[:event][:tel_nr] )
     
-    event_start_time = (Time.parse(params[:event][:start_date])).strftime('%Y-%m-%d ') + (Time.parse(params[:event][:start_date_time])).strftime('%H:%M:%S')
-    event_end_time = (Time.parse(params[:event][:end_date])).strftime('%Y-%m-%d') + (Time.parse(params[:event][:end_date_time])).strftime('%H:%M:%S')
+    event_start_time = params[:event][:start_date] + ' ' + params[:event][:start_date_time]
+    event_end_time = params[:event][:end_date] + ' ' + params[:event][:end_date_time]
     highlight = if params[:event][:highlight].to_i == 0 then false else true end
     
     event.update_attributes(:start_date_time => event_start_time, :end_date_time => event_end_time, :highlight => highlight)
     
     if event.save
-      redirect_to :root, :notice => 'Veranstaltung erfolgreich angelegt.'
+      redirect_to :root, :notice => event_start_time
     else
       redirect_to :root, :notice => 'Veranstaltung konnte nicht angelegt werden'
     end
@@ -31,6 +31,11 @@
   def update
     Event.find(params[:id]).update_attributes(params[:event])
     redirect_to :root, :notice => 'Veranstaltung erfolgreich bearbeitet.'
+  end
+  
+  def destroy
+    Event.find(params[:id]).destroy
+    redirect_to :root, :notice => 'Veranstaltung erfolgreich gelöscht.'
   end
   
   def upload_csv
@@ -69,7 +74,7 @@
     @events = Event.all
     
     respond_to do |format|
-      format.rss { render rss: @events }
+      format.rss { render 'get_rss_feed' }
     end
   end
   

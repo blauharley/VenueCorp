@@ -1,4 +1,4 @@
-xml.instruct! :xml, :version => "1.0" 
+xml.instruct! :xml, :version => "1.0"
 xml.rss :version => "2.0" do
   xml.channel do
     xml.title "Veranstaltungen Steiermark RSS-Feeds"
@@ -9,8 +9,9 @@ xml.rss :version => "2.0" do
       xml.item do
         xml.id event.id
         xml.title event.title
-        xml.long_description event.long_description
-        xml.short_description event.short_description
+        xml.long_description event.description
+        xml.costs event.costs
+        xml.address event.address
         xml.province event.province
         xml.region event.region
         xml.city event.city

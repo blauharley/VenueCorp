@@ -3,7 +3,12 @@
   after_filter :write_note, :only => [:get_events]
   
   def index
-    @events = Event.search(params[:attr], params[:search])
+    if params[:highlight] == 'true'
+      @events = Event.where( :highlight => true )
+      flash[:notice] = params[:highlight]
+    else
+      @events = Event.search(params[:search])
+    end
   end
   
   def show_early_events
