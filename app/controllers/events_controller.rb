@@ -9,7 +9,7 @@
   end
   
   def create
-    event = Event.new(:province => params[:event][:province], :region => params[:event][:region], :city => params[:event][:city], :main_category => params[:event][:main_category], :sub_category => params[:event][:sub_category], :venue => params[:event][:venue], :start_date => params[:event][:start_date], :end_date => params[:event][:end_date], :photo_url => params[:event][:photo_url], :title => params[:event][:title], :description => params[:event][:description], :venue_url => params[:event][:venue_url], :email => params[:event][:email], :tel_nr => params[:event][:tel_nr] )
+    event = Event.new(:province => params[:event][:province], :costs => params[:event][:costs], :address => params[:event][:address], :region => params[:event][:region], :city => params[:event][:city], :main_category => params[:event][:main_category], :sub_category => params[:event][:sub_category], :venue => params[:event][:venue], :start_date => params[:event][:start_date], :end_date => params[:event][:end_date], :photo_url => params[:event][:photo_url], :title => params[:event][:title], :description => params[:event][:description], :venue_url => params[:event][:venue_url], :email => params[:event][:email], :tel_nr => params[:event][:tel_nr] )
     
     event_start_time = params[:event][:start_date] + ' ' + params[:event][:start_date_time]
     event_end_time = params[:event][:end_date] + ' ' + params[:event][:end_date_time]
