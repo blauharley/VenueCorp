@@ -13,8 +13,7 @@ EventApp::Application.routes.draw do
   controller :Venue do
     match 'event_highlight/:highlight' => :index, :as => 'event_highlight'
     match 'earlyEvents' => :show_early_events, :as => 'early_events'
-    match 'placeEvents' => :show_place_events, :as => 'place_events'
-    match 'groupEvents' => :show_group_events, :as => 'group_events'
+    match 'send_contact_mail' => :send_contact_mail, :as => 'send_contact_mail'
   end
   
   root :to => 'Venue#index'

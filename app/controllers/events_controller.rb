@@ -22,7 +22,7 @@
     event.update_attributes(:start_date_time => event_start_time, :end_date_time => event_end_time, :highlight => highlight)
     
     if event.save
-      redirect_to :root, :notice => event_start_time
+      redirect_to :root, :notice => 'Veranstaltung erfolgreich hinzugefügt'
     else
       redirect_to :root, :notice => 'Veranstaltung konnte nicht angelegt werden'
     end

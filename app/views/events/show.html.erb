@@ -1,24 +1,28 @@
-﻿<div>
+﻿
+<div style="width:300px; float:left">
+<h4 id="map_notifier" style="display:none"></h4>
 <h3>Veranstaltung:</h3>
-<%= @event.province %>
-<%= @event.region %>
-<%= @event.city %>
-<%= @event.main_category %>
-<%= @event.sub_category %>
-<%= @event.highlight %>
-<%= @event.venue %>
-<%= @event.start_date %>
-<%= @event.end_date %>
-<%= @event.start_date_time %>
-<%= @event.end_date_time %>
-<%= @event.photo_url %>
-<%= @event.title %>
-<%= @event.description %>
-<%= @event.costs %>
-<%= @event.address %>
-<%= @event.venue_url %>
-<%= @event.email %>
-<%= @event.tel_nr %>
+<p><%= @event.province %></p>
+<p><%= @event.region %></p>
+<p><%= @event.city %></p>
+<p><%= @event.main_category %></p>
+<p><%= @event.sub_category %></p>
+<p><%= @event.highlight %></p>
+<p><%= @event.venue %></p>
+<p><%= @event.start_date %></p>
+<p><%= @event.end_date %></p>
+<p><%= @event.start_date_time %></p>
+<p><%= @event.end_date_time %></p>
+<p><%= @event.photo_url %></p>
+<p><%= @event.title %></p>
+<p><%= @event.description %></p>
+<p><%= @event.costs %></p>
+<p id="address"><%= @event.address %></p>
+<p><%= @event.venue_url %></p>
+<p><%= @event.email %></p>
+<p><%= @event.tel_nr %></p>
 
 <%= link_to 'Als PDF anzeigen', pdf_event_path(@event.id) %>
 </div>
+
+<div id="event_map" style="width:500px; height:500px; float:right; margin-right:50px"></div>

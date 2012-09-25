@@ -11,17 +11,17 @@
     end
   end
   
+  def send_contact_mail
+    RestClient.post "https://api:key-4xfuzrnc06vla3znx-cx0d15nyqvwsr2"\
+    "https://api.mailgun.net/v2",
+    :from => "Excited User <me@samples.mailgun.org>",
+    :to => "franz.josef.bruenner@gmail.com",
+    :subject => "Hello Test Mail",
+    :text => "Testing some Mailgun awesomness!"
+    #UserMailer.send_condact_mail.deliver
+  end
+  
   def show_early_events
-    get_events 'early'
-    redirect_to :back, :notice => @note
-  end
-  
-  def show_place_events
-    get_events 'early'
-    redirect_to :back, :notice => @note
-  end
-  
-  def show_group_events
     get_events 'early'
     redirect_to :back, :notice => @note
   end
@@ -62,8 +62,5 @@
     end
   end
   
-  def redirect_to_events
-    redirect_to :root, :notice => @note
-  end
   
 end
