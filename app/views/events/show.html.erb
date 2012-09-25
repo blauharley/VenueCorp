@@ -1,4 +1,5 @@
-﻿<h3>Veranstaltung:</h3>
+﻿<div>
+<h3>Veranstaltung:</h3>
 <%= @event.province %>
 <%= @event.region %>
 <%= @event.city %>
@@ -20,3 +21,4 @@
 <%= @event.tel_nr %>
 
 <%= link_to 'Als PDF anzeigen', pdf_event_path(@event.id) %>
+</div>
