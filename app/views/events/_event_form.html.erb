@@ -26,10 +26,10 @@
 <%= e.text_field :venue %></p>
 
 <p><%= label_tag :start_date, 'Start-Datum' %>
-<%= e.text_field :start_date, :value => if @event.start_date != nil then @event.start_date.strftime('%Y:%m:%d') else '' end %></p>
+<%= e.text_field :start_date, :value => if @event.start_date != nil then @event.start_date.strftime('%Y/%m/%d') else '' end %></p>
 
 <p><%= label_tag :start_date, 'Ende-Datum' %>
-<%= e.text_field :end_date, :value => if @event.end_date != nil then @event.end_date.strftime('%Y:%m:%d') else '' end %></p>
+<%= e.text_field :end_date, :value => if @event.end_date != nil then @event.end_date.strftime('%Y/%m/%d') else '' end %></p>
 
 <p><%= label_tag :start_date_time, 'Start-Tageszeit' %>
 <%= e.text_field :start_date_time, :value => if @event.start_date_time != nil then @event.start_date_time.strftime('%H:%M:%S') else '' end %></p>

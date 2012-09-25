@@ -6,9 +6,6 @@
   
   def show
     @event = Event.find(params[:id])
-    if File.file? (Dir.pwd + '/' + @event.title + ".pdf")
-      File.delete( (Dir.pwd + '/' + @event.title + ".pdf") )
-    end
   end
   
   def new
@@ -36,7 +33,14 @@
   end
   
   def update
-    Event.find(params[:id]).update_attributes(params[:event])
+    event = Event.find(params[:id])
+    event_start_time = params[:event][:start_date] + ' ' + params[:event][:start_date_time]
+    event_end_time = params[:event][:end_date] + ' ' + params[:event][:end_date_time]
+    highlight = if params[:event][:highlight].to_i == 0 then false else true end
+    
+    event.update_attributes(:start_date_time => event_start_time, :end_date_time => event_end_time, :highlight => highlight)
+    event.update_attributes(params[:event])
+    
     redirect_to :root, :notice => 'Veranstaltung erfolgreich bearbeitet.'
   end
   
