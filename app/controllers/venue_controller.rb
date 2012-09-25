@@ -9,6 +9,8 @@
     else
       @events = Event.search(params[:search])
     end
+    
+    puts Categories.get_sub_cats 'Sport'
   end
   
   def send_contact_mail
