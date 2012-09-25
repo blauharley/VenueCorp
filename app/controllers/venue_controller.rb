@@ -1,4 +1,6 @@
-﻿class VenueController < ApplicationController
+﻿require 'rest_client'
+
+class VenueController < ApplicationController
   
   after_filter :write_note, :only => [:get_events]
   
@@ -12,12 +14,15 @@
   end
   
   def send_contact_mail
-    RestClient.post "https://api:key-4xfuzrnc06vla3znx-cx0d15nyqvwsr2"\
-    "@api.mailgun.net/v2/samples.mailgun.org/messages",
-    :from => "Excited User <me@samples.mailgun.org>",
-    :to => "franz.josef.bruenner@gmail.com",
-    :subject => "Hello Test Mail",
-    :text => "Testing some Mailgun awesomness!"
+    API_KEY = ENV['MAILGUN_API_KEY']
+    API_URL = "https://api:#{API_KEY}@api.mailgun.net/v2/mailgun.net"
+
+    RestClient.post API_URL+"/messages", 
+    :from => "ev@example.com",
+    :to => "ev@mailgun.net",
+    :subject => "This is subject",
+    :text => "Text body",
+    :html => "<b>HTML</b> version of the body!"
     #UserMailer.send_condact_mail.deliver
   end
   
