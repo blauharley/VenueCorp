@@ -13,7 +13,7 @@
   
   def send_contact_mail
     RestClient.post "https://api:key-4xfuzrnc06vla3znx-cx0d15nyqvwsr2"\
-    "https://api.mailgun.net/v2",
+    "@api.mailgun.net/v2/samples.mailgun.org/messages",
     :from => "Excited User <me@samples.mailgun.org>",
     :to => "franz.josef.bruenner@gmail.com",
     :subject => "Hello Test Mail",
