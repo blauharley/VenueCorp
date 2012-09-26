@@ -21,7 +21,7 @@ window.onload = function(){
     events: <%= raw event_js_array + ',' %>
     
     eventClick: function(event) {
-			window.location = 'events/' + event.id;
+			window.location.href = 'http://' + window.location.host + '/events/' + event.id;
     },
     
     eventMouseover : function( event, jsEvent, view ) { jsEvent.target.style.cursor = 'pointer' }
