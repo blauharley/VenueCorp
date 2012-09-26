@@ -1,0 +1,3 @@
+﻿<% event_cats.each do |k,v| %>
+  <p><%= link_to (k + '(' + v.to_s + ')'), get_cat_events_path(k) %></p>
+<% end %>

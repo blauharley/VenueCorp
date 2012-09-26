@@ -9,6 +9,13 @@
   end
   
   def new
+    @main_event_cats = Categories.get_main_cats
+    
+    @event_cats  = []
+    Categories.get_main_cats.each do |k,v|
+      sub_cat = Categories.get_sub_cats k
+      @event_cats << { k =>  sub_cat }
+    end
     @event = Event.new(params[:event])
   end
   

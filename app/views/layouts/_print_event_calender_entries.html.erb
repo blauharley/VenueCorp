@@ -1,0 +1,34 @@
+﻿<script type='text/javascript'>
+
+window.onload = function(){
+
+  $('#calendar').fullCalendar({
+    
+    theme: true,
+    header: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'month,agendaWeek,agendaDay'
+    },
+    
+    <% event_js_array = '[' %>
+    <% for event in events %>
+      <% event_js_array += "{ id : " << event.id.to_s << ", title : '" << event.title.to_s << "', start : new Date(" << event.start_date.strftime('%Y') << "," << ((event.start_date.strftime('%m').to_i - 1).to_s) <<","<< event.start_date.strftime('%d')<< "),"<< " end : new Date(" << event.end_date.strftime('%Y') << "," << ((event.end_date.strftime('%m').to_i - 1).to_s) <<","<< event.end_date.strftime('%d') << "), className: 'cal_events' }," %>
+    <% end %>
+    <% event_js_array = event_js_array[0...event_js_array.length-1] %>
+    <% event_js_array += ']' %>
+    
+    events: <%= raw event_js_array + ',' %>
+    
+    eventClick: function(event) {
+			window.location = 'events/' + event.id;
+    },
+    
+    eventMouseover : function( event, jsEvent, view ) { jsEvent.target.style.cursor = 'pointer' }
+    
+  });
+
+}
+
+</script>
+		

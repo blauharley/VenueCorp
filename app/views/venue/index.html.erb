@@ -7,13 +7,15 @@
 <%= render 'layouts/csv_upload_form' %>
 
 <table>
-  <tr><td><%= link_to 'Alle Veranstaltungen', events_path %></td></tr>
+  <tr><td><%= link_to 'Alle Veranstaltungen', root_path %></td></tr>
   <tr><td><%= link_to 'Highlights', event_highlight_path('true') %></td></tr>
   <tr><td><%= link_to 'Verstanstaltung hinzufügen', new_event_path %></td></tr>
 </table>
 
-<%= link_to 'RSS Feed', event_feed_path( get_event_ids(@events) ) << '.rss' %>
+<%= render 'layouts/event_cat_list', :event_cats => @event_cats %>
+<%= render 'layouts/calender', :entries => @events %>
+
 <%= render 'layouts/event_list', :events => @events %>
 
-
 <%= link_to 'Kontakt', send_contact_mail_path %>
+<%= link_to 'RSS Feed', event_feed_path( get_event_ids(@events) ) << '.rss' %>

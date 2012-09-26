@@ -1,4 +1,25 @@
-﻿
+﻿<script type="text/javascript">
+
+  window.onload = function(){
+    var sub_cats = <%= raw @event_cats.to_json %>
+    
+    document.getElementById('event_main_category').onchange = function(event){
+      for(var sub_cat=0; sub_cat < sub_cats.length; sub_cat++){
+        if( sub_cats[sub_cat][event.currentTarget.value] ){
+          
+          var sub = sub_cats[sub_cat][event.currentTarget.value];
+          document.getElementById('event_sub_category').innerHTML = '';
+          
+          for(var s=0; s < sub.length; s++){
+            document.getElementById('event_sub_category').innerHTML += "<option value='"+sub[s]+"'>"+sub[s]+"</option>";
+          }
+        }
+      }
+    }
+  }
+  
+</script>
+
 <%= form_for(@event) do |e| %>
 
 <p><%= label_tag :title, 'Titel' %>
@@ -13,11 +34,12 @@
 <p><%= label_tag :province, 'Bundesland' %>
 <%= e.text_field :province %></p>
 
+
 <p><%= label_tag :main_category, 'Hauptkategorie' %>
-<%= e.text_field :main_category %></p>
+<%= select( "event", "main_category", @main_event_cats.collect{ |k,v| [k,k] }) %>
 
 <p><%= label_tag :sub_category, 'Unterkategorie' %>
-<%= e.text_field :sub_category %></p>
+<%= select( "event", "sub_category", 'Unterkategorie' => '') %>
 
 <p><%= label_tag :highlight, 'Highlight' %>
 <%= e.check_box :highlight  %></p>

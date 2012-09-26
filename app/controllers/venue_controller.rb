@@ -1,16 +1,19 @@
 ﻿class VenueController < ApplicationController
   
   after_filter :write_note, :only => [:get_events]
+  before_filter :get_number_of_cat_events, :only => [:index, :get_cat_events]
   
   def index
     if params[:highlight] == 'true'
-      @events = Event.where( :highlight => true )
-      flash[:notice] = params[:highlight]
+      @events = Event.where( :highlight => true ).order('start_date')
     else
       @events = Event.search(params[:search])
     end
-    
-    puts Categories.get_sub_cats 'Sport'
+  end
+  
+  def get_cat_events
+    @events = Event.find(:all, :conditions => ['main_category = ?',params[:cat]])
+    render 'index'
   end
   
   def send_contact_mail
@@ -23,6 +26,13 @@
   end
   
   private
+  
+  def get_number_of_cat_events
+    @event_cats = {}
+    Categories.get_main_cats.each do |k,v|
+      @event_cats[k] = Event.find(:all, :conditions => ['main_category = ?',k]).count
+    end
+  end
   
   def get_events cat
     if cat == 'early'

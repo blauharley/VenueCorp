@@ -8,6 +8,10 @@
                :misc => [] 
            }
   
+  def self.get_main_cats 
+    @@main_trans
+  end
+  
   def self.get_sub_cats main_cat
     @@cats[ @@main_trans[main_cat] ]
   end

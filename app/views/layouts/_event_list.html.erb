@@ -1,55 +1,42 @@
-﻿<% if !events.empty? %>
-  <h2>Veranstaltungen</h2>
-  <table>
-    <tr>
-      <td>Bundesland</td>
-      <td>Region</td>
-      <td>Ort</td>
-      <td>Haupt-Kategorie</td>
-      <td>Unter-Kategorie</td>
-      <td>Highlight</td>
-      <td>Veranstaltungsort</td>
-      <td>Veranstaltung Start Tag</td>
-      <td>Veranstaltung Ende Tag</td>
-      <td>Veranstaltung Start Uhrzeit</td>
-      <td>Veranstaltung Ende Uhrzeit</td>
-      <td>Foto</td>
-      <td>Titel</td>
-      <td>Beschreibung</td>
-      <td>Kosten</td>
-      <td>Adresse</td>
-      <td>Website</td>
-      <td>Email</td>
-      <td>Telefon Nr.</td>
-    </tr>
-    
-    <% for event in events %>
-      <tr>
-        <td><%= event.province %></td>
-        <td><%= event.region %></td>
-        <td><%= event.city %></td>
-        <td><%= event.main_category %></td>
-        <td><%= event.sub_category %></td>
-        <td><%= event.highlight %></td>
-        <td><%= event.venue %></td>
-        <td><%= event.start_date %></td>
-        <td><%= event.end_date %></td>
-        <td><%= event.start_date_time.strftime('%H:%M:%S') %></td>
-        <td><%= event.end_date_time.strftime('%H:%M:%S') %></td>
-        <td><%= event.photo_url %></td>
-        <td><%= event.title %></td>
-        <td><%= event.description %></td>
-        <td><%= event.costs %></td>
-        <td><%= event.address %></td>
-        <td><%= event.venue_url %></td>
-        <td><%= event.email %></td>
-        <td><%= event.tel_nr %></td>
-        <td><%= link_to 'Zeigen', event_path(event.id) %></td>
-        <td><%= link_to 'Als PDF anzeigen', pdf_event_path(event.id) %></td>
-        <td><%= link_to 'Bearbeiten', edit_event_path(event.id) %></td>
-        <td><%= link_to 'Löschen', event_path(event.id), :method => :delete %></td>
-      </tr>
-    
+﻿<h2>Veranstaltungen:</h2>
+<div>
+  <% all_highlight_events = [] %>
+  <% all__non_highlight_events = [] %>
+  
+  <% for event in events %>
+    <% if event.highlight %>
+      <% all_highlight_events << event %>
+    <% else %>
+      <% all__non_highlight_events << event %>
     <% end %>
-  </table>
-<% end %>
+  <% end %>
+  
+  <div id='coin-slider'>
+    <% for event in all_highlight_events %>
+        
+      <a href="<%= event_path(event.id) %>">
+        <img src='<%= event.photo_url %>' >
+        <span>
+            <b><%= event.title %></b>
+            <b><%= event.description %></b>
+        </span>
+      </a>
+       
+    <% end %>
+  </div>
+  
+  <% for event in all__non_highlight_events %>
+      <div>
+        <h2><%= event.title %></h2>
+        <p style="float:left; margin-left:10px"><%= event.main_category << '/' << event.sub_category %></p>
+        <img src="<%= event.photo_url %>" width="50" height="50" style="float:left; margin-left:10px" />
+        <p><%= event.description %></p>
+        <b style="float:right; margin-right:10px"><%= event.start_date.to_s << ' '<< event.start_date_time.strftime('%H:%M:%S') %></b>
+        <p><%= link_to 'Zeigen', event_path(event.id) %></td>
+        <%= link_to 'Als PDF anzeigen', pdf_event_path(event.id) %>
+        <%= link_to 'Bearbeiten', edit_event_path(event.id) %>
+        <%= link_to 'Löschen', event_path(event.id), :method => :delete %></p>
+        </tr>
+      </div>
+  <% end %>
+</div>

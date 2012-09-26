@@ -12,6 +12,7 @@ EventApp::Application.routes.draw do
     
   controller :Venue do
     match 'event_highlight/:highlight' => :index, :as => 'event_highlight'
+    match 'catEvents/:cat' => :get_cat_events, :as => 'get_cat_events'
     match 'earlyEvents' => :show_early_events, :as => 'early_events'
     match 'send_contact_mail' => :send_contact_mail, :as => 'send_contact_mail'
   end
