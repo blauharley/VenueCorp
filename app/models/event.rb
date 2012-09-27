@@ -4,21 +4,21 @@
   def self.search(value)
     if value
       hits_city = []
-      hits_city += find(:all, :conditions => ['city like ?', '%' + value + '%']).order('start_date')
+      hits_city += where('city like "%' + value + '%"').order('start_date asc')
       if hits_city.empty?
-        hits_city += find(:all, :conditions => ['city like ?', '%' + value.downcase + '%']).order('start_date')
+        hits_city += where('city like "%' + value.downcase + '%"').order('start_date asc')
       end
       
       hits_title = []
-      hits_title += find(:all, :conditions => ['title like ?', '%' + value + '%']).order('start_date')
+      hits_title += where('title like "%' + value + '%"').order('start_date asc')
       if hits_title.empty?
-        hits_title += find(:all, :conditions => ['title like ?', '%' + value.downcase + '%']).order('start_date')
+        hits_title += where('title like "%' + value.downcase + '%"').order('start_date asc')
       end
       
       hits_description = []
-      hits_description += find(:all, :conditions => ['description like ?', '%' + value + '%']).order('start_date')
+      hits_description += where('description like "%' + value + '%"').order('start_date asc')
       if hits_description.empty?
-        hits_description += find(:all, :conditions => ['description like ?', '%' + value.downcase + '%']).order('start_date')
+        hits_description += where('description like "%' + value.downcase + '%"').order('start_date asc')
       end
       
       hits = hits_city + hits_title + hits_description

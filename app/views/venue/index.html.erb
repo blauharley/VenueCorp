@@ -12,7 +12,7 @@
   <tr><td><%= link_to 'Verstanstaltung hinzufügen', new_event_path %></td></tr>
 </table>
 
-<%= render 'layouts/event_cat_list', :event_cats => @event_cats %>
+<%= render 'layouts/event_cat_list', :event_main_cats => @event_main_cats, :event_sub_cats => @event_sub_cats %>
 <%= render 'layouts/calender', :entries => @events %>
 
 <%= render 'layouts/event_list', :events => @events %>
