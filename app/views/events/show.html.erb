@@ -23,6 +23,7 @@
 <p><%= @event.email %></p>
 <p><%= @event.tel_nr %></p>
 
+<%= link_to 'Bearbeiten', edit_event_path(@event.id) %>
 <%= link_to 'Als PDF anzeigen', pdf_event_path(@event.id) %>
 </div>
 
