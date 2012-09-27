@@ -1,6 +1,32 @@
 ﻿
+var infoWindowText = document.createElement("div");
+infoWindowText.className = 'infobox';
+infoWindowText.style.cssText = "width:310px; height:75px; border:1px solid grey; border-radius:23px; margin-top: 8px; background: white; padding: 10px; text-align:center";
+
+var infoWindowOptions = {
+  content: infoWindowText
+  ,disableAutoPan: false
+  ,maxWidth: 0
+  ,pixelOffset: new google.maps.Size(-135, -10)
+  ,zIndex: null
+  ,boxStyle: { 
+   background: "url('http://google-maps-utility-library-v3.googlecode.com/svn/tags/infobox/1.1.5/examples/tipbox.gif') no-repeat"
+   ,opacity: 0.9
+   ,width: "280px"
+  }
+  ,closeBoxMargin: "20px -6px 2px 2px"
+  ,closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif"
+  ,infoBoxClearance: new google.maps.Size(1, 1)
+  ,isHidden: false
+  ,pane: "floatPane"
+  ,enableEventPropagation: false
+};
+
+var infoWindow = new InfoBox(infoWindowOptions);
+
+
 window.onload = function(){
-  
+
   if(document.getElementById('event_map')){
       showEventOnMap();
   }
@@ -19,7 +45,14 @@ function showEventOnMap(){
   
   var geocoder = geocoder = new google.maps.Geocoder();
   
-  geocoder.geocode( { 'address': document.getElementById('address').innerHTML }, function(results, status) {
+  var address = '';
+  var addressTags = document.getElementsByClassName('address');
+  for(var i=0; i < addressTags.length; i++){
+    address += addressTags[i].innerHTML + ', ';
+  }
+  address = address.slice(0,address.length-3);
+  
+  geocoder.geocode( { 'address': address }, function(results, status) {
     if (status == google.maps.GeocoderStatus.OK) {
       
       if( results.length > 1){
@@ -32,7 +65,15 @@ function showEventOnMap(){
         map.setCenter(results[result].geometry.location);
         var marker = new google.maps.Marker({
             map: map,
-            position: results[result].geometry.location
+            position: results[result].geometry.location,
+            title: results[result].formatted_address
+        });
+        
+        google.maps.event.addListener(marker, 'click', function(event){
+          //marker.setAnimation(google.maps.Animation.BOUNCE);
+          infoWindowText.innerHTML = marker.title;
+          infoWindow.setPosition( event.latLng );
+					infoWindow.open( map );
         });
       }
     } 

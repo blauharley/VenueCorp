@@ -1,5 +1,7 @@
 ﻿class EventsController < ApplicationController
-
+  
+  before_filter :get_event_cats, :only => [:new, :edit]
+  
   def index
     redirect_to :root, :notice => ''
   end
@@ -9,13 +11,6 @@
   end
   
   def new
-    @main_event_cats = Categories.get_main_cats
-    
-    @event_cats  = []
-    Categories.get_main_cats.each do |k,v|
-      sub_cat = Categories.get_sub_cats k
-      @event_cats << { k =>  sub_cat }
-    end
     @event = Event.new(params[:event])
   end
   
@@ -157,6 +152,19 @@
     respond_to do |format|
       format.xml { render xml: @events.to_xml }
       format.json { render json: @events.to_json }
+    end
+  end
+  
+  private
+  
+  def get_event_cats
+    @main_event_cats = { 'Hauptkategorie' => '' }
+    @main_event_cats = @main_event_cats.merge(Categories.get_main_cats)
+    
+    @event_cats  = []
+    Categories.get_main_cats.each do |k,v|
+      sub_cat = Categories.get_sub_cats k
+      @event_cats << { k =>  sub_cat }
     end
   end
   

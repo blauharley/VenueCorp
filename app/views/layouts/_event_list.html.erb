@@ -11,19 +11,21 @@
     <% end %>
   <% end %>
   
-  <div id='coin-slider'>
-    <% for event in all_highlight_events %>
-        
-      <a href="<%= event_path(event.id) %>">
-        <img src='<%= event.photo_url %>' >
-        <span>
-            <b><%= event.title %></b>
-            <b><%= event.description %></b>
-        </span>
-      </a>
-       
-    <% end %>
-  </div>
+  <% if !all_highlight_events.empty? %>
+    <div id='coin-slider'>
+      <% for event in all_highlight_events %>
+          
+        <a href="<%= event_path(event.id) %>">
+          <img src='<%= event.photo_url %>' >
+          <span>
+              <b><%= event.title %></b>
+              <b><%= event.description %></b>
+          </span>
+        </a>
+         
+      <% end %>
+    </div>
+  <% end %>
   
   <% for event in all__non_highlight_events %>
       <div>
