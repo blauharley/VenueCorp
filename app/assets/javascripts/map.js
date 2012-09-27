@@ -7,7 +7,7 @@ var infoWindowOptions = {
   content: infoWindowText
   ,disableAutoPan: false
   ,maxWidth: 0
-  ,pixelOffset: new google.maps.Size(-135, -10)
+  ,pixelOffset: new google.maps.Size(-140, 25)
   ,zIndex: null
   ,boxStyle: { 
    background: "url('http://google-maps-utility-library-v3.googlecode.com/svn/tags/infobox/1.1.5/examples/tipbox.gif') no-repeat"
@@ -37,7 +37,7 @@ function showEventOnMap(){
 
   var mapOptions = {
                     center: new google.maps.LatLng(-34.397, 150.644),
-                    zoom: 8,
+                    zoom: 16,
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                   };
                   
@@ -63,10 +63,19 @@ function showEventOnMap(){
         
       for(var result=0; result < results.length; result++){
         map.setCenter(results[result].geometry.location);
+        
+
         var marker = new google.maps.Marker({
             map: map,
             position: results[result].geometry.location,
-            title: results[result].formatted_address
+            title: results[result].formatted_address,
+            icon: new google.maps.MarkerImage(
+												'/assets/event_star.png', // my 16x48 sprite with 3 circular icons
+												new google.maps.Size(25, 25), // desired size
+												new google.maps.Point(0, 0), // offset within the scaled sprite
+												new google.maps.Point(12.5,0), // anchor point is half of the desired size
+												new google.maps.Size(25, 25) // scaled size of the entire sprite
+											   )
         });
         
         google.maps.event.addListener(marker, 'click', function(event){
