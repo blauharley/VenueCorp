@@ -13,7 +13,7 @@
         $('#searchResults').css('width', $('#searchField').css('width'));
       }
       
-      $('#searchResults').load("searchForEvents/" + $('#searchField').val() + " #eventResults", function(data) {
+      $('#searchResults').load("http://" + window.location.host + "/searchForEvents/" + $('#searchField').val() + " #eventResults", function(data) {
         $(this).html(data);
       });
   
