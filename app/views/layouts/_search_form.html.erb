@@ -1,6 +1,32 @@
-﻿<%= form_tag root_path, :method => 'get' do %>
+﻿<script type="text/javascript">
+  
+  $(document).ready(function(){
+  
+    $('#searchField').keyup(function(event) {
+    
+      if($('#searchField').val().length == 0){
+        $('#searchResults').html('');
+        $('#searchResults').css('display', 'none');
+      }
+      else{
+        $('#searchResults').css('display', 'inline');
+        $('#searchResults').css('width', $('#searchField').css('width'));
+      }
+      
+      $('#searchResults').load("searchForEvents/" + $('#searchField').val() + " #eventResults", function(data) {
+        $(this).html(data);
+      });
+  
+    });
+    
+  });
+  
+</script>
+
+<%= form_tag root_path, :method => 'get' do %>
  
-  <p><%= text_field_tag :search, params[:search], :placeholder => 'Suche Plätze, Events' %>
-  <%= submit_tag 'Suche', :name => nil %><p>
+  <p><%= text_field_tag :search, params[:search], :placeholder => 'Suche Plätze, Events', :id => 'searchField', :style => "width:250px" %>
+  <p><div id ='searchResults' style="display:none;"></div></p>
+  <%= submit_tag 'Veranstaltungen auflisten', :name => nil %><p>
   
 <% end %> 

@@ -24,7 +24,7 @@
       hits = hits_city + hits_title + hits_description
       hits
     else
-      all
+      order('start_date asc')
     end
   end
   

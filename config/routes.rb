@@ -18,6 +18,10 @@ EventApp::Application.routes.draw do
     match 'sendContactMail' => :send_contact_mail, :as => 'send_contact_mail'
   end
   
+  controller :Ajax do
+    match 'searchForEvents/:search' => :search_events
+  end
+  
   root :to => 'Venue#index'
   # See how all your routes lay out with "rake routes"
 
