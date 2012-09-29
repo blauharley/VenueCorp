@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: "event-corp@events.com"
+  default from: "franz.josef.bruenner@gmail.com"
   
   def send_contact_mail sub, body
     @body = body
