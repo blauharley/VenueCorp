@@ -3,25 +3,11 @@
    
   def self.search(value)
     if value
-      hits_city = []
-      hits_city += find(:all, :conditions => ["city like ?", '%' + value + '%'], :order => "start_date asc")
-      if hits_city.empty?
-        hits_city += find(:all, :conditions => ["city like ?", '%' + value.downcase + '%'], :order => "start_date asc")
+      hits = []
+      hits += find(:all, :conditions => ["city like ? OR title like ? OR description like ?", '%' + value + '%', '%' + value + '%', '%' + value + '%'], :order => "start_date asc")
+      if hits.empty?
+        hits += find(:all, :conditions => ["city like ? OR title like ? OR description like ?", '%' + value.downcase + '%', '%' + value.downcase + '%', '%' + value.downcase + '%'], :order => "start_date asc")
       end
-      
-      hits_title = []
-      hits_title += find(:all, :conditions => ["title like ?", '%' + value + '%'], :order => "start_date asc")
-      if hits_title.empty?
-        hits_title += find(:all, :conditions => ["title like ?", '%' + value.downcase + '%'], :order => "start_date asc")
-      end
-      
-      hits_description = []
-      hits_description += find(:all, :conditions => ["description like ?", '%' + value + '%'], :order => "start_date asc")
-      if hits_description.empty?
-        hits_description += find(:all, :conditions => ["description like ?", '%' + value.downcase + '%'], :order => "start_date asc")
-      end
-      
-      hits = hits_city + hits_title + hits_description
       hits
     else
       order('start_date asc')

@@ -1,39 +1,38 @@
 ﻿
-var infoWindowText = document.createElement("div");
-infoWindowText.className = 'infobox';
-infoWindowText.style.cssText = "width:310px; height:75px; border:1px solid grey; border-radius:23px; margin-top: 8px; background: white; padding: 10px; text-align:center";
-
-var infoWindowOptions = {
-  content: infoWindowText
-  ,disableAutoPan: false
-  ,maxWidth: 0
-  ,pixelOffset: new google.maps.Size(-140, 25)
-  ,zIndex: null
-  ,boxStyle: { 
-   background: "url('http://google-maps-utility-library-v3.googlecode.com/svn/tags/infobox/1.1.5/examples/tipbox.gif') no-repeat"
-   ,opacity: 0.9
-   ,width: "280px"
-  }
-  ,closeBoxMargin: "20px -6px 2px 2px"
-  ,closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif"
-  ,infoBoxClearance: new google.maps.Size(1, 1)
-  ,isHidden: false
-  ,pane: "floatPane"
-  ,enableEventPropagation: false
-};
-
-var infoWindow = new InfoBox(infoWindowOptions);
-
-
 window.onload = function(){
 
-  if(document.getElementById('event_map')){
-      showEventOnMap();
+  if(document.getElementById('event_map')){ /* if true map is available */
+  
+      var infoWindowText = document.createElement("div");
+      infoWindowText.className = 'infobox';
+      infoWindowText.style.cssText = "width:310px; height:75px; border:1px solid grey; border-radius:23px; margin-top: 8px; background: white; padding: 10px; text-align:center";
+
+      var infoWindowOptions = {
+        content: infoWindowText
+        ,disableAutoPan: false
+        ,maxWidth: 0
+        ,pixelOffset: new google.maps.Size(-140, 25)
+        ,zIndex: null
+        ,boxStyle: { 
+         background: "url('http://google-maps-utility-library-v3.googlecode.com/svn/tags/infobox/1.1.5/examples/tipbox.gif') no-repeat"
+         ,opacity: 0.9
+         ,width: "280px"
+        }
+        ,closeBoxMargin: "20px -6px 2px 2px"
+        ,closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif"
+        ,infoBoxClearance: new google.maps.Size(1, 1)
+        ,isHidden: false
+        ,pane: "floatPane"
+        ,enableEventPropagation: false
+      };
+
+      var infoWindow = new InfoBox(infoWindowOptions);
+      showEventOnMap(infoWindow, infoWindowText);
   }
   
 };
 
-function showEventOnMap(){
+function showEventOnMap(infoWindow, infoWindowText){
 
   var mapOptions = {
                     center: new google.maps.LatLng(-34.397, 150.644),
