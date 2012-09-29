@@ -1,9 +1,8 @@
 class UserMailer < ActionMailer::Base
-  default from: "from@example.com"
+  default from: "event-corp@events.com"
   
-  def send_condact_mail
-    @test = 'rejawik'
-    mail(:to => 'franz.josef.bruenner@gmail.com', :subject => "Welcome to My Awesome Site")
+  def send_contact_mail sub, body
+    mail(:body => body, :to => 'franz.josef.bruenner@gmail.com', :subject => sub)
   end
   
 end

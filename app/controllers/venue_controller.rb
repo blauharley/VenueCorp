@@ -9,7 +9,7 @@
     else
       @events = Event.search(params[:search])
     end
-    @event_sub_cats = []
+    @event_sub_cats = {}
   end
   
   def get_main_cat_events
@@ -31,13 +31,13 @@
     render 'index'
   end
   
-  def send_contact_mail
-    UserMailer.send_condact_mail.deliver
+  def contact
+    
   end
   
-  def show_early_events
-    get_events 'early'
-    redirect_to :back, :notice => @note
+  def send_contact_mail
+    UserMailer.send_contact_mail(params[:title],params[:body]).deliver
+    redirect_to :root, :notice => 'Wir werden ihre Nachricht bald beantworten.'
   end
   
   private
@@ -48,40 +48,5 @@
       @event_main_cats[k] = Event.find(:all, :conditions => ['main_category = ?',k]).count
     end
   end
-  
-  def get_events cat
-    if cat == 'early'
-      date = Date.today
-      @events = Hash.new
-      for i in 0...6
-        @events[i] = Event.where( :start_date => date ).order('start_date asc')
-        date = date.next
-      end
-      
-      event_array = []
-      @events.each do |index,value|
-        for events in value
-          event_array << events
-        end
-      end
-      @events = event_array
-      
-    elsif cat == 'place'
-      @events = Event.find(:all).group_by(&:city).order('city asc')
-    elsif cat == 'group'
-      @events = Event.find(:all).group_by(&:city)
-    end
-    
-  end
-  
-  def write_note
-    @note = ''
-    if @events.empty?
-      @note = 'Leider keine Treffer'
-    else
-      @note = 'Suche erfolgreich!'
-    end
-  end
-  
   
 end

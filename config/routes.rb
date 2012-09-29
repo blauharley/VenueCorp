@@ -14,7 +14,7 @@ EventApp::Application.routes.draw do
     match 'eventHighlights/:highlight' => :index, :as => 'event_highlight'
     match 'catMainEvents/:cat' => :get_main_cat_events, :as => 'get_main_cat_events'
     match 'catSubEvents/:cat' => :get_sub_cat_events, :as => 'get_sub_cat_events'
-    match 'earlyEvents' => :show_early_events, :as => 'early_events'
+    match 'contact' => :contact, :as => 'contact'
     match 'sendContactMail' => :send_contact_mail, :as => 'send_contact_mail'
   end
   
