@@ -72,7 +72,7 @@ EventApp::Application.configure do
     :domain               => 'gmail.com',
     :user_name            => "franz.josef.bruenner@gmail.com",
     :password             => "ayduof3a",
-    :authentication       => 'login',
+    :authentication       => 'plain',
     :enable_starttls_auto => true
   }
   
