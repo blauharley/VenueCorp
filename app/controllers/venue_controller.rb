@@ -36,7 +36,7 @@
   end
   
   def send_contact_mail
-    UserMailer.send_contact_mail(params[:title],params[:body]).deliver
+    UserMailer.send_contact_mail('test-user', params[:title],params[:body]).deliver
     redirect_to :root, :notice => 'Wir werden ihre Nachricht bald beantworten.'
   end
   
