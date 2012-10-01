@@ -11,11 +11,12 @@
   end
   
   def new
+    @method = 'post'
     @event = Event.new(params[:event])
   end
   
   def create
-    event = Event.new(:province => params[:event][:province], :costs => params[:event][:costs], :address => params[:event][:address], :region => params[:event][:region], :city => params[:event][:city], :main_category => params[:event][:main_category], :sub_category => params[:event][:sub_category], :venue => params[:event][:venue], :start_date => params[:event][:start_date], :end_date => params[:event][:end_date], :photo_url => params[:event][:photo_url], :title => params[:event][:title], :description => params[:event][:description], :venue_url => params[:event][:venue_url], :email => params[:event][:email], :tel_nr => params[:event][:tel_nr] )
+    event = Event.new(params[:event])
     
     event_start_time = params[:event][:start_date] + ' ' + params[:event][:start_date_time]
     event_end_time = params[:event][:end_date] + ' ' + params[:event][:end_date_time]
@@ -31,6 +32,7 @@
   end
   
   def edit
+    @method = 'put'
     @event = Event.find(params[:id])
   end
   
@@ -103,13 +105,13 @@
                              ['End-Datum', event.end_date.strftime('%Y/%m/%d')],
                              ['Start-Tageszeit', event.start_date_time.strftime('%H:%M:%S')],
                              ['Ende-Tageszeit', event.end_date_time.strftime('%H:%M:%S')],
-                             ['Bild-Url', event.photo_url],
                              ['Veranstaltungsort-Url', event.venue_url],
                              ['Email', event.email],
                              ['Tel. Nr.', event.tel_nr],
                              ['Adresse', event.address],
                              ['Kosten', event.costs] ])
               t.draw
+              image event.image.path, :position => :right, :vposition => 20, :width => 100, :height => 100
            end).path
     send_file( pdf_path, :type => 'application/pdf',:disposition => 'inline')
   end

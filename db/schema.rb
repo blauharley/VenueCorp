@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120924143600) do
+ActiveRecord::Schema.define(:version => 20121001144900) do
 
   create_table "events", :force => true do |t|
     t.string   "province"
@@ -25,16 +25,20 @@ ActiveRecord::Schema.define(:version => 20120924143600) do
     t.date     "end_date"
     t.time     "start_date_time"
     t.time     "end_date_time"
-    t.string   "photo_url"
     t.string   "title"
     t.string   "venue_url"
     t.string   "email"
     t.string   "tel_nr"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.string   "description"
     t.string   "address"
     t.string   "costs"
+    t.string   "repeat"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
 end

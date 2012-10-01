@@ -15,12 +15,22 @@
           }
         }
       }
-    }
+    };
+    
+    document.getElementById('repeat_choice').onchange = function(event){
+      document.getElementById('repeat_counter').style.display = 'inline';
+    };
+    
+    document.getElementById('repeat_counter').onchange = function(event){
+      document.getElementById('event_repeat').value = document.getElementById('repeat_choice').value + ' ' + event.currentTarget.value;
+      console.log(document.getElementById('event_repeat').value);
+    };
+    
   }
   
 </script>
 
-<%= form_for(@event) do |e| %>
+<%= form_for(@event, :html => { :multipart => true }) do  |e| %>
 
 <p><%= label_tag :title, 'Titel' %>
 <%= e.text_field :title %></p>
@@ -59,8 +69,8 @@
 <p><%= label_tag :end_date_time, 'Ende-Tageszeit' %>
 <%= e.text_field :end_date_time, :value => if @event.end_date_time != nil then @event.end_date_time.strftime('%H:%M:%S') else '' end  %></p>
 
-<p><%= label_tag :photo_url, 'Bild-Url' %>
-<%= e.text_field :photo_url %></p>
+<p><%= label_tag :image, 'Bild' %>
+<%= e.file_field :image %></p>
 
 <p><%= label_tag :description, 'Beschreibung' %>
 <%= e.text_field :description %></p>
@@ -79,6 +89,18 @@
 
 <p><%= label_tag :tel_nr, 'Tel. Nr.' %>
 <%= e.text_field :tel_nr %></p>
+
+<p><%= label_tag :repeat, 'Wiederholentlich' %>
+<%= e.hidden_field :repeat %>
+<%= select( "repeat", "choice", { 'Nie' => 'never', 'Wöchentlich' => 'weekly', '14-tägig' => 'all_14_days', 'Monatlich' => 'monthly' }, { :selected => 'never' }, { :name => nil }) %>
+
+<% num = { 'wie oft?' => '0' } %>
+<% for i in 1...30 %>
+  <% num[i.to_s] = i.to_s %>
+<% end %>
+<%= select("repeat", "counter", num, { :selected => '0' }, { :style => 'display:none', :name => nil }) %>
+
+</p>
 
 <p><%= e.submit 'OK', :name => nil %></p>
 
