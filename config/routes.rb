@@ -9,6 +9,7 @@ EventApp::Application.routes.draw do
     match 'allEventFeedRss' => 'Events#get_all_rss_feed', :as => 'all_event_feed'
     match 'getEventsByFormat/:attr/:value' => 'Events#get_events_by_format'
     match 'pdfEvent/:id' => 'Events#pdf_event', :as => 'pdf_event'
+    match 'pdfEvents/:ids' => 'Events#pdf_events', :as => 'pdf_events'
     
   controller :Venue do
     match 'eventHighlights/:highlight' => :index, :as => 'event_highlight'

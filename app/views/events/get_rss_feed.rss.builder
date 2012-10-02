@@ -23,7 +23,7 @@ xml.rss :version => "2.0" do
         xml.end_date event.end_date
         xml.start_date_time event.start_date_time
         xml.end_date_time event.end_date_time
-        xml.photo_url event.photo_url
+        xml.image event.image.path
         xml.venue_url event.venue_url
         xml.email event.email
         xml.tel_nr event.tel_nr

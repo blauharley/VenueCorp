@@ -20,3 +20,4 @@
 
 <%= link_to 'Kontakt', contact_path %>
 <%= link_to 'RSS Feed', event_feed_path( get_event_ids(@events) ) << '.rss' %>
+<%= link_to 'Alle als PDF ansehen', pdf_events_path( get_event_ids(@events) ) %>

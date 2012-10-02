@@ -11,7 +11,6 @@
   end
   
   def new
-    @method = 'post'
     @event = Event.new(params[:event])
   end
   
@@ -32,7 +31,6 @@
   end
   
   def edit
-    @method = 'put'
     @event = Event.find(params[:id])
   end
   
@@ -112,6 +110,45 @@
                              ['Kosten', event.costs] ])
               t.draw
               image event.image.path, :position => :right, :vposition => 20, :width => 100, :height => 100
+           end).path
+    send_file( pdf_path, :type => 'application/pdf',:disposition => 'inline')
+  end
+  
+  def pdf_events
+    events = []
+    params[:ids].split(',').each do |id|
+      events << Event.find(id)
+    end
+    
+    pdf_path = (Prawn::Document.generate((events[0].title + ".pdf")) do
+              move_down 10
+              text 'Veranstaltungen:'
+              move_down 3
+              
+              events.each do |event|
+                move_down 5
+                t = make_table([ ['Titel', event.title],
+                               ['Beschreibung', event.description],
+                               ['Hauptkategorie', event.main_category],
+                               ['Unterkategorie', event.sub_category],
+                               ['Ort', event.venue],
+                               ['Veranstaltungsort', event.venue],
+                               ['Region', event.region],
+                               ['Bundesland', event.province],
+                               ['Highlight', event.highlight.to_s],
+                               ['Start-Datum', event.start_date.strftime('%Y/%m/%d')],
+                               ['End-Datum', event.end_date.strftime('%Y/%m/%d')],
+                               ['Start-Tageszeit', event.start_date_time.strftime('%H:%M:%S')],
+                               ['Ende-Tageszeit', event.end_date_time.strftime('%H:%M:%S')],
+                               ['Veranstaltungsort-Url', event.venue_url],
+                               ['Email', event.email],
+                               ['Tel. Nr.', event.tel_nr],
+                               ['Adresse', event.address],
+                               ['Kosten', event.costs] ])
+                  t.draw
+                  image event.image.path, :position => :right, :vposition => 20, :width => 100, :height => 100
+                  start_new_page
+              end
            end).path
     send_file( pdf_path, :type => 'application/pdf',:disposition => 'inline')
   end
