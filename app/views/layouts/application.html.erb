@@ -7,12 +7,16 @@
   <title>EventApp</title>
   
   <%= stylesheet_link_tag    "application", :media => "all" %>
-  
+  <!--[if lt IE 9]>
+  <link  type="text/css"  href="http://chriscoyier.github.com/MovingBoxes/css/movingboxes-ie.css"  rel="stylesheet" media="screen" />
+  <![endif]-->
+
   <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
   <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDq8dsh-CgT1r0D4o96H9tEYbIakrGMcnI&sensor=true"></script>
   <script src="http://google-maps-utility-library-v3.googlecode.com/svn/tags/infobox/1.1.5/src/infobox_packed.js" type="text/javascript"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.js"></script>
   
   <%= javascript_include_tag "application" %>
   
@@ -26,20 +30,13 @@
 <%= yield %>
 
 </body>
-<script>
-  
-  $('#main_notifier').fadeOut(8000);
-  
+<script type="text/javascript">
+
   $(document).ready(function() {
     
-    $('#coin-slider').coinslider({ width: 500, effect: 'random', navigation: true, delay: 5000 });
-     
-    $("#event_start_date").datepicker({ 'format': 'yyyy/mm/dd' });
-    $("#event_end_date").datepicker({ 'format': 'yyyy/mm/dd' });
-    
-    $("#event_start_date_time").timepicker({ 'timeFormat': 'H:i:s' });
-    $("#event_end_date_time").timepicker({ 'timeFormat': 'H:i:s' });
+    $('#main_notifier').fadeOut(8000);
     
   });
+  
 </script>
 </html>

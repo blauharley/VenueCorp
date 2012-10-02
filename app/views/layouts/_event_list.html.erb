@@ -1,5 +1,4 @@
-﻿<h2>Veranstaltungen:</h2>
-<div>
+﻿<div>
   <% all_highlight_events = [] %>
   <% all__non_highlight_events = [] %>
   
@@ -12,39 +11,122 @@
   <% end %>
   
   <% if !all_highlight_events.empty? %>
-    <div id='coin-slider'>
-      <% for event in all_highlight_events %>
-          
-        <a href="<%= event_path(event.id) %>">
-          <%= image_tag event.image.url(:thumb) %>
-          <span>
-              <b><%= event.title %></b>
-              <p>
-                <%= render 'layouts/formatted_dates', :event => event %>
-              </p>
-              <b><%= event.description %></b>
-          </span>
-        </a>
-         
-      <% end %>
+    <div style="width:500px; margin:0 auto">
+      <h2>Highlights:</h2>
+      <div id="carousel">
+        <% all_highlight_events.each do |event| %>
+          <div>
+            <%= image_tag event.image.url(:thumb), :style => 'float:left' %>
+            <h2><%= event.title %></h2>
+            <p><%= event.description %></p>
+            <p><%= event.main_category << '/' << event.sub_category %></p>
+            <p><%= link_to 'Zeigen', event_path(event.id) %></td>
+            <%= link_to 'Als PDF anzeigen', pdf_event_path(event.id) %>
+            <%= link_to 'Bearbeiten', edit_event_path(event.id) %>
+            <%= link_to 'Löschen', event_path(event.id), :method => :delete %></p>
+          </div>
+        <% end %>
+      </div>
     </div>
   <% end %>
   
-  <% for event in all__non_highlight_events %>
-      <div>
-        <h2><%= event.title %></h2>
-        <p>
-          <%= render 'layouts/formatted_dates', :event => event %>
-        </p>
-        <p><%= event.main_category << '/' << event.sub_category %></p>
-        <%= image_tag event.image.url(:thumb), :style => 'float:left' %>
-        <p><%= event.description %></p>
-        <b style="float:right; margin-right:10px"><%= event.start_date.to_s << ' '<< event.start_date_time.strftime('%H:%M:%S') %></b>
-        <p><%= link_to 'Zeigen', event_path(event.id) %></td>
-        <%= link_to 'Als PDF anzeigen', pdf_event_path(event.id) %>
-        <%= link_to 'Bearbeiten', edit_event_path(event.id) %>
-        <%= link_to 'Löschen', event_path(event.id), :method => :delete %></p>
-        </tr>
-      </div>
-  <% end %>
+  <br />
+  <br />
+  
+  <h2 style="width:500px; margin:0 auto">Normale Veranstaltungen:</h2>
+  <div id="page-wrap">
+		
+		<div id="tabs">
+    
+      <ul>
+        <% num = 0 %>
+        <% (all__non_highlight_events.count/10).downto(0) do %>
+          <li><a href="#fragment-<%= num += 10 %>"><%= num %></a></li>
+        <% end %>
+      </ul>
+      
+      <% num = 10 %>
+      <% newTab = false %>
+      <% for event in all__non_highlight_events %>
+        
+        <% if (num % 10) == 0 %>
+          <% newTab = true %>
+          <% if num >= 20 %>
+            <div id="fragment-<%= num %>" class="ui-tabs-panel ui-tabs-hide">
+          <% else %>
+            <div id="fragment-<%= num %>" class="ui-tabs-panel">
+          <% end %>
+        <% end %>
+        
+              <div>
+                <h2><%= event.title %></h2>
+                <p>
+                  <%= render 'layouts/formatted_dates', :event => event %>
+                </p>
+                <p><%= event.main_category << '/' << event.sub_category %></p>
+                <%= image_tag event.image.url(:thumb), :style => 'float:left' %>
+                <p><%= event.description %></p>
+                <b style="float:right; margin-right:10px"><%= event.start_date.to_s << ' '<< event.start_date_time.strftime('%H:%M:%S') %></b>
+                <p><%= link_to 'Zeigen', event_path(event.id) %></td>
+                <%= link_to 'Als PDF anzeigen', pdf_event_path(event.id) %>
+                <%= link_to 'Bearbeiten', edit_event_path(event.id) %>
+                <%= link_to 'Löschen', event_path(event.id), :method => :delete %></p>
+              </div>
+          
+          <% if newTab && ((num + 1) % 10) == 0 %>
+            <% newTab = false %>
+            </div> 
+          <% end %>
+          
+          <% num += 1 %>
+      <% end %>
+    
+    </div>
+  </div>
+  
 </div>
+
+<script type="text/javascript">
+
+  $(document).ready(function() {
+    
+    $('#carousel').movingBoxes({
+      startPanel   : 1,      // start with this panel
+      reducedSize  : 0.8,    // non-current panel size: 80% of panel size
+      buildNav     : true,   // if true, navigation links will be added
+      //navFormatter : function(index, panel){ return panel.find('h2 span').text(); } // function which gets nav text from span inside the panel header
+
+      // width and panelWidth options removed in v2.2.2, but still backwards compatible
+      // width        : 500,    // overall width of movingBoxes (not including navigation arrows)
+      // panelWidth   : 0.7,    // current panel width
+
+    });
+    
+    // tabbar
+    var $tabs = $('#tabs').tabs();
+	
+    $(".ui-tabs-panel").each(function(i){
+
+      var totalSize = $(".ui-tabs-panel").size() - 1;
+
+      if (i != totalSize) {
+        next = i + 2;
+        $(this).append("<a href='#' class='next-tab mover' rel='" + next + "'>Next Page &#187;</a>");
+      }
+  
+      if (i != 0) {
+        prev = i;
+        $(this).append("<a href='#' class='prev-tab mover' rel='" + prev + "'>&#171; Prev Page</a>");
+      }
+    
+    });
+
+    $('.next-tab, .prev-tab').click(function() { 
+      $tabs.tabs('select', $(this).attr("rel"));
+      return false;
+    });
+    
+  });
+  
+</script>
+

@@ -1,6 +1,13 @@
 ﻿<script type="text/javascript">
 
-  window.onload = function(){
+  $(document).ready(function() {
+    
+    $("#event_start_date").datepicker({ 'format': 'yyyy/mm/dd' });
+    $("#event_end_date").datepicker({ 'format': 'yyyy/mm/dd' });
+    
+    $("#event_start_date_time").timepicker({ 'timeFormat': 'H:i:s' });
+    $("#event_end_date_time").timepicker({ 'timeFormat': 'H:i:s' });
+    
     var sub_cats = <%= raw @event_cats.to_json %>
     
     document.getElementById('event_main_category').onchange = function(event){
@@ -26,9 +33,10 @@
       console.log(document.getElementById('event_repeat').value);
     };
     
-  }
+  });
   
 </script>
+
 
 <%= form_for(@event, :html => { :multipart => true }) do  |e| %>
 
@@ -58,16 +66,16 @@
 <%= e.text_field :venue %></p>
 
 <p><%= label_tag :start_date, 'Start-Datum' %>
-<%= e.text_field :start_date, :value => if @event.start_date != nil then @event.start_date.strftime('%Y/%m/%d') else '' end %></p>
+<%= e.text_field :start_date, :value => if @event.start_date != nil then @event.start_date.strftime('%Y/%m/%d') else '' end %> Format: YYYY/MM/DD</p>
 
 <p><%= label_tag :start_date, 'Ende-Datum' %>
-<%= e.text_field :end_date, :value => if @event.end_date != nil then @event.end_date.strftime('%Y/%m/%d') else '' end %></p>
+<%= e.text_field :end_date, :value => if @event.end_date != nil then @event.end_date.strftime('%Y/%m/%d') else '' end %> Format: YYYY/MM/DD</p>
 
 <p><%= label_tag :start_date_time, 'Start-Tageszeit' %>
-<%= e.text_field :start_date_time, :value => if @event.start_date_time != nil then @event.start_date_time.strftime('%H:%M:%S') else '' end %></p>
+<%= e.text_field :start_date_time, :value => if @event.start_date_time != nil then @event.start_date_time.strftime('%H:%M:%S') else '' end %> Format: HH:MM:SS</p>
 
 <p><%= label_tag :end_date_time, 'Ende-Tageszeit' %>
-<%= e.text_field :end_date_time, :value => if @event.end_date_time != nil then @event.end_date_time.strftime('%H:%M:%S') else '' end  %></p>
+<%= e.text_field :end_date_time, :value => if @event.end_date_time != nil then @event.end_date_time.strftime('%H:%M:%S') else '' end  %> Format: HH:MM:SS</p>
 
 <p><%= label_tag :image, 'Bild' %>
 <%= e.file_field :image %></p>
@@ -91,7 +99,7 @@
 <%= e.text_field :tel_nr %></p>
 
 <p><%= label_tag :repeat, 'Wiederholentlich' %>
-<%= e.hidden_field :repeat %>
+<%= e.hidden_field :repeat, :value => 'never' %>
 <%= select( "repeat", "choice", { 'Nie' => 'never', 'Wöchentlich' => 'weekly', '14-tägig' => 'all_14_days', 'Monatlich' => 'monthly' }, { :selected => 'never' }, { :name => nil }) %>
 
 <% num = { 'wie oft?' => '0' } %>

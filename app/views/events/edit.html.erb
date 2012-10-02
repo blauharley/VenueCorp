@@ -1,3 +1,17 @@
 ﻿<p><%= link_to 'Home', root_path %></p>
 <h2>Veranstaltung bearbeiten</h2>
 <%= render 'event_form' %>
+
+<script type="text/javascript">
+
+  $(document).ready(function() {
+  
+    $("#event_start_date").datepicker({ 'format': 'yyyy/mm/dd' });
+    $("#event_end_date").datepicker({ 'format': 'yyyy/mm/dd' });
+    
+    $("#event_start_date_time").timepicker({ 'timeFormat': 'H:i:s' });
+    $("#event_end_date_time").timepicker({ 'timeFormat': 'H:i:s' });
+    
+  });
+
+</script>
