@@ -109,7 +109,9 @@
                              ['Adresse', event.address],
                              ['Kosten', event.costs] ])
               t.draw
-              image event.image.path, :position => :right, :vposition => 20, :width => 100, :height => 100
+              if event.image_content_type
+                image event.image.path, :position => :right, :vposition => 20, :width => 100, :height => 100
+              end
            end).path
     send_file( pdf_path, :type => 'application/pdf',:disposition => 'inline')
   end
@@ -146,7 +148,9 @@
                                ['Adresse', event.address],
                                ['Kosten', event.costs] ])
                   t.draw
-                  image event.image.path, :position => :right, :vposition => 20, :width => 100, :height => 100
+                  if event.image_content_type
+                    image event.image.path, :position => :right, :vposition => 20, :width => 100, :height => 100
+                  end 
                   start_new_page
               end
            end).path

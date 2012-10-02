@@ -11,30 +11,30 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121001144900) do
+ActiveRecord::Schema.define(:version => 20121002173900) do
 
   create_table "events", :force => true do |t|
-    t.string   "province"
-    t.string   "region"
-    t.string   "city"
-    t.string   "main_category"
-    t.string   "sub_category"
-    t.boolean  "highlight"
-    t.string   "venue"
-    t.date     "start_date"
-    t.date     "end_date"
-    t.time     "start_date_time"
-    t.time     "end_date_time"
-    t.string   "title"
-    t.string   "venue_url"
-    t.string   "email"
-    t.string   "tel_nr"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-    t.string   "description"
-    t.string   "address"
-    t.string   "costs"
-    t.string   "repeat"
+    t.string   "province",           :default => ""
+    t.string   "region",             :default => ""
+    t.string   "city",               :default => ""
+    t.string   "main_category",      :default => ""
+    t.string   "sub_category",       :default => ""
+    t.boolean  "highlight",          :default => false
+    t.string   "venue",              :default => ""
+    t.date     "start_date",         :default => '2012-10-02'
+    t.date     "end_date",           :default => '2012-10-02'
+    t.time     "start_date_time",    :default => '2000-01-01 15:41:23'
+    t.time     "end_date_time",      :default => '2000-01-01 15:41:23'
+    t.string   "title",              :default => ""
+    t.string   "venue_url",          :default => ""
+    t.string   "email",              :default => ""
+    t.string   "tel_nr",             :default => ""
+    t.datetime "created_at",                                            :null => false
+    t.datetime "updated_at",                                            :null => false
+    t.string   "description",        :default => ""
+    t.string   "address",            :default => ""
+    t.string   "costs",              :default => ""
+    t.string   "repeat",             :default => ""
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
