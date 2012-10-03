@@ -8,6 +8,24 @@
     $("#event_start_date_time").timepicker({ 'timeFormat': 'H:i:s' });
     $("#event_end_date_time").timepicker({ 'timeFormat': 'H:i:s' });
     
+    var venues = <%= raw @venues.to_json %>
+    
+    // auto-update venues
+    document.getElementById('event_province').onchange = function(event){
+      for(var venue=0; venue < venues.length; venue++){
+        if( venues[venue][event.currentTarget.value] ){
+          
+          var sub = venues[venue][event.currentTarget.value];
+          document.getElementById('event_city').innerHTML = '';
+          
+          for(var v=0; v < sub.length; v++){
+            document.getElementById('event_city').innerHTML += "<option value='"+sub[v]+"'>"+sub[v]+"</option>";
+          }
+        }
+      }
+    };
+    
+    // auto-update subcategories
     var sub_cats = <%= raw @event_cats.to_json %>
     
     document.getElementById('event_main_category').onchange = function(event){
@@ -43,21 +61,20 @@
 <p><%= label_tag :title, 'Titel' %>
 <%= e.text_field :title %></p>
 
-<p><%= label_tag :city, 'Ort' %>
-<%= e.text_field :city %><p>
-
 <p><%= label_tag :region, 'Region' %>
 <%= e.text_field :region %></p>
 
 <p><%= label_tag :province, 'Bundesland' %>
-<%= e.text_field :province %></p>
+<%= select( "event", "province", @federal_countries.collect{ |k,v| [k,k] }) %></p>
 
+<p><%= label_tag :city, 'Ort' %>
+<%= select( "event", "city", 'Wähle Ort' => '') %><p>
 
 <p><%= label_tag :main_category, 'Hauptkategorie' %>
 <%= select( "event", "main_category", @main_event_cats.collect{ |k,v| [k,k] }) %>
 
 <p><%= label_tag :sub_category, 'Unterkategorie' %>
-<%= select( "event", "sub_category", 'Unterkategorie' => '') %>
+<%= select( "event", "sub_category", 'Wähle Unterkategorie' => '') %>
 
 <p><%= label_tag :highlight, 'Highlight' %>
 <%= e.check_box :highlight  %></p>

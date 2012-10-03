@@ -8,7 +8,7 @@ module ApplicationHelper
     ids
   end
   
-  def show_formated_repeat_dates repeat_attr, start_date
+  def get_formated_repeat_dates repeat_attr, start_date
     repeat_attr = repeat_attr.split(' ')
     repeat_kinds = { 'never' => 0, 'weekly' => 7, 'all_14_days' => 14, 'monthly' => 30 }
     

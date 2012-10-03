@@ -4,8 +4,7 @@
 
 <h3>Suche</h3>
 
-<%= render 'layouts/search_form' %>
-<%= render 'layouts/csv_upload_form' %>
+<%= render 'layouts/navibar', :all_venues => @all_venues, :all_cats => @all_event_cats %>
 
 <table>
   <tr><td><%= link_to 'Alle Veranstaltungen', root_path %></td></tr>
@@ -13,7 +12,7 @@
   <tr><td><%= link_to 'Verstanstaltung hinzufügen', new_event_path %></td></tr>
 </table>
 
-<%= render 'layouts/event_cat_list', :event_main_cats => @event_main_cats, :event_sub_cats => @event_sub_cats %>
+<%# render 'layouts/event_cat_list', :event_main_cats => @event_main_cats, :event_sub_cats => @event_sub_cats %>
 <%= render 'layouts/calender', :entries => @events %>
 
 <%= render 'layouts/event_list', :events => @events %>

@@ -1,5 +1,5 @@
 ﻿<% ele = 0 %>
-<% show_formated_repeat_dates(event.repeat, event.start_date).each do |date| %>
+<% get_formated_repeat_dates(event.repeat, event.start_date).each do |date| %>
   
   <% if date >= Date.today && ele < 3 %>
     <%= date.to_s + '/' %>

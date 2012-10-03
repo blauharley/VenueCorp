@@ -1,7 +1,7 @@
 xml.instruct! :xml, :version => "1.0"
 xml.rss :version => "2.0" do
   xml.channel do
-    xml.title "Veranstaltungen Steiermark RSS-Feeds"
+    xml.title "Veranstaltungen in Oesterreich"
     xml.description "all events"
     xml.link root_path
 

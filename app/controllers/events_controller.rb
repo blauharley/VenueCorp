@@ -1,6 +1,6 @@
 ﻿class EventsController < ApplicationController
   
-  before_filter :get_event_cats, :only => [:new, :edit]
+  before_filter :get_event_cats_and_venues, :only => [:new, :edit]
   
   def index
     redirect_to :root, :notice => ''
@@ -50,39 +50,6 @@
     Event.find(params[:id]).destroy
     redirect_to :root, :notice => 'Veranstaltung erfolgreich gelöscht.'
   end
-  
-  def upload_csv
-    
-    redirect_to :back, :notice => 'Zurzeit außer Betrieb!'
-    return
-    if params[:csv_file].content_type != 'text/csv'
-      redirect_to :back, :notice => 'Datei: ' << params[:csv_file].original_filename << ' muss eine *.csv-Datei sein.'
-      return
-    end
-    
-    csv_file = params[:csv_file]
-    csv_content_array = CSV.read(csv_file.open.path, col_sep: ";", encoding: "ISO8859-1")
-    
-    error_msg = 'Folgende Veranstaltungseinträge waren fehlerhaft: '
-    row = 1
-    error = false
-    
-    csv_content_array.each do |event|
-      tmp_event = Event.create(:province => event[0], :region => event[1], :city => event[2], :main_category => event[3], :sub_category => event[4], :highlight => event[5], :venue => event[6], :start_date => event[7], :end_date => event[8], :start_date_time => event[9], :end_date_time => event[10], :photo_url => event[11], :title => event[12], :short_description => event[13], :long_description => event[14], :venue_url => event[15], :email => event[16], :tel_nr => event[17] )
-      if !tmp_event.valid?
-        error = true
-        error_msg += ' in Zeile ' << row.to_s << ' Eintrag: ' << tmp_event.print_attr
-      end
-      row += 1
-    end
-    
-    if error
-      redirect_to :root, :notice => error_msg
-    else
-      redirect_to :root, :notice => 'Alle Einträge wurden erfolgreich in die Datenbank übernommen.'
-    end
-  end
-  
   
   def pdf_event
     event = Event.find(params[:id])
@@ -200,13 +167,24 @@
   
   private
   
-  def get_event_cats
-    @main_event_cats = { 'Hauptkategorie' => '' }
+  def get_event_cats_and_venues
+    @federal_countries = { 'Wähle Bundesland' => '' }
+    @federal_countries = @federal_countries.merge(Venues.get_federal_countries)
+    
+    @venues  = []
+    Venues.get_federal_countries.each do |k,v|
+      venue = Venues.get_venues k
+      venue = venue.sort
+      @venues << { k =>  venue }
+    end
+    
+    @main_event_cats = { 'Wähle Hauptkategorie' => '' }
     @main_event_cats = @main_event_cats.merge(Categories.get_main_cats)
     
     @event_cats  = []
     Categories.get_main_cats.each do |k,v|
       sub_cat = Categories.get_sub_cats k
+      sub_cat = sub_cat.sort
       @event_cats << { k =>  sub_cat }
     end
   end
