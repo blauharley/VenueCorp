@@ -8,40 +8,37 @@
     $("#event_start_date_time").timepicker({ 'timeFormat': 'H:i:s' });
     $("#event_end_date_time").timepicker({ 'timeFormat': 'H:i:s' });
     
-    var venues = <%= raw @venues.to_json %>
     
-    // auto-update venues
-    document.getElementById('event_province').onchange = function(event){
-      for(var venue=0; venue < venues.length; venue++){
-        if( venues[venue][event.currentTarget.value] ){
-          
-          var sub = venues[venue][event.currentTarget.value];
-          document.getElementById('event_city').innerHTML = '';
-          
-          for(var v=0; v < sub.length; v++){
-            document.getElementById('event_city').innerHTML += "<option value='"+sub[v]+"'>"+sub[v]+"</option>";
+    function activateAutoSelectUpdate(array, main_id, sub_id){
+      
+      document.getElementById(main_id).onchange = function(event){
+        
+        document.getElementById(sub_id).style.display = 'inline';
+        
+        for(var x=0; x < array.length; x++){
+          if( array[x][event.currentTarget.value] ){
+            
+            var sub = array[x][event.currentTarget.value];
+            document.getElementById(sub_id).innerHTML = '';
+            
+            for(var y=0; y < sub.length; y++){
+              document.getElementById(sub_id).innerHTML += "<option value='"+sub[y]+"'>"+sub[y]+"</option>";
+            }
           }
         }
-      }
-    };
+      };
+    }
+    
+    // auto-update venues
+    var venues = <%= raw @venues.to_json %>
+    activateAutoSelectUpdate(venues, 'event_province', 'event_city');
     
     // auto-update subcategories
     var sub_cats = <%= raw @event_cats.to_json %>
+    activateAutoSelectUpdate(sub_cats, 'event_main_category', 'event_sub_category');
     
-    document.getElementById('event_main_category').onchange = function(event){
-      for(var sub_cat=0; sub_cat < sub_cats.length; sub_cat++){
-        if( sub_cats[sub_cat][event.currentTarget.value] ){
-          
-          var sub = sub_cats[sub_cat][event.currentTarget.value];
-          document.getElementById('event_sub_category').innerHTML = '';
-          
-          for(var s=0; s < sub.length; s++){
-            document.getElementById('event_sub_category').innerHTML += "<option value='"+sub[s]+"'>"+sub[s]+"</option>";
-          }
-        }
-      }
-    };
     
+    // auto-update how often?
     document.getElementById('repeat_choice').onchange = function(event){
       document.getElementById('repeat_counter').style.display = 'inline';
     };
@@ -68,13 +65,13 @@
 <%= select( "event", "province", @federal_countries.collect{ |k,v| [k,k] }) %></p>
 
 <p><%= label_tag :city, 'Ort' %>
-<%= select( "event", "city", 'Wähle Ort' => '') %><p>
+<%= select( "event", "city", { 'Wähle Ort' => '' }, {}, { :style => 'display:none' }) %><p>
 
 <p><%= label_tag :main_category, 'Hauptkategorie' %>
 <%= select( "event", "main_category", @main_event_cats.collect{ |k,v| [k,k] }) %>
 
 <p><%= label_tag :sub_category, 'Unterkategorie' %>
-<%= select( "event", "sub_category", 'Wähle Unterkategorie' => '') %>
+<%= select( "event", "sub_category", { 'Wähle Unterkategorie' => '' }, {}, { :style => 'display:none' }) %>
 
 <p><%= label_tag :highlight, 'Highlight' %>
 <%= e.check_box :highlight  %></p>
