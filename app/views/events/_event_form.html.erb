@@ -22,7 +22,11 @@
             document.getElementById(sub_id).innerHTML = '';
             
             for(var y=0; y < sub.length; y++){
-              document.getElementById(sub_id).innerHTML += "<option value='"+sub[y]+"'>"+sub[y]+"</option>";
+              var opt = document.createElement('option');
+              opt.setAttribute('value', sub[y]);
+              opt.innerHTML = sub[y];
+                
+              document.getElementById(sub_id).appendChild(opt);
             }
           }
         }
