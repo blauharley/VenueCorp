@@ -45,12 +45,34 @@
     // auto-update how often?
     document.getElementById('repeat_choice').onchange = function(event){
       document.getElementById('repeat_counter').style.display = 'inline';
+      document.getElementById('event_repeat_dates').value = document.getElementById('repeat_choice').value + ' ' + event.currentTarget.value;
     };
     
     document.getElementById('repeat_counter').onchange = function(event){
       document.getElementById('event_repeat_dates').value = document.getElementById('repeat_choice').value + ' ' + event.currentTarget.value;
     };
     
+    document.getElementById('submitButton').onclick = function(event){
+      
+      var inputs = document.forms[0].children;
+      for(var input=0; input < inputs.length; input++){
+        if(inputs[input].nodeName == 'P'){
+          
+          for(var i=0; i < inputs[input].children.length; i++){
+            if(inputs[input].children[i].name && inputs[input].children[i].name.search(/event/) == 0)
+              if(inputs[input].children[i].value.length == 0){
+                alert('Achtung das Feld: ' + inputs[input].children[0].innerHTML + ' ist nicht ausgefüllt!')
+                return false;
+              }
+          }
+        }
+      }
+      
+      document.forms[0].submit();
+      
+    };
+    
+    setTimeout(function(){ console.log(); },1000);
   });
   
 </script>
@@ -115,18 +137,23 @@
 <p><%= label_tag :tel_nr, 'Tel. Nr.' %>
 <%= e.text_field :tel_nr %></p>
 
-<p><%= label_tag :repeat_dates, 'Wiederholentlich' %>
-<%= e.hidden_field :repeat_dates, :value => 'never' %>
-<%= select( "repeat", "choice", { 'Nie' => 'never', 'Wöchentlich' => 'weekly', '14-tägig' => 'all_14_days', 'Monatlich' => 'monthly' }, { :selected => 'never' }, { :name => nil }) %>
-
-<% num = { 'wie oft?' => '0' } %>
-<% for i in 1...30 %>
-  <% num[i.to_s] = i.to_s %>
+<% days = { 'Tage' => 'nie' } %>
+<% for i in 1..31 %>
+  <% days['jeden ' + i.to_s + ' Tag'] = i.to_s %>
 <% end %>
-<%= select("repeat", "counter", num, { :selected => '0' }, { :style => 'display:none', :name => nil }) %>
+
+<p><%= label_tag :repeat_dates, 'Intervall' %>
+<%= e.hidden_field :repeat_dates, :value => '0' %>
+<%= select( "repeat", "choice", days, { :selected => 'nie' }, { :name => nil }) %>
+
+<% times = { 'wie oft?' => '0' } %>
+<% for i in 1..54 %>
+  <% times[i.to_s + ' mal'] = i.to_s %>
+<% end %>
+<%= select("repeat", "counter", times, { :selected => '1' }, { :style => 'display:none', :name => nil }) %>
 
 </p>
 
-<p><%= e.submit 'OK', :name => nil %></p>
+<p><%= e.submit 'OK', :name => nil, :id => 'submitButton' %></p>
 
 <% end %>

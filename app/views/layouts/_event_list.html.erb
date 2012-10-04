@@ -17,8 +17,13 @@
           <div>
             <%= image_tag event.image.url(:thumb), :style => 'float:left' %>
             <h2><%= event.title %></h2>
+            <p>
+              <%= render 'layouts/formatted_dates', :event => event, :max_num => 1 %>
+            </p>
+            <% if event.main_category && event.sub_category %>
+              <p><%= event.main_category << '/' << event.sub_category %></p>
+            <% end %>
             <p><%= event.description %></p>
-            <p><%= event.main_category << '/' << event.sub_category %></p>
             <p><%= link_to 'Zeigen', event_path(event.id) %></td>
             <%= link_to 'Als PDF anzeigen', pdf_event_path(event.id) %>
             <%= link_to 'Bearbeiten', edit_event_path(event.id) %>
@@ -59,12 +64,13 @@
               <div>
                 <h2><%= event.title %></h2>
                 <p>
-                  <%= render 'layouts/formatted_dates', :event => event %>
+                  <%= render 'layouts/formatted_dates', :event => event, :max_num => 3 %>
                 </p>
-                <p><%= event.main_category << '/' << event.sub_category %></p>
+                <% if event.main_category && event.sub_category %>
+                  <p><%= event.main_category << '/' << event.sub_category %></p>
+                <% end %>
                 <%= image_tag event.image.url(:thumb), :style => 'float:left' %>
                 <p><%= event.description %></p>
-                <b style="float:right; margin-right:10px"><%= event.start_date.to_s << ' '<< event.start_date_time.strftime('%H:%M:%S') %></b>
                 <p><%= link_to 'Zeigen', event_path(event.id) %></td>
                 <%= link_to 'Als PDF anzeigen', pdf_event_path(event.id) %>
                 <%= link_to 'Bearbeiten', edit_event_path(event.id) %>

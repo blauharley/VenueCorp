@@ -25,11 +25,10 @@
     <%= @event.start_date %>-<%= @event.end_date %>
   <% else %>
     <p>Nächste Daten:
-    <%= render 'layouts/formatted_dates', :event => @event %>
+    <%= render 'layouts/formatted_dates', :event => @event, :max_num => 5 %>
     </p>
   <% end %>
   
-  <%= @event.start_date_time.strftime('%H:%M:%S') %>-<%= @event.end_date_time.strftime('%H:%M:%S') %>
 </h7>
 
 <h5 style="margin-top:55px"><%= @event.description %></h5>

@@ -1,14 +1,39 @@
-﻿<% if event.repeat_dates != 'never' %>
+﻿
+<% old_event = true %>
+
+<% if event.repeat_dates != 'nie' %>
   
+  <% num = 0 %>
   <% event.repeat_dates.split(' ').each do |date| %>
     
     <% if date >= Date.today.to_s %>
-      <%= date.to_s + '/' %>
-    <% end %>
- 
-    <% if event.repeat_dates.split(' ').last == date %>
-      ...
+      <% if num == 0 %>
+        <b style="float:right; margin-right:10px">
+      <% end %>
+      
+      <% num += 1 %>
+      <% old_event = false %>
+      
+      <% if num != max_num || date != event.repeat_dates.split(' ').last %>
+        <%= date.to_s + '/' %>
+      <% else %>
+        <%= date.to_s + ' ab' %>
+      <% end %>
+      
+      <% if num == max_num || date != event.repeat_dates.split(' ').last %>
+        <%= event.start_date_time.strftime('%H:%M:%S') %></b>
+        <% break %>
+      <% end %>
     <% end %>
   <% end %>
-  
+
+<% else %>
+  <% if event.start_date && event.start_date >= Date.today %>
+    <b style="float:right; margin-right:10px"><%= event.start_date.to_s << ' '<< event.start_date_time.strftime('%H:%M:%S') %></b>
+    <% old_event = false %>
+  <% end %>
+<% end %>
+
+<% if old_event %>
+  <b style="float:right; margin-right:10px">Veranstaltung ist veraltet</b>
 <% end %>

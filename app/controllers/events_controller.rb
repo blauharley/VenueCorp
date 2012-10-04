@@ -186,18 +186,19 @@
     highlight = if params['highlight'].to_i == 0 then false else true end
     
     start_date = Date.parse(event_start_time)
-    repeat_kinds = { 'never' => 0, 'weekly' => 7, 'all_14_days' => 14, 'monthly' => 30 }
     repeat_dates = params['repeat_dates'].split(' ')
     formated_dates = ''
     
-    if repeat_dates[0] != 'never' && repeat_dates[1]
+    if repeat_dates[0] != 'nie' && repeat_dates[1] && repeat_dates[1] > '0'
       for i in 0...repeat_dates[1].to_i
-        formated_dates += (start_date + repeat_kinds[repeat_dates[0]].days).to_s + ' '
-        start_date = (start_date + repeat_kinds[repeat_dates[0]].days)
+        formated_dates += (start_date + repeat_dates[0].to_i.days).to_s + ' '
+        start_date = (start_date + repeat_dates[0].to_i.days)
       end
     end
     
-    event.update_attributes(:province => params['province'], :region => params['region'], :city => params['city'], :main_category => params['main_category'], :sub_category => params['sub_category'], :venue => params['venue'], :title => params['title'], :venue_url => params['venue_url'], :email => params['email'], :tel_nr => params['tel_nr'], :description => params['description'], :address => params['address'], :costs => params['costs'], :image => params['image'], :start_date_time => event_start_time, :end_date_time => event_end_time, :highlight => highlight, :repeat_dates => formated_dates)
+    event.update_attributes(params)
+    event.update_attributes(:start_date_time => event_start_time, :end_date_time => event_end_time, :highlight => highlight, :repeat_dates => formated_dates)
+
   end
   
 end
