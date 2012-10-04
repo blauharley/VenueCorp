@@ -1,4 +1,6 @@
-﻿<ul class="menu" id="menu">
+﻿<div style="padding:20px 40px; height:30px; width:750px; border:1px solid grey">
+
+<ul class="menu" id="menu">
 	
   <li><a href="#" class="menulink">Bundesland/Region/Ort</a>
     <ul>
@@ -60,15 +62,13 @@
 		<%= form_tag root_path, :method => 'get' do %>
  
       <p><%= text_field_tag :search, params[:search], :placeholder => 'Suche', :id => 'searchField', :style => "width:250px; height:28px" %>
-      <p><div id ='searchResults' style="display:none;"></div></p>
-      
+      <p><div id ='searchResults' style="position: absolute; display:none;"></div></p>
+    <% end %>
+    
   </li>
   
-  <li>
-    <%= submit_tag 'Veranstaltungen auflisten', :name => nil %><p>
-    <% end %> 
-  </li>
 </ul>
+</div>
 
 <script type="text/javascript">
 	
@@ -96,6 +96,13 @@
         });
       }
       
+    });
+    
+    // fade out search results
+    $(document).mouseover(function(event){
+      
+      if(event.target && event.target.nodeName != 'A')
+        $('#searchResults').fadeOut(100);
     });
     
   });

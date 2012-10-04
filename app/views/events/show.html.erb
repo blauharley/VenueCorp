@@ -1,37 +1,74 @@
 ﻿
 <p><%= link_to 'Home', root_path %></p>
-<div style="width:300px; float:left">
 <h4 id="map_notifier" style="display:none"></h4>
-<h3>Veranstaltung:</h3>
+
+<% if @event.highlight %>
+  <h2>Veranstaltung Einzel</h2>
+<% else %>
+  <h2>Highlight Veranstaltung Einzel</h2>
+<% end %>
+
+<%= render 'layouts/navibar', :all_venues => @all_venues, :all_cats => @all_event_cats %>
+
+<div style="margin-top:70px; width:300px">
+  <p><%= image_tag @event.image.url(:medium), :style => 'width:300px; height:300px' %></p>
+  <div id="event_map" style="width:300px; height:300px; margin-right:50px;"></div>
+</div>
+
+<div style="margin-top:-620px; margin-right:500px; width:350px; float:right">
+<h3><%= @event.title %><h3>
+<h5><%= @event.main_category %>/<%= @event.sub_category %></h5>
+
+<h7 style="font-size:10px; float:right">
+  
+  <% if @event.repeat_dates == 'never' %>
+    <%= @event.start_date %>-<%= @event.end_date %>
+  <% else %>
+    <p>Nächste Daten:
+    <%= render 'layouts/formatted_dates', :event => @event %>
+    </p>
+  <% end %>
+  
+  <%= @event.start_date_time.strftime('%H:%M:%S') %>-<%= @event.end_date_time.strftime('%H:%M:%S') %>
+</h7>
+
+<h5 style="margin-top:55px"><%= @event.description %></h5>
+
+<br />
+<h5>Location</h5>
+
 <p class="address"><%= @event.province %></p>
 <p class="address"><%= @event.region %></p>
 <p class="address"><%= @event.city %></p>
-<p><%= @event.main_category %></p>
-<p><%= @event.sub_category %></p>
-<p><%= @event.highlight %></p>
 <p class="address"><%= @event.venue %></p>
-<p><%= @event.start_date %></p>
-<p><%= @event.end_date %></p>
-<p><%= @event.start_date_time.strftime('%H:%M:%S') %></p>
-<p><%= @event.end_date_time.strftime('%H:%M:%S') %></p>
+<p class="address"><%= @event.address %></p>
 
-<% if @event.repeat != 'never' %>
-  <p>Nächste Daten</p>
-  <%= render 'layouts/formatted_dates', :event => @event %>
-  </p>
+
+<h5>Kosten</h5>
+<p><%= @event.costs %></p>
+
+<h5>Website</h5>
+<% if @event.venue_url.length > 0 %>
+  <p><%= @event.venue_url %></p>
+<% else %>
+  <p>Keine Website</p>
 <% end %>
 
-<p><%= image_tag @event.image.url(:thumb) %>
-<p><%= @event.title %></p>
-<p><%= @event.description %></p>
-<p><%= @event.costs %></p>
-<p class="address"><%= @event.address %></p>
-<p><%= @event.venue_url %></p>
-<p><%= @event.email %></p>
-<p><%= @event.tel_nr %></p>
+<h5>E-Mail</h5>
+<% if @event.email.length > 0 %>
+  <p><%= @event.email %></p>
+<% else %>
+  <p>Keine E-Mail Adresse</p>
+<% end %>
 
-<%= link_to 'Bearbeiten', edit_event_path(@event.id) %>
-<%= link_to 'Als PDF anzeigen', pdf_event_path(@event.id) %>
+<h5>Tel. Nr.</h5>
+<% if @event.tel_nr.length > 0 %>
+  <p><%= @event.tel_nr %></p>
+<% else %>
+  <p>Keine Tel. Nr.</p>
+<% end %>
+
+<b><%= link_to 'Bearbeiten', edit_event_path(@event.id) %></b>
+<b><%= link_to 'Als PDF anzeigen', pdf_event_path(@event.id) %></b>
+
 </div>
-
-<div id="event_map" style="width:500px; height:500px; float:right; margin-right:50px"></div>

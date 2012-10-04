@@ -1,22 +1,27 @@
-﻿<h1>Event-Kalender</h1>
-
-<p>Hier login</p>
-
-<h3>Suche</h3>
+﻿<p><%= link_to 'Home', root_path %></p>
+<h1>Veranstaltungen</h1>
 
 <%= render 'layouts/navibar', :all_venues => @all_venues, :all_cats => @all_event_cats %>
 
-<table>
-  <tr><td><%= link_to 'Alle Veranstaltungen', root_path %></td></tr>
-  <tr><td><%= link_to 'Highlights', event_highlight_path('true') %></td></tr>
-  <tr><td><%= link_to 'Verstanstaltung hinzufügen', new_event_path %></td></tr>
-</table>
+<div style="margin-top:70px; width:500px; float:left">
+  <%= render 'layouts/event_list', :events => @events %>
+  <p><%= link_to 'Alle als PDF ansehen', pdf_events_path( get_event_ids(@events) ) %></p>
+<div>
 
-<%# render 'layouts/event_cat_list', :event_main_cats => @event_main_cats, :event_sub_cats => @event_sub_cats %>
-<%= render 'layouts/calender', :entries => @events %>
-
-<%= render 'layouts/event_list', :events => @events %>
-
-<%= link_to 'Kontakt', contact_path %>
-<%= link_to 'RSS Feed', event_feed_path( get_event_ids(@events) ) << '.rss' %>
-<%= link_to 'Alle als PDF ansehen', pdf_events_path( get_event_ids(@events) ) %>
+<div style="position:absolute; top:80%; left:850px; width:300px">
+  
+  <%= render 'layouts/calender', :entries => @events %>
+  
+  <table>
+    <tr><td><%= link_to 'Alle Veranstaltungen', root_path %></td></tr>
+    <tr><td><%= link_to 'Highlights', event_highlight_path('true') %></td></tr>
+    <tr><td><a href="#">Login</a></td></tr>
+    <tr><td><%= link_to 'Verstanstaltung hinzufügen', new_event_path %></td></tr>
+    <tr></tr>
+    
+    <tr><td><%= link_to 'RSS Feed', event_feed_path( get_event_ids(@events) ) << '.rss' %></td><td>iCal</td><td>google cal</td></tr>
+    <tr><td><%= link_to 'Kontakt', contact_path %></td></tr>
+    
+  </table>
+  
+</div>

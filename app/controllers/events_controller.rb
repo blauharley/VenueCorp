@@ -1,10 +1,7 @@
 ﻿class EventsController < ApplicationController
   
   before_filter :get_event_cats_and_venues, :only => [:new, :edit]
-  
-  def index
-    redirect_to :root, :notice => ''
-  end
+  before_filter :get_navi_vars, :only => [:show]
   
   def show
     @event = Event.find(params[:id])
@@ -15,13 +12,9 @@
   end
   
   def create
-    event = Event.new(params[:event])
+    event = Event.new
     
-    event_start_time = params[:event][:start_date] + ' ' + params[:event][:start_date_time]
-    event_end_time = params[:event][:end_date] + ' ' + params[:event][:end_date_time]
-    highlight = if params[:event][:highlight].to_i == 0 then false else true end
-    
-    event.update_attributes(:start_date_time => event_start_time, :end_date_time => event_end_time, :highlight => highlight)
+    set_event_attr event, params[:event]
     
     if event.save
       redirect_to :root, :notice => 'Veranstaltung erfolgreich hinzugefügt'
@@ -36,12 +29,8 @@
   
   def update
     event = Event.find(params[:id])
-    event_start_time = params[:event][:start_date] + ' ' + params[:event][:start_date_time]
-    event_end_time = params[:event][:end_date] + ' ' + params[:event][:end_date_time]
-    highlight = if params[:event][:highlight].to_i == 0 then false else true end
     
-    event.update_attributes(:start_date_time => event_start_time, :end_date_time => event_end_time, :highlight => highlight)
-    event.update_attributes(params[:event])
+    set_event_attr event, params[:event]
     
     redirect_to :root, :notice => 'Veranstaltung erfolgreich bearbeitet.'
   end
@@ -187,6 +176,28 @@
       sub_cat = sub_cat.sort
       @event_cats << { k =>  sub_cat }
     end
+  end
+  
+  
+  def set_event_attr event, params
+    
+    event_start_time = params['start_date'] + ' ' + params['start_date_time']
+    event_end_time = params['end_date'] + ' ' + params['end_date_time']
+    highlight = if params['highlight'].to_i == 0 then false else true end
+    
+    start_date = Date.parse(event_start_time)
+    repeat_kinds = { 'never' => 0, 'weekly' => 7, 'all_14_days' => 14, 'monthly' => 30 }
+    repeat_dates = params['repeat_dates'].split(' ')
+    formated_dates = ''
+    
+    if repeat_dates[0] != 'never' && repeat_dates[1]
+      for i in 0...repeat_dates[1].to_i
+        formated_dates += (start_date + repeat_kinds[repeat_dates[0]].days).to_s + ' '
+        start_date = (start_date + repeat_kinds[repeat_dates[0]].days)
+      end
+    end
+    
+    event.update_attributes(:province => params['province'], :region => params['region'], :city => params['city'], :main_category => params['main_category'], :sub_category => params['sub_category'], :venue => params['venue'], :title => params['title'], :venue_url => params['venue_url'], :email => params['email'], :tel_nr => params['tel_nr'], :description => params['description'], :address => params['address'], :costs => params['costs'], :image => params['image'], :start_date_time => event_start_time, :end_date_time => event_end_time, :highlight => highlight, :repeat_dates => formated_dates)
   end
   
 end

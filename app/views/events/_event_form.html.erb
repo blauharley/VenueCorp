@@ -48,8 +48,7 @@
     };
     
     document.getElementById('repeat_counter').onchange = function(event){
-      document.getElementById('event_repeat').value = document.getElementById('repeat_choice').value + ' ' + event.currentTarget.value;
-      console.log(document.getElementById('event_repeat').value);
+      document.getElementById('event_repeat_dates').value = document.getElementById('repeat_choice').value + ' ' + event.currentTarget.value;
     };
     
   });
@@ -116,8 +115,8 @@
 <p><%= label_tag :tel_nr, 'Tel. Nr.' %>
 <%= e.text_field :tel_nr %></p>
 
-<p><%= label_tag :repeat, 'Wiederholentlich' %>
-<%= e.hidden_field :repeat, :value => 'never' %>
+<p><%= label_tag :repeat_dates, 'Wiederholentlich' %>
+<%= e.hidden_field :repeat_dates, :value => 'never' %>
 <%= select( "repeat", "choice", { 'Nie' => 'never', 'Wöchentlich' => 'weekly', '14-tägig' => 'all_14_days', 'Monatlich' => 'monthly' }, { :selected => 'never' }, { :name => nil }) %>
 
 <% num = { 'wie oft?' => '0' } %>

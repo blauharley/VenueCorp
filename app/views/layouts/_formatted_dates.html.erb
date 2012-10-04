@@ -1,16 +1,14 @@
-﻿<% ele = 0 %>
-<% get_formated_repeat_dates(event.repeat, event.start_date).each do |date| %>
+﻿<% if event.repeat_dates != 'never' %>
   
-  <% if date >= Date.today && ele < 3 %>
-    <%= date.to_s + '/' %>
+  <% event.repeat_dates.split(' ').each do |date| %>
+    
+    <% if date >= Date.today.to_s %>
+      <%= date.to_s + '/' %>
+    <% end %>
+ 
+    <% if event.repeat_dates.split(' ').last == date %>
+      ...
+    <% end %>
   <% end %>
   
-  <% if date < Date.today %>
-    <% ele -= 1 %>
-  <% else %>
-    <% ele += 1 %>
-  <% end %>
-<% end %>
-<% if event.repeat != 'never' %>
-  ...
 <% end %>
