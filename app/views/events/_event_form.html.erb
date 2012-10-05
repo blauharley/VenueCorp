@@ -60,9 +60,10 @@
           
           for(var i=0; i < inputs[input].children.length; i++){
             if(inputs[input].children[i].name && inputs[input].children[i].name.search(/event/) == 0)
-              if(inputs[input].children[i].value.length == 0){
-                alert('Achtung das Feld: ' + inputs[input].children[0].innerHTML + ' ist nicht ausgefüllt!')
-                return false;
+              if(inputs[input].children[i].value.length == 0)
+                if(inputs[input].children[i].id != 'event_image' && inputs[input].children[i].id != 'event_costs' && inputs[input].children[i].id != 'event_venue_url' && inputs[input].children[i].id != 'event_email' && inputs[input].children[i].id != 'event_tel_nr' && inputs[input].children[i].id != 'repeat_choice' && inputs[input].children[i].id != 'repeat_counter'){
+                  alert('Achtung das Feld: ' + inputs[input].children[0].innerHTML + ' ist nicht ausgefüllt!')
+                  return false;
               }
           }
         }
@@ -116,25 +117,25 @@
 <p><%= label_tag :end_date_time, 'Ende-Tageszeit' %>
 <%= e.text_field :end_date_time, :value => if @event.end_date_time != nil then @event.end_date_time.strftime('%H:%M:%S') else '' end  %> Format: HH:MM:SS</p>
 
-<p><%= label_tag :image, 'Bild' %>
+<p><%= label_tag :image, 'Bild (optional)' %>
 <%= e.file_field :image %></p>
 
 <p><%= label_tag :description, 'Beschreibung' %>
 <%= e.text_field :description %></p>
 
-<p><%= label_tag :costs, 'Kosten' %>
+<p><%= label_tag :costs, 'Kosten (optional)' %>
 <%= e.text_field :costs %></p>
 
 <p><%= label_tag :address, 'Adresse' %>
 <%= e.text_field :address %></p>
 
-<p><%= label_tag :venue_url, 'Website-Url' %>
+<p><%= label_tag :venue_url, 'Website-Url (optional)' %>
 <%= e.text_field :venue_url %></p>
 
-<p><%= label_tag :email, 'E-mail Adresse' %>
+<p><%= label_tag :email, 'E-mail Adresse (optional)' %>
 <%= e.text_field :email %></p>
 
-<p><%= label_tag :tel_nr, 'Tel. Nr.' %>
+<p><%= label_tag :tel_nr, 'Tel. Nr. (optional)' %>
 <%= e.text_field :tel_nr %></p>
 
 <% days = { 'Tage' => 'nie' } %>
@@ -142,8 +143,8 @@
   <% days['jeden ' + i.to_s + ' Tag'] = i.to_s %>
 <% end %>
 
-<p><%= label_tag :repeat_dates, 'Intervall' %>
-<%= e.hidden_field :repeat_dates, :value => '0' %>
+<p><%= label_tag :repeat_dates, 'Intervall (optional)' %>
+<%= e.hidden_field :repeat_dates, :value => 'nie' %>
 <%= select( "repeat", "choice", days, { :selected => 'nie' }, { :name => nil }) %>
 
 <% times = { 'wie oft?' => '0' } %>

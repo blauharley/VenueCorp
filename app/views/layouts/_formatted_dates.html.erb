@@ -1,6 +1,11 @@
 ﻿
 <% old_event = true %>
 
+<% if event.start_date && event.start_date >= Date.today %>
+    <b style="float:right; margin-right:10px"><%= event.start_date.to_s << ' '<< event.start_date_time.strftime('%H:%M:%S') %></b>
+    <% old_event = false %>
+<% end %>
+
 <% if event.repeat_dates != 'nie' %>
   
   <% num = 0 %>
@@ -14,23 +19,17 @@
       <% num += 1 %>
       <% old_event = false %>
       
-      <% if num != max_num || date != event.repeat_dates.split(' ').last %>
+      <% if (num + 1) != max_num || date != event.repeat_dates.split(' ').last %>
         <%= date.to_s + '/' %>
       <% else %>
         <%= date.to_s + ' ab' %>
       <% end %>
       
-      <% if num == max_num || date != event.repeat_dates.split(' ').last %>
+      <% if num < max_num || date != event.repeat_dates.split(' ').last %>
         <%= event.start_date_time.strftime('%H:%M:%S') %></b>
         <% break %>
       <% end %>
     <% end %>
-  <% end %>
-
-<% else %>
-  <% if event.start_date && event.start_date >= Date.today %>
-    <b style="float:right; margin-right:10px"><%= event.start_date.to_s << ' '<< event.start_date_time.strftime('%H:%M:%S') %></b>
-    <% old_event = false %>
   <% end %>
 <% end %>
 
