@@ -115,16 +115,18 @@
   
   def ics_event
     
-    cal = Calendar.new
+    event = Event.find(params[:id])
+    
+    cal = Icalendar::Calendar.new
     cal.event do
-      dtstart       Date.new(2005, 04, 29)
-      dtend         Date.new(2005, 04, 28)
-      summary     "Meeting with the man."
-      description "Have a long lunch meeting and decide nothing..."
-      klass       "PRIVATE"
+      dtstart       event.start_date.to_s
+      dtend         event.end_date.to_s
+      summary       event.title
+      description   event.description
+      klass         "Public"
     end
 
-    send_data(cal.publish, :filename=>"mycal.ics", :disposition=>"inline; filename=mycal.ics", :type=>"text/calendar")
+    send_data(cal.to_ical, :filename=>"mycal.ics", :disposition=>"inline; filename=mycal.ics", :type=>"text/calendar")
   end
   
   def get_all_rss_feed
