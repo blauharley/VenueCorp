@@ -6,7 +6,8 @@ EventApp::Application.routes.draw do
     match 'getEventsByFormat/:attr/:value' => 'Events#get_events_by_format'
     match 'pdfEvent/:id' => 'Events#pdf_event', :as => 'pdf_event'
     match 'pdfEvents/:ids' => 'Events#pdf_events', :as => 'pdf_events'
-  
+    match 'icsEvent/:id' => 'Events#ics_event', :as => 'ics_event'
+    
   get "venue/index"
   
   controller :Venue do

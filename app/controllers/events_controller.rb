@@ -113,6 +113,20 @@
     send_file( pdf_path, :type => 'application/pdf',:disposition => 'inline')
   end
   
+  def ics_event
+    
+    cal = Calendar.new
+    cal.event do
+      dtstart       Date.new(2005, 04, 29)
+      dtend         Date.new(2005, 04, 28)
+      summary     "Meeting with the man."
+      description "Have a long lunch meeting and decide nothing..."
+      klass       "PRIVATE"
+    end
+
+    send_data(cal.publish, :filename=>"mycal.ics", :disposition=>"inline; filename=mycal.ics", :type=>"text/calendar")
+  end
+  
   def get_all_rss_feed
     @events = Event.all
     
