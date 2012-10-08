@@ -44,79 +44,84 @@ window.onload = function(){
       }
         
   }
+
+  function showEventOnMap(map){
+
+    var geocoder = geocoder = new google.maps.Geocoder();
+    
+    var address = '';
+    var addressTags = document.getElementsByClassName('address');
+    for(var i=0; i < addressTags.length; i++){
+      address += addressTags[i].innerHTML + ', ';
+    }
+    address = address.slice(0,address.length-3);
+    
+    geocoder.geocode( { 'address': address }, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        
+        if( results.length > 1){
+          document.getElementById('map_notifier').style.display = 'inline';
+          document.getElementById('map_notifier').innerHTML = 'Es gibt mehrere Treffer auf der Karte!';
+          $('#map_notifier').fadeOut(8000);
+        }
+          
+        for(var result=0; result < results.length; result++){
+          map.setCenter(results[result].geometry.location);
+          
+
+          var marker = new google.maps.Marker({
+              map: map,
+              position: results[result].geometry.location,
+              title: results[result].formatted_address,
+              icon: new google.maps.MarkerImage(
+                          '/assets/event_star.png', // my 16x48 sprite with 3 circular icons
+                          new google.maps.Size(25, 25), // desired size
+                          new google.maps.Point(0, 0), // offset within the scaled sprite
+                          new google.maps.Point(12.5,0), // anchor point is half of the desired size
+                          new google.maps.Size(25, 25) // scaled size of the entire sprite
+                           )
+          });
+          
+          google.maps.event.addListener(marker, 'click', function(event){
+            //marker.setAnimation(google.maps.Animation.BOUNCE);
+            infoWindowText.innerHTML = marker.title;
+            infoWindow.setPosition( event.latLng );
+            infoWindow.open( map );
+          });
+        }
+      } 
+      else{
+        console.log("Geocode was not successful for the following reason: " + status);
+      }
+    });
+    
+  }
+
+
+  function prepareSearchMap(map){
+
+    var marker = new google.maps.Marker({
+        map: map,
+        position: new google.maps.LatLng(48.20833, 16.373064),//document.getElementById('currentLocation').value,
+        title: 'drag Marker to search for Events',
+        icon: new google.maps.MarkerImage(
+                    '/assets/event_star.png', // my 16x48 sprite with 3 circular icons
+                    new google.maps.Size(25, 25), // desired size
+                    new google.maps.Point(0, 0), // offset within the scaled sprite
+                    new google.maps.Point(12.5,0), // anchor point is half of the desired size
+                    new google.maps.Size(25, 25) // scaled size of the entire sprite
+                     ),
+        draggable: true
+    });
+    
+    google.maps.event.addListener(marker, 'dragend', function(event){
+      marker.setAnimation(google.maps.Animation.BOUNCE);
+      infoWindowText.innerHTML = 'Suche wird gestartet, bitte warten...';
+      infoWindow.setPosition( event.latLng );
+      infoWindow.open( map )
+      window.location = "http://" + window.location.host + "/locationSearch?latlng=" + event.latLng;
+    });
+  }
+
   
 };
-
-function showEventOnMap(map, infoWindow, infoWindowText){
-
-  var geocoder = geocoder = new google.maps.Geocoder();
-  
-  var address = '';
-  var addressTags = document.getElementsByClassName('address');
-  for(var i=0; i < addressTags.length; i++){
-    address += addressTags[i].innerHTML + ', ';
-  }
-  address = address.slice(0,address.length-3);
-  
-  geocoder.geocode( { 'address': address }, function(results, status) {
-    if (status == google.maps.GeocoderStatus.OK) {
-      
-      if( results.length > 1){
-        document.getElementById('map_notifier').style.display = 'inline';
-        document.getElementById('map_notifier').innerHTML = 'Es gibt mehrere Treffer auf der Karte!';
-        $('#map_notifier').fadeOut(8000);
-      }
-        
-      for(var result=0; result < results.length; result++){
-        map.setCenter(results[result].geometry.location);
-        
-
-        var marker = new google.maps.Marker({
-            map: map,
-            position: results[result].geometry.location,
-            title: results[result].formatted_address,
-            icon: new google.maps.MarkerImage(
-												'/assets/event_star.png', // my 16x48 sprite with 3 circular icons
-												new google.maps.Size(25, 25), // desired size
-												new google.maps.Point(0, 0), // offset within the scaled sprite
-												new google.maps.Point(12.5,0), // anchor point is half of the desired size
-												new google.maps.Size(25, 25) // scaled size of the entire sprite
-											   )
-        });
-        
-        google.maps.event.addListener(marker, 'click', function(event){
-          //marker.setAnimation(google.maps.Animation.BOUNCE);
-          infoWindowText.innerHTML = marker.title;
-          infoWindow.setPosition( event.latLng );
-					infoWindow.open( map );
-        });
-      }
-    } 
-    else{
-      console.log("Geocode was not successful for the following reason: " + status);
-    }
-  });
-  
-}
-
-
-function prepareSearchMap(map){
-  var marker = new google.maps.Marker({
-      map: map,
-      position: new google.maps.LatLng(48.20833, 16.373064),//document.getElementById('currentLocation').value,
-      title: 'drag Marker to search for Events',
-      icon: new google.maps.MarkerImage(
-                  '/assets/event_star.png', // my 16x48 sprite with 3 circular icons
-                  new google.maps.Size(25, 25), // desired size
-                  new google.maps.Point(0, 0), // offset within the scaled sprite
-                  new google.maps.Point(12.5,0), // anchor point is half of the desired size
-                  new google.maps.Size(25, 25) // scaled size of the entire sprite
-                   ),
-      draggable: true
-  });
-  
-  google.maps.event.addListener(marker, 'dragend', function(event){
-    //marker.setAnimation(google.maps.Animation.BOUNCE);
-    window.location = "http://" + window.location.host + "/locationSearch?latlng=" + event.latLng;
-  });
-}

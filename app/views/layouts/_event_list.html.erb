@@ -18,10 +18,12 @@
   <br />
   <br />
   
-  <div id="sponsored_events">
-    <h3>Gesponsorte Veranstaltungen</h3>
-    <%= render "layouts/carousel", :tag_id => 'carousel2', :events => sponsored_events %>
-  </div>
+  <% if !sponsored_events.empty? %>
+    <div id="sponsored_events">
+      <h3>Gesponsorte Veranstaltungen</h3>
+      <%= render "layouts/carousel", :tag_id => 'carousel2', :events => sponsored_events %>
+    </div>
+  <% end %>
   
   <br />
   <br />

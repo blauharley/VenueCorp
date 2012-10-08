@@ -7,6 +7,11 @@ class ApplicationController < ActionController::Base
   
   def get_navi_vars
     
+    @main_cat_clicked = false
+    @sub_cat_clicked = false
+    @federal_state_clicked = false
+    @region_clicked = false
+    
     @all_venues = {}
     Venues.get_federal_countries.each do |k,v|
     
