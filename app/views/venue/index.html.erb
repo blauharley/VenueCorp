@@ -1,4 +1,5 @@
-﻿<p><%= link_to 'Home', root_path %></p>
+﻿ 
+<p><%= link_to 'Home', root_path %></p>
 <h1>Veranstaltungen</h1>
 
 <%= render 'layouts/navibar', :all_venues => @all_venues, :all_cats => @all_event_cats %>
@@ -17,6 +18,7 @@
     <tr><td><%= link_to 'Highlights', event_highlight_path('true') %></td></tr>
     <tr><td><a href="#">Login</a></td></tr>
     <tr><td><%= link_to 'Verstanstaltung hinzufügen', new_event_path %></td></tr>
+    <tr><td><%= link_to 'Umfeldsuche', search_surrounding_events_path %></td></tr>
     <tr></tr>
     
     <tr><td><%= link_to 'RSS Feed', event_feed_path( get_event_ids(@events) ) << '.rss' %></td></tr>

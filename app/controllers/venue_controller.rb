@@ -1,6 +1,6 @@
 ﻿class VenueController < ApplicationController
   
-  before_filter :get_navi_vars, :only => [:index, :get_main_cat_events, :get_sub_cat_events, :get_federal_country, :get_venue, :get_events_by_date]
+  before_filter :get_navi_vars, :only => [:index, :get_main_cat_events, :get_sub_cat_events, :get_federal_country, :get_venue, :get_events_by_date, :get_events_by_geocoding]
   
   def index
     if params[:highlight] == 'true'
@@ -53,8 +53,20 @@
     render 'index'
   end
   
-  def contact
+  def get_events_by_geocoding
+    marker_place = Geocoder.search(params[:latlng])
+    @events = []
     
+    Event.all.each do |event|
+      distance_diff = event.distance_to(marker_place[0].address)
+      if distance_diff && (distance_diff *1.6) <= 20
+        @events << event
+      end
+    end
+    render 'index'
+  end
+  
+  def contact
   end
   
   def send_contact_mail
@@ -62,6 +74,9 @@
     redirect_to :root, :notice => 'Wir werden ihre Nachricht bald beantworten.'
   end
   
+  def search_surrounding_events
+    @location = request.location.city + ', ' + request.location.country
+  end
   
   private
   

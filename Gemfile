@@ -24,6 +24,7 @@ gem 'jquery-rails'
 gem 'prawn', '~> 1.0.0.rc1'
 gem "paperclip", :git => "http://github.com/thoughtbot/paperclip.git"
 gem "icalendar", "~> 1.2.0"
+gem "geocoder"
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

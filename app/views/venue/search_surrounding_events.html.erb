@@ -1,0 +1,13 @@
+﻿<%= link_to 'Home', root_path %>
+<h3>Suche Veranstaltungen mit Hilfe der Texteingabe oder der Map</h3>
+
+<%= @location %>
+<%= form_tag get_events_by_geocoding_path do %>
+  <%= hidden_field_tag 'latlng', '', :id => 'latlng' %>
+  <%= hidden_field_tag 'currentLocation', @location, :id => 'currentLocation' %>
+  <%= text_field_tag 'adresse', '', :placeholder => 'Suche Veranstaltungen bei Adresse' %>
+  <%= submit_tag 'Suchen', :name => nil %>
+<% end %>
+
+<div id="search_map" style="height:800px"></div>
+

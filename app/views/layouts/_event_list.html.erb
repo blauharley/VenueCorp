@@ -103,6 +103,8 @@
       buildNav     : true,   // if true, navigation links will be added
     });
     
+    
+    
     // tabbar
     var $tabs = $('#tabs').tabs();
 	
@@ -127,6 +129,12 @@
       return false;
     });
     
+    
+    // show hits altogether
+    var originalDomain = "http://" + window.location.host + '/';
+    if( window.location.href.length > originalDomain.length )
+      $('#main_notifier').html("<%= @events.count.to_s + ' Treffer'%>");
+      
   });
   
 </script>

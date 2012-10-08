@@ -1,5 +1,9 @@
 ﻿class Event < ActiveRecord::Base
-  attr_accessible :city, :email, :end_date, :end_date_time, :highlight, :main_category, :costs, :address, :province, :region, :description, :start_date, :start_date_time, :sub_category, :tel_nr, :title, :venue, :venue_url, :image, :repeat_dates, :sponsored
+  attr_accessible :city, :email, :end_date, :end_date_time, :highlight, :main_category, :costs, :address, :province, :region, :description, :start_date, :start_date_time, :sub_category, :tel_nr, :title, :venue, :venue_url, :image, :repeat_dates, :sponsored, :latitude, :longitude
+  
+  geocoded_by :address
+  after_validation :geocode
+  
   has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }
   
   def self.search(value)

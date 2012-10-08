@@ -19,6 +19,8 @@ EventApp::Application.routes.draw do
     match 'date/:start_date' => :get_events_by_date
     match 'contact' => :contact, :as => 'contact'
     match 'sendContactMail' => :send_contact_mail, :as => 'send_contact_mail'
+    match 'searchSurroundingEvents' => :search_surrounding_events, :as => 'search_surrounding_events'
+    match 'locationSearch' => :get_events_by_geocoding, :as => 'get_events_by_geocoding'
   end
   
   controller :Ajax do

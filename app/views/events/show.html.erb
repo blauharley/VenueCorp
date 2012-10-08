@@ -68,7 +68,6 @@
 <% end %>
 
 <b><%= link_to 'Bearbeiten', edit_event_path(@event.id) %></b>
-<% google_cal_url =  %>
 <b><%= link_to 'Google Cal', '#', :onclick => "window.open('https://www.google.com/calendar/render?action=TEMPLATE&dates=" + @event.start_date.strftime('%Y%m%d') + @event.start_date_time.strftime('T%H%M%SZ') + "/" + @event.end_date.strftime('%Y%m%d') + @event.end_date_time.strftime('T%H%M%SZ') + "&details=" + @event.description + "&sprop=website:" + @event.venue_url + "&text=" + @event.title + "&pli=1&sf=true&output=xml', '_blank'); return false" %></b>
 <b><%= link_to 'ICal & Outlook', ics_event_path(@event.id) %></b>
 <b><%= link_to 'Als PDF anzeigen', pdf_event_path(@event.id) %></b>
