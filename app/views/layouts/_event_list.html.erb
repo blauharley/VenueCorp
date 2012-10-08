@@ -1,38 +1,27 @@
 ﻿<div>
-  <% all_highlight_events = [] %>
-  <% all__non_highlight_events = [] %>
+  <% highlight_events = [] %>
+  <% sponsored_events = [] %>
   
   <% for event in events %>
     <% if event.highlight %>
-      <% all_highlight_events << event %>
-    <% else %>
-      <% all__non_highlight_events << event %>
+      <% highlight_events << event %>
+    <% elsif event.sponsored %>
+      <% sponsored_events << event %>
     <% end %>
   <% end %>
   
-  <% if !all_highlight_events.empty? %>
-    <div style="width:500px; margin:0 auto">
-      <div id="carousel">
-        <% all_highlight_events.each do |event| %>
-          <div>
-            <%= image_tag event.image.url(:thumb), :style => 'float:left' %>
-            <h2><%= event.title %></h2>
-            <p>
-              <%= render 'layouts/formatted_dates', :event => event, :max_num => 1 %>
-            </p>
-            <% if event.main_category && event.sub_category %>
-              <p><%= event.main_category << '/' << event.sub_category %></p>
-            <% end %>
-            <p><%= event.description %></p>
-            <p><%= link_to 'Zeigen', event_path(event.id) %></td>
-            <%= link_to 'Als PDF anzeigen', pdf_event_path(event.id) %>
-            <%= link_to 'Bearbeiten', edit_event_path(event.id) %>
-            <%= link_to 'Löschen', event_path(event.id), :method => :delete %></p>
-          </div>
-        <% end %>
-      </div>
-    </div>
+  <% if !highlight_events.empty? %>
+    <h3>Highlight Veranstaltungen</h3>
+    <%= render "layouts/carousel", :tag_id => 'carousel', :events => highlight_events %>
   <% end %>
+  
+  <br />
+  <br />
+  
+  <div id="sponsored_events">
+    <h3>Gesponsorte Veranstaltungen</h3>
+    <%= render "layouts/carousel", :tag_id => 'carousel2', :events => sponsored_events %>
+  </div>
   
   <br />
   <br />
@@ -43,14 +32,14 @@
     
       <ul>
         <% num = 0 %>
-        <% (all__non_highlight_events.count/10).downto(0) do %>
+        <% (events.count/10).downto(0) do %>
           <li><a href="#fragment-<%= num += 10 %>"><%= num %></a></li>
         <% end %>
       </ul>
       
       <% num = 10 %>
       <% newTab = false %>
-      <% for event in all__non_highlight_events %>
+      <% for event in events %>
         
         <% if (num % 10) == 0 %>
           <% newTab = true %>
@@ -69,7 +58,9 @@
                 <% if event.main_category && event.sub_category %>
                   <p><%= event.main_category << '/' << event.sub_category %></p>
                 <% end %>
-                <%= image_tag event.image.url(:thumb), :style => 'float:left' %>
+                <% if event.image_content_type %>
+                  <%= image_tag event.image.url(:thumb), :style => 'float:left' %>
+                <% end %>
                 <p><%= event.description %></p>
                 <p><%= link_to 'Zeigen', event_path(event.id) %></td>
                 <%= link_to 'Als PDF anzeigen', pdf_event_path(event.id) %>
@@ -104,6 +95,12 @@
       // width        : 500,    // overall width of movingBoxes (not including navigation arrows)
       // panelWidth   : 0.7,    // current panel width
 
+    });
+    
+    $('#carousel2').movingBoxes({
+      startPanel   : 1,      // start with this panel
+      reducedSize  : 0.8,    // non-current panel size: 80% of panel size
+      buildNav     : true,   // if true, navigation links will be added
     });
     
     // tabbar

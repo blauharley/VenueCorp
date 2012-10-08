@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121004123800) do
+ActiveRecord::Schema.define(:version => 20121008151500) do
 
   create_table "events", :force => true do |t|
     t.string   "province",           :default => ""
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(:version => 20121004123800) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.string   "repeat_dates"
+    t.boolean  "sponsored"
   end
 
 end

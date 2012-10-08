@@ -200,6 +200,7 @@
     event_start_time = params['start_date'] + ' ' + params['start_date_time']
     event_end_time = params['end_date'] + ' ' + params['end_date_time']
     highlight = if params['highlight'].to_i == 0 then false else true end
+    sponsored = if params['sponsored'].to_i == 0 then false else true end
     
     start_date = Date.parse(event_start_time)
     repeat_dates = params['repeat_dates'].split(' ')
@@ -213,7 +214,7 @@
     end
     
     event.update_attributes(params)
-    event.update_attributes(:start_date_time => event_start_time, :end_date_time => event_end_time, :highlight => highlight, :repeat_dates => formated_dates)
+    event.update_attributes(:start_date_time => event_start_time, :end_date_time => event_end_time, :highlight => highlight, :sponsored => sponsored, :repeat_dates => formated_dates)
 
   end
   

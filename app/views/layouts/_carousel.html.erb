@@ -1,0 +1,23 @@
+﻿<div style="width:500px; margin:0 auto">
+  <div id="<%= tag_id %>">
+    <% events.each do |event| %>
+      <div>
+        <% if event.image_content_type %>
+          <%= image_tag event.image.url(:thumb), :style => 'float:left' %>
+        <% end %>
+        <h2><%= event.title %></h2>
+        <p>
+          <%= render 'layouts/formatted_dates', :event => event, :max_num => 1 %>
+        </p>
+        <% if event.main_category && event.sub_category %>
+          <p><%= event.main_category << '/' << event.sub_category %></p>
+        <% end %>
+        <p><%= event.description %></p>
+        <p><%= link_to 'Zeigen', event_path(event.id) %></td>
+        <%= link_to 'Als PDF anzeigen', pdf_event_path(event.id) %>
+        <%= link_to 'Bearbeiten', edit_event_path(event.id) %>
+        <%= link_to 'Löschen', event_path(event.id), :method => :delete %></p>
+      </div>
+    <% end %>
+  </div>
+</div>
