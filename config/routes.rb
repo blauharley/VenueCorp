@@ -1,5 +1,9 @@
 EventApp::Application.routes.draw do
   
+  get "registration/new"
+
+  devise_for :users, :controllers => { :sessions => "users", :registrations => "registration" }
+
   resources :events
     match 'eventFeedRss/:ids' => 'Events#get_rss_feed', :as => 'event_feed'
     match 'allEventFeedRss' => 'Events#get_all_rss_feed', :as => 'all_event_feed'

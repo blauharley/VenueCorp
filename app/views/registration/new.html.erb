@@ -1,0 +1,18 @@
+<h3>Sign up</h3>
+
+<br>
+  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |u| %>
+    
+      <p><%= u.label :email %><br />
+        <%= u.email_field :email %></p>
+
+      <p><%= u.label :password %><br />
+        <%= u.password_field :password, :value => ""%></p>
+
+      <p><%= u.label :password_confirmation %><br />
+        <%= u.password_field :password_confirmation %></p>
+      <br>
+      <p><%= u.submit "Sign up" %></p>
+
+  <% end %>
+  

@@ -1,8 +1,16 @@
 ﻿ 
 <p><%= link_to 'Home', root_path %></p>
+<p><%= render 'layouts/user_login_form' %></p>
+
 <h1>Veranstaltungen</h1>
 
 <%= render 'layouts/navibar', :all_venues => @all_venues, :all_cats => @all_event_cats, :federal_state_clicked => @federal_state_clicked, :region_clicked => @region_clicked, :main_cat_clicked => @main_cat_clicked, :sub_cat_clicked => @sub_cat_clicked %>
+
+<% if current_user %>
+  <h3>User</h3>
+  <%= current_user.email %>
+  <%= link_to 'Logout', destroy_user_session_path, :method => :delete %>
+<% end %>
 
 <div style="margin-top:70px; width:500px; float:left">
   <%= render 'layouts/event_list', :events => @events, :federal_state_clicked => @federal_state_clicked, :region_clicked => @region_clicked %>
@@ -15,8 +23,7 @@
   
   <table>
     <tr><td><%= link_to 'Alle Veranstaltungen', root_path %></td></tr>
-    <tr><td><%= link_to 'Highlights', event_highlight_path('true') %></td></tr>
-    <tr><td><a href="#">Login</a></td></tr>
+    <tr><td><%= link_to 'Bundes-Highlights', event_highlight_path('true') %></td></tr>
     <tr><td><%= link_to 'Verstanstaltung hinzufügen', new_event_path %></td></tr>
     <tr><td><%= link_to 'Umfeldsuche', search_surrounding_events_path %></td></tr>
     <tr></tr>
