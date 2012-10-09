@@ -3,11 +3,22 @@
   <% sponsored_events = [] %>
   
   <% for event in events %>
-    <% if event.highlight %>
+    
+    <% if federal_state_clicked && !region_clicked && event.federal_highlight %>
       <% highlight_events << event %>
+    
+    <% elsif region_clicked && event.regional_highlight %>
+      <% highlight_events << event %>
+    
+    <% elsif !federal_state_clicked && !region_clicked %>
+      <% if event.federal_highlight || event.regional_highlight %>
+        <% highlight_events << event %>
+      <% end %>
+      
     <% elsif event.sponsored %>
       <% sponsored_events << event %>
     <% end %>
+    
   <% end %>
   
   <% if !highlight_events.empty? %>

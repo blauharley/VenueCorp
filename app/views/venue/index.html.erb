@@ -2,10 +2,10 @@
 <p><%= link_to 'Home', root_path %></p>
 <h1>Veranstaltungen</h1>
 
-<%= render 'layouts/navibar', :all_venues => @all_venues, :all_cats => @all_event_cats %>
+<%= render 'layouts/navibar', :all_venues => @all_venues, :all_cats => @all_event_cats, :federal_state_clicked => @federal_state_clicked, :region_clicked => @region_clicked, :main_cat_clicked => @main_cat_clicked, :sub_cat_clicked => @sub_cat_clicked %>
 
 <div style="margin-top:70px; width:500px; float:left">
-  <%= render 'layouts/event_list', :events => @events %>
+  <%= render 'layouts/event_list', :events => @events, :federal_state_clicked => @federal_state_clicked, :region_clicked => @region_clicked %>
   <p><%= link_to 'Alle als PDF ansehen', pdf_events_path( get_event_ids(@events) ) %></p>
 <div>
 

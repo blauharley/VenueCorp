@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121008163600) do
+ActiveRecord::Schema.define(:version => 20121009125800) do
 
   create_table "events", :force => true do |t|
     t.string   "province",           :default => ""
@@ -19,7 +19,6 @@ ActiveRecord::Schema.define(:version => 20121008163600) do
     t.string   "city",               :default => ""
     t.string   "main_category",      :default => ""
     t.string   "sub_category",       :default => ""
-    t.boolean  "highlight",          :default => false
     t.string   "venue",              :default => ""
     t.date     "start_date",         :default => '2012-10-02'
     t.date     "end_date",           :default => '2012-10-02'
@@ -42,6 +41,8 @@ ActiveRecord::Schema.define(:version => 20121008163600) do
     t.boolean  "sponsored"
     t.float    "latitude"
     t.float    "longitude"
+    t.boolean  "federal_highlight"
+    t.boolean  "regional_highlight"
   end
 
 end
