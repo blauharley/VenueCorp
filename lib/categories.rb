@@ -16,4 +16,16 @@
     @@cats[ @@main_trans[main_cat] ]
   end
   
+  def self.get_main_cat_by_sub_cat sub_cat
+    main_cat = ''
+    @@cats.each do |k,array|
+      for sub in array
+        if sub_cat == sub
+          main_cat = if @@main_trans.index(k) then @@main_trans.index(k).slice(0,@@main_trans.index(k).length) else '' end
+        end
+      end
+    end
+    main_cat
+  end
+  
 end

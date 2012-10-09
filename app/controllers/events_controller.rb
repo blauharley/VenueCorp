@@ -55,6 +55,7 @@
                              ['Region', event.region],
                              ['Bundesland', event.province],
                              ['Highlight', event.highlight.to_s],
+                             ['Gesponsort', event.sponsored.to_s],
                              ['Start-Datum', event.start_date.strftime('%Y/%m/%d')],
                              ['End-Datum', event.end_date.strftime('%Y/%m/%d')],
                              ['Start-Tageszeit', event.start_date_time.strftime('%H:%M:%S')],
@@ -65,7 +66,7 @@
                              ['Adresse', event.address],
                              ['Kosten', event.costs] ])
               t.draw
-              if event.image_content_type
+              if event.image.exists?
                 image event.image.path, :position => :right, :vposition => 20, :width => 100, :height => 100
               end
            end).path
@@ -94,6 +95,7 @@
                                ['Region', event.region],
                                ['Bundesland', event.province],
                                ['Highlight', event.highlight.to_s],
+                               ['Gesponsort', event.sponsored.to_s],
                                ['Start-Datum', event.start_date.strftime('%Y/%m/%d')],
                                ['End-Datum', event.end_date.strftime('%Y/%m/%d')],
                                ['Start-Tageszeit', event.start_date_time.strftime('%H:%M:%S')],
@@ -104,7 +106,7 @@
                                ['Adresse', event.address],
                                ['Kosten', event.costs] ])
                   t.draw
-                  if event.image_content_type
+                  if event.image.exists?
                     image event.image.path, :position => :right, :vposition => 20, :width => 100, :height => 100
                   end 
                   start_new_page

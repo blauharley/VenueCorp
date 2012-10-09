@@ -12,25 +12,27 @@
   
   def get_main_cat_events
     @events = Event.find(:all, :conditions => ['main_category = ?',params[:cat]], :order => "title asc")
-    @main_cat_clicked = true
+    @main_cat_clicked = params[:cat]
     render 'index'
   end
   
   def get_sub_cat_events
     @events = Event.find(:all, :conditions => ['sub_category = ?',params[:cat]], :order => "title asc")
-    @sub_cat_clicked = true
+    @main_cat_clicked = Categories.get_main_cat_by_sub_cat params[:cat]
+    @sub_cat_clicked = params[:cat]
     render 'index'
   end
   
   def get_federal_country
     @events = Event.find(:all, :conditions => ['province = ?',params[:country]], :order => "title asc")
-    @federal_state_clicked = true
+    @federal_state_clicked = params[:country]
     render 'index'
   end
   
   def get_venue
     @events = Event.find(:all, :conditions => ['city = ?',params[:city]], :order => "title asc")
-    @region_clicked = true
+    @federal_state_clicked = Venues.get_federal_countries_by_vene params[:city]
+    @region_clicked = params[:city]
     render 'index'
   end
   

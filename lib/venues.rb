@@ -138,4 +138,16 @@
     @@venues[ @@main_trans[federal_countries ] ]
   end
   
+  def self.get_federal_countries_by_vene venue
+    federal_country = ''
+    @@venues.each do |k,array|
+      for ven in array
+        if venue == ven
+          federal_country = if @@main_trans.index(k) then @@main_trans.index(k).slice(0,@@main_trans.index(k).length) else '' end
+        end
+      end
+    end
+    federal_country
+  end
+  
 end
