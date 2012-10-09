@@ -99,8 +99,11 @@
 <p><%= label_tag :sub_category, 'Unterkategorie' %>
 <%= select( "event", "sub_category", { 'Wähle Unterkategorie' => '' }, {}, { :style => 'display:none' }) %>
 
-<p><%= label_tag :highlight, 'Highlight' %>
-<%= e.check_box :highlight  %></p>
+<p><%= label_tag :federal_highlight, 'Bundes-Highlight' %>
+<%= e.check_box :federal_highlight  %></p>
+
+<p><%= label_tag :regional_highlight, 'Regional-Highlight' %>
+<%= e.check_box :regional_highlight  %></p>
 
 <h3>Darf nur Admin</h3>
 <p><%= label_tag :sponsored, 'Gesponsort' %>

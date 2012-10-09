@@ -1,0 +1,18 @@
+﻿<% if federal_state_clicked || region_clicked || main_cat_clicked || sub_cat_clicked %>
+  <ul style="list-style-type:none">
+
+    <% if federal_state_clicked && !region_clicked %>
+      <li style="float:left"><%= federal_state_clicked %></li>
+      
+    <% elsif federal_state_clicked && region_clicked %>
+      <li style="float:left"><%= federal_state_clicked << '/' << region_clicked %></li>
+      
+    <% elsif main_cat_clicked && !sub_cat_clicked %>
+      <li style="float:left"><%= main_cat_clicked %></li>
+      
+    <% elsif sub_cat_clicked && main_cat_clicked %>
+      <li style="float:left"><%= main_cat_clicked << '/' << sub_cat_clicked %></li>
+    <% end %>
+    
+  </ul>
+<% end %>
