@@ -99,7 +99,8 @@ window.onload = function(){
 
   function prepareSearchMap(map){
     
-    var start_address = false;
+    var start_address = new google.maps.LatLng(48.20833, 16.373064);
+    
     if(document.getElementById('currentLocation').value.length){
       
       geocoder.geocode( { 'address': document.getElementById('currentLocation').value }, function(results, status) {
@@ -108,8 +109,7 @@ window.onload = function(){
           start_address = results[0].geometry.location;
           start_address = new google.maps.LatLng(start_address.Xa, start_address.Ya)
         }
-        else
-          start_address = new google.maps.LatLng(48.20833, 16.373064)
+        
       });
       
     }
