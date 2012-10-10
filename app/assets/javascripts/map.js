@@ -99,6 +99,7 @@ window.onload = function(){
 
   function prepareSearchMap(map){
     
+    var marker;
     var start_address = new google.maps.LatLng(48.20833, 16.373064);
     
     if(document.getElementById('currentLocation').value.length){
@@ -108,13 +109,33 @@ window.onload = function(){
         if (status == google.maps.GeocoderStatus.OK){
           start_address = results[0].geometry.location;
           start_address = new google.maps.LatLng(start_address.Xa, start_address.Ya)
+          
+          
+          if(marker)
+           marker.setMap(null);
+           
+          marker = new google.maps.Marker({
+              map: map,
+              position: start_address,
+              title: 'drag Marker to search for Events',
+              icon: new google.maps.MarkerImage(
+                          '/assets/event_star.png', // my 16x48 sprite with 3 circular icons
+                          new google.maps.Size(25, 25), // desired size
+                          new google.maps.Point(0, 0), // offset within the scaled sprite
+                          new google.maps.Point(12.5,0), // anchor point is half of the desired size
+                          new google.maps.Size(25, 25) // scaled size of the entire sprite
+                           ),
+              draggable: true
+          });
+          map.setCenter(start_address);
+          
         }
         
       });
       
     }
     
-    var marker = new google.maps.Marker({
+    marker = new google.maps.Marker({
         map: map,
         position: start_address,
         title: 'drag Marker to search for Events',
