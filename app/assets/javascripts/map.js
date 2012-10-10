@@ -99,7 +99,7 @@ window.onload = function(){
 
   function prepareSearchMap(map){
     
-    var start_address = '';
+    var start_address = false;
     if(document.getElementById('currentLocation').value.length){
       
       geocoder.geocode( { 'address': document.getElementById('currentLocation').value }, function(results, status) {
@@ -114,7 +114,7 @@ window.onload = function(){
     
     var marker = new google.maps.Marker({
         map: map,
-        position: start_address.length ? start_address : new google.maps.LatLng(48.20833, 16.373064),
+        position: start_address ? new google.maps.LatLng(start_address.lat, start_address.lng): new google.maps.LatLng(48.20833, 16.373064),
         title: 'drag Marker to search for Events',
         icon: new google.maps.MarkerImage(
                     '/assets/event_star.png', // my 16x48 sprite with 3 circular icons
