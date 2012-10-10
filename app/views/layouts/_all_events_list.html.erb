@@ -1,0 +1,52 @@
+﻿<div id="page-wrap">
+		
+  <div id="tabs">
+  
+    <ul>
+      <% num = 0 %>
+      <% (events.count/10).downto(0) do %>
+        <li><a href="#fragment-<%= num += 10 %>"><%= num %></a></li>
+      <% end %>
+    </ul>
+    
+    <% num = 10 %>
+    <% newTab = false %>
+    <% for event in events %>
+      
+      <% if (num % 10) == 0 %>
+        <% newTab = true %>
+        <% if num >= 20 %>
+          <div id="fragment-<%= num %>" class="ui-tabs-panel ui-tabs-hide">
+        <% else %>
+          <div id="fragment-<%= num %>" class="ui-tabs-panel">
+        <% end %>
+      <% end %>
+      
+            <div>
+              <h2><%= event.title %></h2>
+              <p>
+                <%= render 'layouts/formatted_dates', :event => event, :max_num => 3 %>
+              </p>
+              <% if event.main_category && event.sub_category %>
+                <p><%= event.main_category << '/' << event.sub_category %></p>
+              <% end %>
+              <% if event.image_content_type %>
+                <%= image_tag event.image.url(:thumb), :style => 'float:left' %>
+              <% end %>
+              <p><%= event.description %></p>
+              <p><%= link_to 'Zeigen', event_path(event.id) %></td>
+              <%= link_to 'Als PDF anzeigen', pdf_event_path(event.id) %>
+              <%= link_to_if (current_user && event.user && current_user.id == event.user.id) || current_admin, 'Bearbeiten', edit_event_path(event.id) %>
+              <%= link_to_if (current_user && event.user && current_user.id == event.user.id) || current_admin, 'Löschen', event_path(event.id), :method => :delete %></p>
+            </div>
+        
+        <% if newTab && ((num + 1) % 10) == 0 %>
+          <% newTab = false %>
+          </div> 
+        <% end %>
+        
+        <% num += 1 %>
+    <% end %>
+    </div>
+  </div>
+</div>
