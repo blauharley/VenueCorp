@@ -33,6 +33,7 @@ window.onload = function(){
       };
 
       var infoWindow = new InfoBox(infoWindowOptions);
+      var geocoder = geocoder = new google.maps.Geocoder();
       
       if(document.getElementById('event_map')){
         var map = new google.maps.Map(document.getElementById("event_map"), mapOptions);
@@ -47,8 +48,6 @@ window.onload = function(){
 
   function showEventOnMap(map){
 
-    var geocoder = geocoder = new google.maps.Geocoder();
-    
     var address = '';
     var addressTags = document.getElementsByClassName('address');
     for(var i=0; i < addressTags.length; i++){
@@ -99,10 +98,19 @@ window.onload = function(){
 
 
   function prepareSearchMap(map){
-
+    
+    var start_address = '';
+    if(document.getElementById('currentLocation').value.length){
+      geocoder.geocode( { 'address': document.getElementById('currentLocation').value }, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          start_address = results[0].geometry.location;
+        }
+      });
+    }
+    
     var marker = new google.maps.Marker({
         map: map,
-        position: document.getElementById('currentLocation').value.length ? document.getElementById('currentLocation').value : new google.maps.LatLng(48.20833, 16.373064),
+        position: start_address.length ? start_address : new google.maps.LatLng(48.20833, 16.373064),
         title: 'drag Marker to search for Events',
         icon: new google.maps.MarkerImage(
                     '/assets/event_star.png', // my 16x48 sprite with 3 circular icons
