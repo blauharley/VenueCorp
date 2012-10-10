@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121010070141) do
+ActiveRecord::Schema.define(:version => 20121010093400) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(:version => 20121010070141) do
     t.float    "longitude"
     t.boolean  "federal_highlight"
     t.boolean  "regional_highlight"
+    t.integer  "user_id"
   end
 
   create_table "users", :force => true do |t|

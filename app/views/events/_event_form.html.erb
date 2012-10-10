@@ -93,22 +93,32 @@
 <p><%= label_tag :city, 'Ort' %>
 <%= select( "event", "city", { 'Wähle Ort' => '' }, {}, { :style => 'display:none' }) %><p>
 
+
+
 <p><%= label_tag :main_category, 'Hauptkategorie' %>
 <%= select( "event", "main_category", @main_event_cats.collect{ |k,v| [k,k] }) %>
 
 <p><%= label_tag :sub_category, 'Unterkategorie' %>
 <%= select( "event", "sub_category", { 'Wähle Unterkategorie' => '' }, {}, { :style => 'display:none' }) %>
 
-<h3>Bundes-Highlight und Regional-Highlight wählbar für Bundesländer, Regional-Highlight nur für Regionen</h3>
-<p><%= label_tag :federal_highlight, 'Bundes-Highlight' %>
-<%= e.check_box :federal_highlight  %></p>
+
+
+<% if admin_signed_in? && !user_signed_in? %>
+  <p><%= label_tag :federal_highlight, 'Bundes-Highlight' %>
+  <%= e.check_box :federal_highlight  %></p>
+<% end %>
 
 <p><%= label_tag :regional_highlight, 'Regional-Highlight' %>
 <%= e.check_box :regional_highlight  %></p>
 
-<h3>Darf nur Admin</h3>
-<p><%= label_tag :sponsored, 'Gesponsort' %>
-<%= e.check_box :sponsored  %></p>
+
+
+<% if admin_signed_in? %>
+  <p><%= label_tag :sponsored, 'Gesponsort' %>
+  <%= e.check_box :sponsored %></p>
+<% end %>
+
+
 
 <p><%= label_tag :venue, 'Veranstaltungsort' %>
 <%= e.text_field :venue %></p>

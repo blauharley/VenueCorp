@@ -69,7 +69,7 @@
                   <%= render 'layouts/formatted_dates', :event => event, :max_num => 3 %>
                 </p>
                 <% if event.main_category && event.sub_category %>
-                  <p><%= event.main_category << '/' << event.sub_category %></p>
+                  <p><%= event.main_category %></p>
                 <% end %>
                 <% if event.image_content_type %>
                   <%= image_tag event.image.url(:thumb), :style => 'float:left' %>
@@ -77,8 +77,8 @@
                 <p><%= event.description %></p>
                 <p><%= link_to 'Zeigen', event_path(event.id) %></td>
                 <%= link_to 'Als PDF anzeigen', pdf_event_path(event.id) %>
-                <%= link_to 'Bearbeiten', edit_event_path(event.id) %>
-                <%= link_to 'Löschen', event_path(event.id), :method => :delete %></p>
+                <%= link_to_if (current_user && event.user && current_user.id == event.user.id) || current_admin, 'Bearbeiten', edit_event_path(event.id) %>
+                <%= link_to_if (current_user && event.user && current_user.id == event.user.id) || current_admin, 'Löschen', event_path(event.id), :method => :delete %></p>
               </div>
           
           <% if newTab && ((num + 1) % 10) == 0 %>

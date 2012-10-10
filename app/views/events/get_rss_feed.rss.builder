@@ -17,7 +17,8 @@ xml.rss :version => "2.0" do
         xml.city event.city
         xml.main_category event.main_category
         xml.sub_category event.sub_category
-        xml.highlight event.highlight
+        xml.regional_highlight event.regional_highlight
+        xml.federal_highlight event.federal_highlight
         xml.venue event.venue
         xml.start_date event.start_date
         xml.end_date event.end_date

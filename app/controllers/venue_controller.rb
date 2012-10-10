@@ -76,8 +76,8 @@
   end
   
   def send_contact_mail
-    UserMailer.send_contact_mail('test-user', params[:title],params[:body]).deliver
-    redirect_to :root, :notice => 'Wir werden ihre Nachricht bald beantworten.'
+    UserMailer.send_contact_mail('test-user', params[:subject],params[:body]).deliver
+    redirect_to :root, :notice => 'Wir werden ihre Nachricht in kürze beantworten.'
   end
   
   def search_surrounding_events

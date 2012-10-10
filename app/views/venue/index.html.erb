@@ -4,16 +4,9 @@
 
 <h1>Veranstaltungen</h1>
 
-<%= render 'layouts/navibar', :all_venues => @all_venues, :all_cats => @all_event_cats, :federal_state_clicked => @federal_state_clicked, :region_clicked => @region_clicked, :main_cat_clicked => @main_cat_clicked, :sub_cat_clicked => @sub_cat_clicked %>
+<%= render 'layouts/navibar', :all_venues => @all_venues, :all_cats => @all_event_cats %>
 
-<% if current_user %>
-  <h3>User</h3>
-  <%= current_user.email %>
-  <%= link_to 'Logout', destroy_user_session_path, :method => :delete %>
-<% elsif current_admin %>
-  <h3>Als Admin eingeloggt</h3>
-  <%= link_to 'Logout', destroy_admin_session_path, :method => :delete %>
-<% end %>
+<%= render 'layouts/user_panel' %>
 
 <div style="margin-top:70px; width:500px; float:left">
   <%= render 'layouts/event_list', :events => @events, :federal_state_clicked => @federal_state_clicked, :region_clicked => @region_clicked %>
@@ -27,8 +20,9 @@
   <table>
     <tr><td><%= link_to 'Alle Veranstaltungen', root_path %></td></tr>
     <tr><td><%= link_to 'Bundes-Highlights', event_highlight_path('true') %></td></tr>
-    <tr><td><%= link_to 'Verstanstaltung hinzufügen', new_event_path %></td></tr>
     <tr><td><%= link_to 'Umfeldsuche', search_surrounding_events_path %></td></tr>
+    <tr><td><%= link_to_if current_user || current_admin, 'Verstanstaltung hinzufügen', new_event_path %></td></tr>
+    <tr><td><%= link_to_if current_admin, 'User hinzufügen', new_user_registration_path %></td></tr>
     <tr><td><%= link_to_if !current_admin, 'Admin Login', new_admin_session_path %></tr>
     <tr><td><%= link_to_if !current_user && !current_admin, 'Login', new_user_session_path %></tr>
     

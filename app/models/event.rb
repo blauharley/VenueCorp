@@ -1,5 +1,6 @@
 ﻿class Event < ActiveRecord::Base
-  attr_accessible :city, :email, :end_date, :end_date_time, :highlight, :main_category, :costs, :address, :province, :region, :description, :start_date, :start_date_time, :sub_category, :tel_nr, :title, :venue, :venue_url, :image, :repeat_dates, :sponsored, :latitude, :longitude
+  attr_accessible :city, :email, :end_date, :end_date_time, :regional_highlight, :federal_highlight, :main_category, :costs, :address, :province, :region, :description, :start_date, :start_date_time, :sub_category, :tel_nr, :title, :venue, :venue_url, :image, :repeat_dates, :sponsored, :latitude, :longitude, :user_id, :user
+  belongs_to :user
   
   geocoded_by :address
   after_validation :geocode

@@ -1,3 +1,5 @@
+<%= link_to 'Home', root_path %>
+
 <div id="sign_in_form">
    <%= form_for("admin", :url => new_admin_session_path) do |f| %>
      <%= f.submit 'Sign in', :class =>"float_right" %><br />

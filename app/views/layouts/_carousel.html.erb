@@ -17,8 +17,8 @@
           <p><%= event.description %></p>
           <p><%= link_to 'Zeigen', event_path(event.id) %></td>
           <%= link_to 'Als PDF anzeigen', pdf_event_path(event.id) %>
-          <%= link_to 'Bearbeiten', edit_event_path(event.id) %>
-          <%= link_to 'Löschen', event_path(event.id), :method => :delete %></p>
+          <%= link_to_if (current_user && event.user && current_user.id == event.user.id) || current_admin, 'Bearbeiten', edit_event_path(event.id) %>
+          <%= link_to_if (current_user && event.user && current_user.id == event.user.id) || current_admin, 'Löschen', event_path(event.id), :method => :delete %></p>
         </div>
       <% end %>
     </div>

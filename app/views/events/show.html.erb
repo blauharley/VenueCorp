@@ -2,13 +2,11 @@
 <p><%= link_to 'Home', root_path %></p>
 <h4 id="map_notifier" style="display:none"></h4>
 
-<% if @event.highlight %>
-  <h2>Veranstaltung Einzel</h2>
-<% else %>
-  <h2>Highlight Veranstaltung Einzel</h2>
-<% end %>
+<h2>Veranstaltung <%= @event.title %></h2>
 
 <%= render 'layouts/navibar', :all_venues => @all_venues, :all_cats => @all_event_cats %>
+
+<%= render 'layouts/user_panel' %>
 
 <div style="margin-top:70px; width:300px">
   <p><%= image_tag @event.image.url(:medium), :style => 'width:300px; height:300px' %></p>
@@ -67,7 +65,7 @@
   <p>Keine Tel. Nr.</p>
 <% end %>
 
-<b><%= link_to 'Bearbeiten', edit_event_path(@event.id) %></b>
+<b><%= link_to_if (current_user && @event.user && current_user.id == @event.user.id) || current_admin, 'Bearbeiten', edit_event_path(@event.id) %></b>
 <b><%= link_to 'Google Cal', '#', :onclick => "window.open('https://www.google.com/calendar/render?action=TEMPLATE&dates=" + @event.start_date.strftime('%Y%m%d') + @event.start_date_time.strftime('T%H%M%SZ') + "/" + @event.end_date.strftime('%Y%m%d') + @event.end_date_time.strftime('T%H%M%SZ') + "&details=" + @event.description + "&sprop=website:" + @event.venue_url + "&text=" + @event.title + "&pli=1&sf=true&output=xml', '_blank'); return false" %></b>
 <b><%= link_to 'ICal & Outlook', ics_event_path(@event.id) %></b>
 <b><%= link_to 'Als PDF anzeigen', pdf_event_path(@event.id) %></b>

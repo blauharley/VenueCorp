@@ -1,6 +1,7 @@
 ﻿class EventsController < ApplicationController
   
   before_filter :get_event_cats_and_venues, :only => [:new, :edit]
+  
   before_filter :get_navi_vars, :only => [:show]
   
   def show
@@ -8,7 +9,8 @@
   end
   
   def new
-    @event = Event.new(params[:event])
+    @event = Event.new
+    check_logged_in_user
   end
   
   def create
@@ -25,6 +27,7 @@
   
   def edit
     @event = Event.find(params[:id])
+    check_logged_in_user
   end
   
   def update
@@ -54,7 +57,8 @@
                              ['Veranstaltungsort', event.venue],
                              ['Region', event.region],
                              ['Bundesland', event.province],
-                             ['Highlight', event.highlight.to_s],
+                             ['Bundes-Highlight', event.federal_highlight.to_s],
+                             ['Regional-Highlight', event.regional_highlight.to_s],
                              ['Gesponsort', event.sponsored.to_s],
                              ['Start-Datum', event.start_date.strftime('%Y/%m/%d')],
                              ['End-Datum', event.end_date.strftime('%Y/%m/%d')],
@@ -94,7 +98,8 @@
                                ['Veranstaltungsort', event.venue],
                                ['Region', event.region],
                                ['Bundesland', event.province],
-                               ['Highlight', event.highlight.to_s],
+                               ['Bundes-Highlight', event.federal_highlight.to_s],
+                               ['Regional-Highlight', event.regional_highlight.to_s],
                                ['Gesponsort', event.sponsored.to_s],
                                ['Start-Datum', event.start_date.strftime('%Y/%m/%d')],
                                ['End-Datum', event.end_date.strftime('%Y/%m/%d')],
@@ -175,6 +180,7 @@
   private
   
   def get_event_cats_and_venues
+    
     @federal_countries = { 'Wähle Bundesland' => '' }
     @federal_countries = @federal_countries.merge(Venues.get_federal_countries)
     
@@ -194,6 +200,7 @@
       sub_cat = sub_cat.sort
       @event_cats << { k =>  sub_cat }
     end
+    
   end
   
   
@@ -201,7 +208,8 @@
     
     event_start_time = params['start_date'] + ' ' + params['start_date_time']
     event_end_time = params['end_date'] + ' ' + params['end_date_time']
-    highlight = if params['highlight'].to_i == 0 then false else true end
+    reg_highlight = if params['regional_highlight'].to_i == 0 then false else true end
+    fed_highlight = if params['federal_highlight'].to_i == 0 then false else true end
     sponsored = if params['sponsored'].to_i == 0 then false else true end
     
     start_date = Date.parse(event_start_time)
@@ -215,9 +223,21 @@
       end
     end
     
+    if current_user
+      event.user = current_user
+    end
+    
     event.update_attributes(params)
-    event.update_attributes(:start_date_time => event_start_time, :end_date_time => event_end_time, :highlight => highlight, :sponsored => sponsored, :repeat_dates => formated_dates)
+    event.update_attributes(:start_date_time => event_start_time, :end_date_time => event_end_time, :regional_highlight => reg_highlight, :federal_highlight => fed_highlight, :sponsored => sponsored, :repeat_dates => formated_dates)
 
+  end
+  
+  private
+  
+  def check_logged_in_user
+    if (!current_user && !current_admin) || (current_user && current_user.id != @event.user_id && @event.image) # @event.image is nil when new action is called
+      redirect_to :root, :notice => 'Sie müssen sich einloggen, um Veranstaltungen hinzuzufügen, bearbeiten oder löschen zu können.'
+    end
   end
   
 end

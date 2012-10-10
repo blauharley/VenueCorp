@@ -17,7 +17,7 @@
                                 "Südburgenland" ],
                                 
                :carinthia => [  "Hohe Tauern",
-                                "Lieser-/Maltatal",
+                                "Lieser-Maltatal",
                                 "Katschberg-Rennweg",
                                 "Region Nockberge Bad Kleinkirchheim",
                                 "Naturarena Kärnten – Gail-, Gitsch-, Lesachtal, Weissensee",
