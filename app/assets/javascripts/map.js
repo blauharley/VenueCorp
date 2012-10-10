@@ -101,6 +101,7 @@ window.onload = function(){
     
     var start_address = '';
     if(document.getElementById('currentLocation').value.length){
+      console.log("document.getElementById('currentLocation') true");
       geocoder.geocode( { 'address': document.getElementById('currentLocation').value }, function(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
           start_address = results[0].geometry.location;
