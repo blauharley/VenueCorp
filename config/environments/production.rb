@@ -66,7 +66,7 @@ EventApp::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   
   # gmail configurations
-  #config.action_mailer.default_url_options = { :host => 'http://event-corp.herokuapp.com/contact' }
+  config.action_mailer.default_url_options = { :host => 'http://event-corp.herokuapp.com/contact' }
   
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
