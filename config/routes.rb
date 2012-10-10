@@ -1,5 +1,11 @@
 EventApp::Application.routes.draw do
   
+  get "admin/new"
+
+  get "admin/create"
+
+  devise_for :admins, :controllers => { :sessions => "admin" }
+
   get "registration/new"
 
   devise_for :users, :controllers => { :sessions => "users", :registrations => "registration" }

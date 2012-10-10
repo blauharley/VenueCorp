@@ -1,5 +1,5 @@
-﻿<div id="sign_in_form">
-   <%= form_for("user", :url => new_user_session_path) do |f| %>
+<div id="sign_in_form">
+   <%= form_for("admin", :url => new_admin_session_path) do |f| %>
      <%= f.submit 'Sign in', :class =>"float_right" %><br />
      <%= f.text_field :email, :placeholder => "e-mail" %><br />
      <%= f.password_field :password, :placeholder => "password" %><br />

@@ -1,11 +1,11 @@
-class UsersController < Devise::SessionsController
-  before_filter :authenticate_user!, :only => [:new,:create]
+class AdminController < Devise::SessionsController
+  before_filter :authenticate_admin!, :only => [:new,:create]
   
   def new
   end
   
   def create
-    current_user
+    current_admin
     redirect_to :root
   end
   

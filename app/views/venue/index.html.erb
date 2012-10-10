@@ -1,6 +1,6 @@
 ﻿ 
 <p><%= link_to 'Home', root_path %></p>
-<p><%= render 'layouts/user_login_form' %></p>
+<p><%# render 'layouts/user_login_form' %></p>
 
 <h1>Veranstaltungen</h1>
 
@@ -10,6 +10,9 @@
   <h3>User</h3>
   <%= current_user.email %>
   <%= link_to 'Logout', destroy_user_session_path, :method => :delete %>
+<% elsif current_admin %>
+  <h3>Als Admin eingeloggt</h3>
+  <%= link_to 'Logout', destroy_admin_session_path, :method => :delete %>
 <% end %>
 
 <div style="margin-top:70px; width:500px; float:left">
@@ -26,7 +29,8 @@
     <tr><td><%= link_to 'Bundes-Highlights', event_highlight_path('true') %></td></tr>
     <tr><td><%= link_to 'Verstanstaltung hinzufügen', new_event_path %></td></tr>
     <tr><td><%= link_to 'Umfeldsuche', search_surrounding_events_path %></td></tr>
-    <tr></tr>
+    <tr><td><%= link_to_if !current_admin, 'Admin Login', new_admin_session_path %></tr>
+    <tr><td><%= link_to_if !current_user && !current_admin, 'Login', new_user_session_path %></tr>
     
     <tr><td><%= link_to 'RSS Feed', event_feed_path( get_event_ids(@events) ) << '.rss' %></td></tr>
     <tr><td><%= link_to 'Kontakt', contact_path %></td></tr>
