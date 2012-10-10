@@ -87,7 +87,11 @@
   end
   
   def search_surrounding_events
-    @location = request.location.city + ', ' + request.location.country
+    if request.location.city.length > 0
+      @location = request.location.city + ', ' + request.location.country
+    else
+      @location = ''
+    end
   end
   
 end
