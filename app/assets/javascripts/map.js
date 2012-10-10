@@ -104,17 +104,19 @@ window.onload = function(){
       
       geocoder.geocode( { 'address': document.getElementById('currentLocation').value }, function(results, status) {
         
-        if (status == google.maps.GeocoderStatus.OK) {
+        if (status == google.maps.GeocoderStatus.OK){
           start_address = results[0].geometry.location;
+          start_address = new google.maps.LatLng(start_address.Xa, start_address.Ya)
         }
+        else
+          start_address = new google.maps.LatLng(48.20833, 16.373064)
       });
       
     }
-    if(start_address)
-    console.log(start_address);
+    
     var marker = new google.maps.Marker({
         map: map,
-        position: start_address ? new google.maps.LatLng(start_address.Xa, start_address.Ya) : new google.maps.LatLng(48.20833, 16.373064),
+        position: start_address,
         title: 'drag Marker to search for Events',
         icon: new google.maps.MarkerImage(
                     '/assets/event_star.png', // my 16x48 sprite with 3 circular icons
@@ -125,6 +127,8 @@ window.onload = function(){
                      ),
         draggable: true
     });
+    
+    map.setCenter(start_address);
     
     google.maps.event.addListener(marker, 'dragend', function(event){
       marker.setAnimation(google.maps.Animation.BOUNCE);
