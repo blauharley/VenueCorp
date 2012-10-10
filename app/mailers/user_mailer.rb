@@ -1,4 +1,5 @@
 class UserMailer < ActionMailer::Base
+  default :from => "event-corp@heroku.com"
   
   def send_contact_mail user, sub, body
     if user.class != String
@@ -8,7 +9,7 @@ class UserMailer < ActionMailer::Base
     end
     
     @body = body
-    mail(:to => 'xxtita@gmail.com', :from => @username, :subject => sub)
+    mail(:to => 'xxtita@gmail.com', :subject => sub)
   end
   
 end
