@@ -129,6 +129,13 @@ window.onload = function(){
           });
           map.setCenter(start_address);
           
+          google.maps.event.addListener(marker, 'dragend', function(event){
+            marker.setAnimation(google.maps.Animation.BOUNCE);
+            infoWindowText.innerHTML = 'Suche wird gestartet, bitte warten...';
+            infoWindow.setPosition( event.latLng );
+            infoWindow.open( map )
+            window.location = "http://" + window.location.host + "/locationSearch?latlng=" + event.latLng;
+          });
         }
         
       });
