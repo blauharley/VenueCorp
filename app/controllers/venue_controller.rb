@@ -76,7 +76,13 @@
   end
   
   def send_contact_mail
-    UserMailer.send_contact_mail('test-user', params[:subject],params[:body]).deliver
+    user = '(Nicht registriert!)'
+    if current_user
+      user = current_user
+    elsif current_admin
+      user = current_admin
+    end
+    UserMailer.send_contact_mail(user, params[:subject],params[:body]).deliver
     redirect_to :root, :notice => 'Wir werden ihre Nachricht in kürze beantworten.'
   end
   
