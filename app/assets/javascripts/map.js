@@ -101,12 +101,15 @@ window.onload = function(){
     
     var start_address = '';
     if(document.getElementById('currentLocation').value.length){
-      console.log("document.getElementById('currentLocation') true");
+      
       geocoder.geocode( { 'address': document.getElementById('currentLocation').value }, function(results, status) {
+        console.log(results);
         if (status == google.maps.GeocoderStatus.OK) {
           start_address = results[0].geometry.location;
+          console.log(start_address);
         }
       });
+      
     }
     
     var marker = new google.maps.Marker({
