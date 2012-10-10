@@ -9,7 +9,7 @@ class UserMailer < ActionMailer::Base
     end
     
     @body = body
-    mail(:to => 'xxtita@gmail.com', :subject => sub)
+    mail(:to => 'franz.josef.bruenner@aon.at', :subject => sub)
   end
   
 end
