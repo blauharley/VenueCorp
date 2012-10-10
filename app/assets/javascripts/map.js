@@ -114,7 +114,7 @@ window.onload = function(){
     
     var marker = new google.maps.Marker({
         map: map,
-        position: start_address ? new google.maps.LatLng(start_address.lat, start_address.lng): new google.maps.LatLng(48.20833, 16.373064),
+        position: start_address ? new google.maps.LatLng(start_address.Xa, start_address.Ya): new google.maps.LatLng(48.20833, 16.373064),
         title: 'drag Marker to search for Events',
         icon: new google.maps.MarkerImage(
                     '/assets/event_star.png', // my 16x48 sprite with 3 circular icons
