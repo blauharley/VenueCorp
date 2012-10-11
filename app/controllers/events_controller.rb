@@ -35,7 +35,11 @@
     
     set_event_attr event, params[:event]
     
-    redirect_to :root, :notice => 'Veranstaltung erfolgreich bearbeitet.'
+    if event.save
+      redirect_to :root, :notice => 'Veranstaltung erfolgreich bearbeitet.'
+    else
+      redirect_to :root, :notice => 'Veranstaltung konnte nicht bearbeitet werden.'
+    end
   end
   
   def destroy
@@ -235,7 +239,8 @@
   private
   
   def check_logged_in_user
-    if (!current_user && !current_admin) || (current_user && current_user.id != @event.user_id && @event.image) # @event.image is nil when new action is called
+    # first condition: edit foreign,  second condition: new, third condition: edit my own
+    if (current_user && !@event.title.empty? && current_user.id != @event.user_id) || (current_user && !@event.title.empty? && @event.user_id == nil) || (current_user && current_user.id != @event.user_id && !@event.title.empty?)
       redirect_to :root, :notice => 'Sie müssen sich einloggen, um Veranstaltungen hinzuzufügen, bearbeiten oder löschen zu können.'
     end
   end

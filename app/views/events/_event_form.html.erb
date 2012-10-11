@@ -56,24 +56,31 @@
       
       var inputs = document.forms[0].children;
       for(var input=0; input < inputs.length; input++){
-        if(inputs[input].nodeName == 'P'){
-          
+        
           for(var i=0; i < inputs[input].children.length; i++){
-            if(inputs[input].children[i].name && inputs[input].children[i].name.search(/event/) == 0)
-              if(inputs[input].children[i].value.length == 0)
+            
+            if(inputs[input].children[i].name && inputs[input].children[i].name.search(/event/) == 0){
+              
+              if(inputs[input].children[i].value.length == 0){
+              console.log(inputs[input].children[i])
                 if(inputs[input].children[i].id != 'event_image' && inputs[input].children[i].id != 'event_costs' && inputs[input].children[i].id != 'event_venue_url' && inputs[input].children[i].id != 'event_email' && inputs[input].children[i].id != 'event_tel_nr' && inputs[input].children[i].id != 'repeat_choice' && inputs[input].children[i].id != 'repeat_counter'){
-                  alert('Achtung das Feld: ' + inputs[input].children[0].innerHTML + ' ist nicht ausgefüllt!')
+                  alert('Achtung das Feld: ' + inputs[input].id + ' ist nicht ausgefüllt!')
                   return false;
+                }
               }
+            }
           }
-        }
+        
       }
       
       document.forms[0].submit();
       
     };
     
-    setTimeout(function(){ console.log(); },1000);
+    document.getElementById('backbutton').onclick = function(event){
+      window.location = "http://" + window.host;
+    };
+    
   });
   
 </script>
@@ -81,98 +88,106 @@
 
 <%= form_for(@event, :html => { :multipart => true }) do  |e| %>
 
-<p><%= label_tag :title, 'Titel' %>
-<%= e.text_field :title %></p>
+<p><p><%= label_tag :title, 'Titel' %></p>
+<p id="Titel"><%= e.text_field :title %></p></p>
 
-<p><%= label_tag :region, 'Region' %>
-<%= e.text_field :region %></p>
+<p><p><%= label_tag :address, 'Adresse' %></p>
+<p id="Adresse"><%= e.text_field :address, :pattern => '^[ÄÜÖäüö]?\w+\s?\d+,\s?[ÄÜÖäüö]?\w+,\s?[ÄÜÖäüö]?\w+,\s?[ÄÜÖäüö]?\w+$' %>Format: Street House-number, City, Province, Country</p></p>
 
-<p><%= label_tag :province, 'Bundesland' %>
-<%= select( "event", "province", @federal_countries.collect{ |k,v| [k,k] }) %></p>
+<p><p><%= label_tag :region, 'Region' %></p>
+<p id="Region"><%= e.text_field :region %></p></p>
 
-<p><%= label_tag :city, 'Ort' %>
-<%= select( "event", "city", { 'Wähle Ort' => '' }, {}, { :style => 'display:none' }) %><p>
+<p><p><%= label_tag :province, 'Bundesland' %></p>
+<p id="Bundesland"><%= select( "event", "province", @federal_countries.collect{ |k,v| [k,k] }) %></p></p>
+
+<p><p><%= label_tag :city, 'Ort' %></p>
+<p id="Ort"><%= select( "event", "city", { 'Wähle Ort' => '' }, {}, { :style => 'display:none' }) %></p></p>
 
 
 
-<p><%= label_tag :main_category, 'Hauptkategorie' %>
-<%= select( "event", "main_category", @main_event_cats.collect{ |k,v| [k,k] }) %>
+<p><p><%= label_tag :main_category, 'Hauptkategorie' %></p>
+<p id="Hauptkategorie"><%= select( "event", "main_category", @main_event_cats.collect{ |k,v| [k,k] }) %></p></p>
 
-<p><%= label_tag :sub_category, 'Unterkategorie' %>
-<%= select( "event", "sub_category", { 'Wähle Unterkategorie' => '' }, {}, { :style => 'display:none' }) %>
+<p><p><%= label_tag :sub_category, 'Unterkategorie' %></p>
+<p id="Unterkategorie"><%= select( "event", "sub_category", { 'Wähle Unterkategorie' => '' }, {}, { :style => 'display:none' }) %></p></p>
 
 
 
 <% if admin_signed_in? && !user_signed_in? %>
-  <p><%= label_tag :federal_highlight, 'Bundes-Highlight' %>
-  <%= e.check_box :federal_highlight  %></p>
+  <p><p><%= label_tag :federal_highlight, 'Bundes-Highlight' %></p>
+  <p id="Bundes-Highlight"><%= e.check_box :federal_highlight  %></p></p>
 <% end %>
 
-<p><%= label_tag :regional_highlight, 'Regional-Highlight' %>
-<%= e.check_box :regional_highlight  %></p>
+<p><p><%= label_tag :regional_highlight, 'Regional-Highlight' %></p>
+<p id="Regional-Highlight"><%= e.check_box :regional_highlight  %></p></p>
 
 
 
 <% if admin_signed_in? %>
-  <p><%= label_tag :sponsored, 'Gesponsort' %>
-  <%= e.check_box :sponsored %></p>
+  <p><p><%= label_tag :sponsored, 'Gesponsort' %></p>
+  <p id="Gesponsort"><%= e.check_box :sponsored %></p></p>
 <% end %>
 
 
 
-<p><%= label_tag :venue, 'Veranstaltungsort' %>
-<%= e.text_field :venue %></p>
+<p><p><%= label_tag :venue, 'Veranstaltungsort' %></p>
+<p id="Veranstaltungsort"><%= e.text_field :venue %></p></p>
 
-<p><%= label_tag :start_date, 'Start-Datum' %>
-<%= e.text_field :start_date, :value => if @event.start_date != nil then @event.start_date.strftime('%Y/%m/%d') else '' end %> Format: YYYY/MM/DD</p>
+<p><p><%= label_tag :start_date, 'Start-Datum' %></p>
+<p id="Start-Datum"><%= e.text_field :start_date, :pattern => '^\d{4}/\d{2}/\d{2}$', :value => if @event.start_date != nil then @event.start_date.strftime('%Y/%m/%d') else '' end %> Format: YYYY/MM/DD</p></p>
 
-<p><%= label_tag :start_date, 'Ende-Datum' %>
-<%= e.text_field :end_date, :value => if @event.end_date != nil then @event.end_date.strftime('%Y/%m/%d') else '' end %> Format: YYYY/MM/DD</p>
+<p><p><%= label_tag :start_date, 'Ende-Datum' %></p>
+<p id="Ende-Datum"><%= e.text_field :end_date, :pattern => '^\d{4}/\d{2}/\d{2}$', :value => if @event.end_date != nil then @event.end_date.strftime('%Y/%m/%d') else '' end %> Format: YYYY/MM/DD</p></p>
 
-<p><%= label_tag :start_date_time, 'Start-Tageszeit' %>
-<%= e.text_field :start_date_time, :value => if @event.start_date_time != nil then @event.start_date_time.strftime('%H:%M:%S') else '' end %> Format: HH:MM:SS</p>
+<p><p><%= label_tag :start_date_time, 'Start-Tageszeit' %></p>
+<p id="Start-Tageszeit"><%= e.text_field :start_date_time, :pattern => '^\d{2}:\d{2}:\d{2}$', :value => if @event.start_date_time != nil then @event.start_date_time.strftime('%H:%M:%S') else '' end %> Format: HH:MM:SS</p></p>
 
-<p><%= label_tag :end_date_time, 'Ende-Tageszeit' %>
-<%= e.text_field :end_date_time, :value => if @event.end_date_time != nil then @event.end_date_time.strftime('%H:%M:%S') else '' end  %> Format: HH:MM:SS</p>
+<p><p><%= label_tag :end_date_time, 'Ende-Tageszeit' %></p>
+<p id="Ende-Tageszeit"><%= e.text_field :end_date_time, :pattern => '^\d{2}:\d{2}:\d{2}$', :value => if @event.end_date_time != nil then @event.end_date_time.strftime('%H:%M:%S') else '' end  %> Format: HH:MM:SS</p></p>
 
-<p><%= label_tag :image, 'Bild (optional)' %>
-<%= e.file_field :image %></p>
+<p><p><%= label_tag :image, 'Bild (optional)' %></p>
+<p id="Bild"><%= e.file_field :image %></p></p>
 
-<p><%= label_tag :description, 'Beschreibung' %>
-<%= e.text_field :description %></p>
+<p><p><%= label_tag :description, 'Beschreibung' %></p>
+<p id="Beschreibung"><%# text_area :event, :description, :id => 'description' %></p></p>
+<textarea cols="80" id="description" name="description" rows="10">&lt;p&gt;This is some &lt;strong&gt;sample text&lt;/strong&gt;. You are using &lt;a href="http://ckeditor.com/"&gt;CKEditor&lt;/a&gt;.&lt;/p&gt;</textarea><script type="text/javascript">
 
-<p><%= label_tag :costs, 'Kosten (optional)' %>
-<%= e.text_field :costs %></p>
+  CKEDITOR.replace( 'description' );
 
-<p><%= label_tag :address, 'Adresse' %>
-<%= e.text_field :address %></p>
+</script>
 
-<p><%= label_tag :venue_url, 'Website-Url (optional)' %>
-<%= e.text_field :venue_url %></p>
+<p><p><%= label_tag :costs, 'Kosten (optional)' %></p>
+<p id="Kosten"><%= e.text_field :costs %></p></p>
 
-<p><%= label_tag :email, 'E-mail Adresse (optional)' %>
-<%= e.text_field :email %></p>
+<p><p><%= label_tag :venue_url, 'Website-Url (optional)' %></p>
+<p id="Website-Url"><%= e.text_field :venue_url %></p></p>
+
+<p><p><%= label_tag :email, 'E-mail Adresse (optional)' %></p>
+<%= e.text_field :email %></p></p>
 
 <p><%= label_tag :tel_nr, 'Tel. Nr. (optional)' %>
-<%= e.text_field :tel_nr %></p>
+<p id="Tel. Nr."><%= e.text_field :tel_nr %></p>
 
 <% days = { 'Tage' => 'nie' } %>
 <% for i in 1..31 %>
   <% days['jeden ' + i.to_s + ' Tag'] = i.to_s %>
 <% end %>
 
-<p><%= label_tag :repeat_dates, 'Intervall (optional)' %>
+<p><p><%= label_tag :repeat_dates, 'Intervall (optional)' %></p>
 <%= e.hidden_field :repeat_dates, :value => 'nie' %>
-<%= select( "repeat", "choice", days, { :selected => 'nie' }, { :name => nil }) %>
+<p id="Intervall"><%= select( "repeat", "choice", days, { :selected => 'nie' }, { :name => nil }) %></p></p>
 
 <% times = { 'wie oft?' => '0' } %>
 <% for i in 1..54 %>
   <% times[i.to_s + ' mal'] = i.to_s %>
 <% end %>
-<%= select("repeat", "counter", times, { :selected => '1' }, { :style => 'display:none', :name => nil }) %>
+<p id="Intervall-Anzahl"><%= select("repeat", "counter", times, { :selected => '1' }, { :style => 'display:none', :name => nil }) %></p>
 
 </p>
 
-<p><%= e.submit 'OK', :name => nil, :id => 'submitButton' %></p>
+<p>
+  <%= e.submit 'Speichern', :name => nil, :id => 'submitButton' %>
+  <%= button_tag 'Zurück', :id => 'backbutton' %>
+</p>
 
 <% end %>
