@@ -1,5 +1,7 @@
 EventApp::Application.routes.draw do
   
+  mount Ckeditor::Engine => "/ckeditor"
+  
   get "admin/new"
 
   get "admin/create"

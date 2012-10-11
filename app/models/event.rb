@@ -10,7 +10,6 @@
   validates :start_date, :presence => true
   validates :end_date, :presence => true
   validates :start_date_time, :presence => true
-  validates :description, :presence => true
   validates :address, :presence => true
  
   belongs_to :user
@@ -23,9 +22,9 @@
   def self.search(value)
     if value
       hits = []
-      hits += find(:all, :conditions => ["city like ? OR title like ? OR description like ?", '%' + value + '%', '%' + value + '%', '%' + value + '%'], :order => "title asc")
+      hits += find(:all, :conditions => ["title like ? OR city like ? OR description like ?", '%' + value + '%', '%' + value + '%', '%' + value + '%'], :order => "title asc")
       if hits.empty?
-        hits += find(:all, :conditions => ["city like ? OR title like ? OR description like ?", '%' + value.downcase + '%', '%' + value.downcase + '%', '%' + value.downcase + '%'], :order => "title asc")
+        hits += find(:all, :conditions => ["title like ? OR city like ? OR description like ?", '%' + value.downcase + '%', '%' + value.downcase + '%', '%' + value.downcase + '%'], :order => "title asc")
       end
       hits
     else

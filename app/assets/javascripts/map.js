@@ -48,12 +48,7 @@ window.onload = function(){
 
   function showEventOnMap(map){
 
-    var address = '';
-    var addressTags = document.getElementsByClassName('address');
-    for(var i=0; i < addressTags.length; i++){
-      address += addressTags[i].innerHTML + ', ';
-    }
-    address = address.slice(0,address.length-3);
+    var address = document.getElementById('address').innerHTML;
     
     geocoder.geocode( { 'address': address }, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {

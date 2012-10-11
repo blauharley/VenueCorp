@@ -1,7 +1,10 @@
 class RegistrationController < Devise::SessionsController
-  before_filter :authenticate_as_admin, :only => [:new, :create]
+  before_filter :authenticate_as_admin, :only => [:create]
   
   def new
+    if !current_admin
+      redirect_to :root, :notice => 'Keine Berechtigung!'
+    end
   end
   
   def create

@@ -11,26 +11,26 @@
     
     function activateAutoSelectUpdate(array, main_id, sub_id){
       
-      document.getElementById(main_id).onchange = function(event){
-        
-        document.getElementById(sub_id).style.display = 'inline';
-        
-        for(var x=0; x < array.length; x++){
-          if( array[x][event.currentTarget.value] ){
-            
-            var sub = array[x][event.currentTarget.value];
-            document.getElementById(sub_id).innerHTML = '';
-            
-            for(var y=0; y < sub.length; y++){
-              var opt = document.createElement('option');
-              opt.setAttribute('value', sub[y]);
-              opt.innerHTML = sub[y];
-                
-              document.getElementById(sub_id).appendChild(opt);
+      if(document.getElementById(main_id) && document.getElementById(sub_id)){
+        document.getElementById(main_id).onchange = function(event){
+                  
+          for(var x=0; x < array.length; x++){
+            if( array[x][event.currentTarget.value] ){
+              
+              var sub = array[x][event.currentTarget.value];
+              document.getElementById(sub_id).innerHTML = '';
+              
+              for(var y=0; y < sub.length; y++){
+                var opt = document.createElement('option');
+                opt.setAttribute('value', sub[y]);
+                opt.innerHTML = sub[y];
+                  
+                document.getElementById(sub_id).appendChild(opt);
+              }
             }
           }
-        }
-      };
+        };
+      }
     }
     
     // auto-update venues
@@ -44,8 +44,7 @@
     
     // auto-update how often?
     document.getElementById('repeat_choice').onchange = function(event){
-      document.getElementById('repeat_counter').style.display = 'inline';
-      document.getElementById('event_repeat_dates').value = document.getElementById('repeat_choice').value + ' ' + event.currentTarget.value;
+      document.getElementById('event_repeat_dates').value = event.currentTarget.value + ' ' +document.getElementById('repeat_counter').value;
     };
     
     document.getElementById('repeat_counter').onchange = function(event){
@@ -62,8 +61,8 @@
             if(inputs[input].children[i].name && inputs[input].children[i].name.search(/event/) == 0){
               
               if(inputs[input].children[i].value.length == 0){
-              console.log(inputs[input].children[i])
-                if(inputs[input].children[i].id != 'event_image' && inputs[input].children[i].id != 'event_costs' && inputs[input].children[i].id != 'event_venue_url' && inputs[input].children[i].id != 'event_email' && inputs[input].children[i].id != 'event_tel_nr' && inputs[input].children[i].id != 'repeat_choice' && inputs[input].children[i].id != 'repeat_counter'){
+              
+                if(inputs[input].children[i].id != 'event_description' && inputs[input].children[i].id != 'event_image' && inputs[input].children[i].id != 'event_costs' && inputs[input].children[i].id != 'event_venue_url' && inputs[input].children[i].id != 'event_email' && inputs[input].children[i].id != 'event_tel_nr' && inputs[input].children[i].id != 'repeat_choice' && inputs[input].children[i].id != 'repeat_counter'){
                   alert('Achtung das Feld: ' + inputs[input].id + ' ist nicht ausgefüllt!')
                   return false;
                 }
@@ -81,6 +80,8 @@
       window.location = "http://" + window.host;
     };
     
+    $('#event_image').attr('size', 130);
+
   });
   
 </script>
@@ -89,29 +90,84 @@
 <%= form_for(@event, :html => { :multipart => true }) do  |e| %>
 
 <p><p><%= label_tag :title, 'Titel' %></p>
-<p id="Titel"><%= e.text_field :title %></p></p>
+<p id="Titel"><%= e.text_field :title, :size => '130' %></p></p>
 
 <p><p><%= label_tag :address, 'Adresse' %></p>
-<p id="Adresse"><%= e.text_field :address, :pattern => '^[ÄÜÖäüö]?\w+\s?\d+,\s?[ÄÜÖäüö]?\w+,\s?[ÄÜÖäüö]?\w+,\s?[ÄÜÖäüö]?\w+$' %>Format: Street House-number, City, Province, Country</p></p>
+<p id="Adresse"><%= e.text_field :address, :pattern => '^[ÄÜÖäüö]?\w+\s?\d+,\s?[ÄÜÖäüö]?\w+,\s?[ÄÜÖäüö]?\w+,\s?[ÄÜÖäüö]?\w+$', :size => '130' %>Format: Street House-number, City, Province, Country</p></p>
 
 <p><p><%= label_tag :region, 'Region' %></p>
-<p id="Region"><%= e.text_field :region %></p></p>
-
-<p><p><%= label_tag :province, 'Bundesland' %></p>
-<p id="Bundesland"><%= select( "event", "province", @federal_countries.collect{ |k,v| [k,k] }) %></p></p>
-
-<p><p><%= label_tag :city, 'Ort' %></p>
-<p id="Ort"><%= select( "event", "city", { 'Wähle Ort' => '' }, {}, { :style => 'display:none' }) %></p></p>
+<p id="Region"><%= e.text_field :region, :size => '130' %></p></p>
 
 
 
-<p><p><%= label_tag :main_category, 'Hauptkategorie' %></p>
-<p id="Hauptkategorie"><%= select( "event", "main_category", @main_event_cats.collect{ |k,v| [k,k] }) %></p></p>
+<% if !@event.province.empty? && !@event.city.empty? %>
+  <p><p><%= label_tag :province, 'Bundesland' %></p>
+  <p id="Hauptkategorie"><%= text_field_tag :event, :province, { :value => @event.province, :disabled => true } %></p>
+  
+  <p><p><%= label_tag :city, 'Ort' %></p>
+  <p id="Unterkategorie"><%= text_field_tag :event, :city, { :value => @event.city, :disabled => true } %></p>
+  
+<% else %>
+  <p><p><%= label_tag :province, 'Bundesland' %></p>
+  <p id="Bundesland"><%= select( "event", "province", @federal_countries.collect{ |k,v| [k,k] }, {}, :style => 'width:888px') %></p></p>
 
-<p><p><%= label_tag :sub_category, 'Unterkategorie' %></p>
-<p id="Unterkategorie"><%= select( "event", "sub_category", { 'Wähle Unterkategorie' => '' }, {}, { :style => 'display:none' }) %></p></p>
+  <p><p><%= label_tag :city, 'Ort' %></p>
+  <p id="Ort"><%= select( "event", "city", { 'Wähle Ort' => '' }, {}, :style => 'width:888px') %></p></p>
+<% end %>
 
 
+
+<p><p><%= label_tag :venue, 'Veranstaltungsort' %></p>
+<p id="Veranstaltungsort"><%= e.text_field :venue, :size => '130' %></p></p>
+
+<p><p><%= label_tag :venue_url, 'Website-Url (optional)' %></p>
+<p id="Website-Url"><%= e.text_field :venue_url, :size => '130' %></p></p>
+
+<p><p><%= label_tag :email, 'E-mail Adresse (optional)' %></p>
+<%= e.text_field :email, :size => '130' %></p></p>
+
+<p><%= label_tag :tel_nr, 'Tel. Nr. (optional)' %>
+<p id="Tel. Nr."><%= e.text_field :tel_nr, :size => '130' %></p>
+
+
+<% if !@event.main_category.empty? && !@event.sub_category.empty? %>
+  <p><p><%= label_tag :main_category, 'Hauptkategorie' %></p>
+  <p id="Hauptkategorie"><%= text_field_tag :event, :main_category, { :value => @event.main_category, :disabled => true } %></p>
+  
+  <p><p><%= label_tag :sub_category, 'Unterkategorie' %></p>
+  <p id="Unterkategorie"><%= text_field_tag :event, :sub_category, { :value => @event.sub_category, :disabled => true } %></p>
+  
+<% else %>
+  <p><p><%= label_tag :main_category, 'Hauptkategorie' %></p>
+  <p id="Hauptkategorie"><%= select( "event", "main_category", @main_event_cats.collect{ |k,v| [k,k] }, {}, :style => 'width:888px') %></p></p>
+
+  <p><p><%= label_tag :sub_category, 'Unterkategorie' %></p>
+  <p id="Unterkategorie"><%= select( "event", "sub_category", { 'Wähle Unterkategorie' => '' }, {}, :style => 'width:888px') %></p></p>
+<% end %>
+
+
+<p><p><%= label_tag :description, 'Beschreibung' %></p>
+<p id="Beschreibung"><%= e.cktext_area :description, :toolbar => 'Easy', :width => 888, :height => 350 %></p></p>
+
+
+
+<p><p><%= label_tag :start_date, 'Start-Datum' %></p>
+<p id="Start-Datum"><%= e.text_field :start_date, :size => '130', :pattern => '^\d{4}/\d{2}/\d{2}$', :value => if @event.start_date != nil then @event.start_date.strftime('%Y/%m/%d') else '' end %> Format: YYYY/MM/DD</p></p>
+
+<p><p><%= label_tag :start_date, 'Ende-Datum' %></p>
+<p id="Ende-Datum"><%= e.text_field :end_date, :size => '130', :pattern => '^\d{4}/\d{2}/\d{2}$', :value => if @event.end_date != nil then @event.end_date.strftime('%Y/%m/%d') else '' end %> Format: YYYY/MM/DD</p></p>
+
+<p><p><%= label_tag :start_date_time, 'Start-Tageszeit' %></p>
+<p id="Start-Tageszeit"><%= e.text_field :start_date_time, :size => '130', :pattern => '^\d{2}:\d{2}:\d{2}$', :value => if @event.start_date_time != nil then @event.start_date_time.strftime('%H:%M:%S') else '' end %> Format: HH:MM:SS</p></p>
+
+<p><p><%= label_tag :end_date_time, 'Ende-Tageszeit' %></p>
+<p id="Ende-Tageszeit"><%= e.text_field :end_date_time, :size => '130', :pattern => '^\d{2}:\d{2}:\d{2}$', :value => if @event.end_date_time != nil then @event.end_date_time.strftime('%H:%M:%S') else '' end  %> Format: HH:MM:SS</p></p>
+
+<p><p><%= label_tag :image, 'Bild (optional)' %></p>
+<p id="Bild"><%= e.file_field :image %></p></p>
+
+<p><p><%= label_tag :costs, 'Kosten (optional)' %></p>
+<p id="Kosten"><%= e.text_field :costs, :size => '130' %></p></p>
 
 <% if admin_signed_in? && !user_signed_in? %>
   <p><p><%= label_tag :federal_highlight, 'Bundes-Highlight' %></p>
@@ -122,51 +178,11 @@
 <p id="Regional-Highlight"><%= e.check_box :regional_highlight  %></p></p>
 
 
-
 <% if admin_signed_in? %>
   <p><p><%= label_tag :sponsored, 'Gesponsort' %></p>
   <p id="Gesponsort"><%= e.check_box :sponsored %></p></p>
 <% end %>
 
-
-
-<p><p><%= label_tag :venue, 'Veranstaltungsort' %></p>
-<p id="Veranstaltungsort"><%= e.text_field :venue %></p></p>
-
-<p><p><%= label_tag :start_date, 'Start-Datum' %></p>
-<p id="Start-Datum"><%= e.text_field :start_date, :pattern => '^\d{4}/\d{2}/\d{2}$', :value => if @event.start_date != nil then @event.start_date.strftime('%Y/%m/%d') else '' end %> Format: YYYY/MM/DD</p></p>
-
-<p><p><%= label_tag :start_date, 'Ende-Datum' %></p>
-<p id="Ende-Datum"><%= e.text_field :end_date, :pattern => '^\d{4}/\d{2}/\d{2}$', :value => if @event.end_date != nil then @event.end_date.strftime('%Y/%m/%d') else '' end %> Format: YYYY/MM/DD</p></p>
-
-<p><p><%= label_tag :start_date_time, 'Start-Tageszeit' %></p>
-<p id="Start-Tageszeit"><%= e.text_field :start_date_time, :pattern => '^\d{2}:\d{2}:\d{2}$', :value => if @event.start_date_time != nil then @event.start_date_time.strftime('%H:%M:%S') else '' end %> Format: HH:MM:SS</p></p>
-
-<p><p><%= label_tag :end_date_time, 'Ende-Tageszeit' %></p>
-<p id="Ende-Tageszeit"><%= e.text_field :end_date_time, :pattern => '^\d{2}:\d{2}:\d{2}$', :value => if @event.end_date_time != nil then @event.end_date_time.strftime('%H:%M:%S') else '' end  %> Format: HH:MM:SS</p></p>
-
-<p><p><%= label_tag :image, 'Bild (optional)' %></p>
-<p id="Bild"><%= e.file_field :image %></p></p>
-
-<p><p><%= label_tag :description, 'Beschreibung' %></p>
-<p id="Beschreibung"><%# text_area :event, :description, :id => 'description' %></p></p>
-<textarea cols="80" id="description" name="description" rows="10">&lt;p&gt;This is some &lt;strong&gt;sample text&lt;/strong&gt;. You are using &lt;a href="http://ckeditor.com/"&gt;CKEditor&lt;/a&gt;.&lt;/p&gt;</textarea><script type="text/javascript">
-
-  CKEDITOR.replace( 'description' );
-
-</script>
-
-<p><p><%= label_tag :costs, 'Kosten (optional)' %></p>
-<p id="Kosten"><%= e.text_field :costs %></p></p>
-
-<p><p><%= label_tag :venue_url, 'Website-Url (optional)' %></p>
-<p id="Website-Url"><%= e.text_field :venue_url %></p></p>
-
-<p><p><%= label_tag :email, 'E-mail Adresse (optional)' %></p>
-<%= e.text_field :email %></p></p>
-
-<p><%= label_tag :tel_nr, 'Tel. Nr. (optional)' %>
-<p id="Tel. Nr."><%= e.text_field :tel_nr %></p>
 
 <% days = { 'Tage' => 'nie' } %>
 <% for i in 1..31 %>
@@ -175,13 +191,13 @@
 
 <p><p><%= label_tag :repeat_dates, 'Intervall (optional)' %></p>
 <%= e.hidden_field :repeat_dates, :value => 'nie' %>
-<p id="Intervall"><%= select( "repeat", "choice", days, { :selected => 'nie' }, { :name => nil }) %></p></p>
+<p id="Intervall"><%= select( "repeat", "choice", days, { :selected => 'nie' }, { :name => nil, :style => 'width:888px' }) %></p></p>
 
 <% times = { 'wie oft?' => '0' } %>
 <% for i in 1..54 %>
   <% times[i.to_s + ' mal'] = i.to_s %>
 <% end %>
-<p id="Intervall-Anzahl"><%= select("repeat", "counter", times, { :selected => '1' }, { :style => 'display:none', :name => nil }) %></p>
+<p id="Intervall-Anzahl"><%= select("repeat", "counter", times, { :selected => '1' }, { :name => nil, :style => 'width:888px' }) %></p>
 
 </p>
 

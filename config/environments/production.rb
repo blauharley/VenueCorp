@@ -79,4 +79,6 @@ EventApp::Application.configure do
     :enable_starttls_auto => true
   }
   
+  config.assets.precompile += Ckeditor.assets
+  
 end

@@ -54,7 +54,7 @@
               text 'Veranstaltung:'
               move_down 3
               t = make_table([ ['Titel', event.title],
-                             ['Beschreibung', event.description],
+                             ['Beschreibung', event.description.html_safe],
                              ['Hauptkategorie', event.main_category],
                              ['Unterkategorie', event.sub_category],
                              ['Ort', event.venue],
