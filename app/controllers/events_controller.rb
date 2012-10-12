@@ -239,8 +239,8 @@
   private
   
   def check_logged_in_user
-    # first condition: edit foreign,  second condition: new, third condition: edit my own
-    if (current_user && !@event.title.empty? && current_user.id != @event.user_id) || (current_user && !@event.title.empty? && @event.user_id == nil) || (current_user && current_user.id != @event.user_id && !@event.title.empty?)
+    # first condition: logged in as user or admin,  second condition: edit foreign,  third condition: new, fourth condition: edit my own
+    if (!current_user && !current_admin) || (current_user && !@event.title.empty? && current_user.id != @event.user_id) || (current_user && !@event.title.empty? && @event.user_id == nil) || (current_user && current_user.id != @event.user_id && !@event.title.empty?)
       redirect_to :root, :notice => 'Sie müssen sich einloggen, um Veranstaltungen hinzuzufügen, bearbeiten oder löschen zu können.'
     end
   end
