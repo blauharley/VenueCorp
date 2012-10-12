@@ -3,8 +3,12 @@
   before_filter :get_navi_vars, :only => [:index, :get_main_cat_events, :get_sub_cat_events, :get_federal_country, :get_venue, :get_events_by_date, :get_events_by_geocoding]
   
   def index
-    if params[:highlight] == 'true'
-      @events = Event.where( :highlight => true ).order('start_date')
+    if (params[:cat] == 'federal' || params[:cat] == 'regional') && params[:highlight] == 'true'
+      if params[:cat] == 'federal'
+        @events = Event.where( :federal_highlight => true ).order('start_date')
+      elsif params[:cat] == 'regional'
+        @events = Event.where( :regional_highlight => true ).order('start_date')
+      end
     else
       @events = Event.search(params[:search])
     end

@@ -23,7 +23,7 @@ EventApp::Application.routes.draw do
   get "venue/index"
   
   controller :Venue do
-    match 'eventHighlights/:highlight' => :index, :as => 'event_highlight'
+    match 'eventHighlights/:cat/:highlight' => :index, :as => 'event_highlight'
     match 'federalCountry/:country' => :get_federal_country, :as => 'get_federal_country'
     match 'venue/:city' => :get_venue, :as => 'get_venue'
     match 'catMainEvents/:cat' => :get_main_cat_events, :as => 'get_main_cat_events'

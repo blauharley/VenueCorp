@@ -19,7 +19,8 @@
   
   <table>
     <tr><td><%= link_to 'Alle Veranstaltungen', root_path %></td></tr>
-    <tr><td><%= link_to 'Bundes-Highlights', event_highlight_path('true') %></td></tr>
+    <tr><td><%= link_to 'Alle Bundes-Highlights', event_highlight_path('federal', 'true') %></td></tr>
+    <tr><td><%= link_to 'Alle Regional-Highlights', event_highlight_path('regional', 'true') %></td></tr>
     <tr><td><%= link_to 'Umfeldsuche', search_surrounding_events_path %></td></tr>
     <tr><td><%= link_to_if current_user || current_admin, 'Verstanstaltung hinzufügen', new_event_path %></td></tr>
     <tr><td><%= link_to_if current_admin, 'User hinzufügen', new_user_registration_path %></td></tr>
