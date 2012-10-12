@@ -60,9 +60,9 @@
             
             if(inputs[input].children[i].name && inputs[input].children[i].name.search(/event/) == 0){
               
-              if(inputs[input].children[i].value.length == 0){
+              if( (inputs[input].children[i].value.length == 0 && inputs[input].children[i].tagName != 'TEXTAREA') || (inputs[input].children[i].tagName == 'TEXTAREA' && CKEDITOR.instances['event_description'].getData().length == 0) ){
               
-                if(inputs[input].children[i].id != 'event_description' && inputs[input].children[i].id != 'event_image' && inputs[input].children[i].id != 'event_costs' && inputs[input].children[i].id != 'event_venue_url' && inputs[input].children[i].id != 'event_email' && inputs[input].children[i].id != 'event_tel_nr' && inputs[input].children[i].id != 'repeat_choice' && inputs[input].children[i].id != 'repeat_counter'){
+                if(inputs[input].children[i].id != 'event_image' && inputs[input].children[i].id != 'event_costs' && inputs[input].children[i].id != 'event_venue_url' && inputs[input].children[i].id != 'event_email' && inputs[input].children[i].id != 'event_tel_nr' && inputs[input].children[i].id != 'repeat_choice' && inputs[input].children[i].id != 'repeat_counter'){
                   alert('Achtung das Feld: ' + inputs[input].id + ' ist nicht ausgefüllt!')
                   return false;
                 }
@@ -93,7 +93,7 @@
 <p id="Titel"><%= e.text_field :title, :size => '130' %></p></p>
 
 <p><p><%= label_tag :address, 'Adresse' %></p>
-<p id="Adresse"><%= e.text_field :address, :pattern => '^[ÄÜÖäüö]?\w+\s?\d+,\s?[ÄÜÖäüö]?\w+,\s?[ÄÜÖäüö]?\w+,\s?[ÄÜÖäüö]?\w+$', :size => '130' %>Format: Street House-number, City, Province, Country</p></p>
+<p id="Adresse"><%= e.text_field :address, :pattern => '^[ÄÜÖäüö]?\w+\s?\d+,\s?[ÄÜÖäüö]?\w+,\s?[ÄÜÖäüö]?\w+$', :size => '130' %>Format: Street House-number, City, Province</p></p>
 
 <p><p><%= label_tag :region, 'Region' %></p>
 <p id="Region"><%= e.text_field :region, :size => '130' %></p></p>

@@ -65,7 +65,7 @@
     
     Event.all.each do |event|
       distance_diff = event.distance_to(marker_place[0].address)
-      if distance_diff && (distance_diff *1.6) <= 20
+      if distance_diff && (distance_diff *1.6) <= 20 # radius 20 km
         @events << event
       end
     end
