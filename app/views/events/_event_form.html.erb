@@ -203,7 +203,7 @@
 
 <p>
   <%= e.submit 'Speichern', :name => nil, :id => 'submitButton' %>
-  <%= button_tag 'Zurück', :id => 'backbutton' %>
+  <%= button_tag 'Zurück', :type => 'button', :name => nil, :onclick => 'window.location = \'http://event-corp.herokuapp.com/\''.html_safe %>
 </p>
 
 <% end %>
