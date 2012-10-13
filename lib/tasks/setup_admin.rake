@@ -4,9 +4,9 @@
   
   task :setup_admin => ['environment'] do
     admin = Admin.create! do |u|
-      u.email = 'admin@admin.com'
-      u.password = 'admin123'
-      u.password_confirmation = 'admin123'
+      u.email = 'admin@heroku.com'
+      u.password = '2dkay9pr3t'
+      u.password_confirmation = '2dkay9pr3t'
     end
     admin.save!
     puts 'Admin created!'
