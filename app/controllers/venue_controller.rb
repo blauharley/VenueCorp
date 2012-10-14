@@ -65,6 +65,11 @@
   
   def get_events_by_geocoding
     marker_place = Geocoder.search(params[:latlng])
+    if marker_place.nil?
+      redirect_to :root, :notice => 'Die Google-API kann momentan nicht benutzt werden.'
+      return
+    end
+    
     @events = []
     
     Event.all.each do |event|
