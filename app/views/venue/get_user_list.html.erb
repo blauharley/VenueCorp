@@ -1,0 +1,24 @@
+﻿<h3>Userliste</h3>
+
+<%= render 'layouts/navibar', :all_venues => @all_venues, :all_cats => @all_event_cats %>
+<%= render 'layouts/user_panel' %>
+<br/>
+<br/>
+
+<ul>
+<% for user in @users %>
+  <li><b><%= 'Username:' << user.email %></b></li>
+  <% if !user.events.empty? %>
+    <li>
+      <ul>
+        <li>Veranstaltungen:</li>
+        <% for event in user.events %>
+          <li><%= link_to event.title << ' Kat. ' << event.main_category << '/' << event.sub_category, event_path(event.id) %></li>
+        <% end %>
+      </ul>
+    </li>
+  <% else %>
+    <li>Keine Veranstaltungen</li>
+  <% end %>
+<% end %>
+</ul>

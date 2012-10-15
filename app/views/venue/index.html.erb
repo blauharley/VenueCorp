@@ -24,6 +24,7 @@
     <tr><td><%= link_to 'Umfeldsuche', search_surrounding_events_path %></td></tr>
     <tr><td><%= link_to_if current_user || current_admin, 'Verstanstaltung hinzufügen', new_event_path %></td></tr>
     <tr><td><%= link_to_if current_admin, 'User hinzufügen', new_user_registration_path %></td></tr>
+    <tr><td><%= link_to_if current_admin, 'Userliste', get_user_list_path %></td></tr>
     <tr><td><%= link_to_if !current_admin, 'Admin Login', new_admin_session_path %></tr>
     <tr><td><%= link_to_if !current_user && !current_admin, 'Login', new_user_session_path %></tr>
     

@@ -1,6 +1,6 @@
 ﻿class VenueController < ApplicationController
   
-  before_filter :get_navi_vars, :only => [:index, :get_main_cat_events, :get_sub_cat_events, :get_federal_country, :get_venue, :get_events_by_date, :get_events_by_geocoding]
+  before_filter :get_navi_vars, :only => [:index, :get_main_cat_events, :get_sub_cat_events, :get_federal_country, :get_venue, :get_events_by_date, :get_events_by_geocoding, :get_user_list]
   
   def index
     if (params[:cat] == 'federal' || params[:cat] == 'regional') && params[:highlight] == 'true'
@@ -79,6 +79,15 @@
       end
     end
     render 'index'
+  end
+  
+  def get_user_list
+    if !current_admin
+      redirect_to :root, :notice => 'Keine Berechtigung!'
+      return 
+    end
+    
+    @users = User.all
   end
   
   def contact

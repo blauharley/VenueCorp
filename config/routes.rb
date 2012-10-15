@@ -33,6 +33,7 @@ EventApp::Application.routes.draw do
     match 'sendContactMail' => :send_contact_mail, :as => 'send_contact_mail'
     match 'searchSurroundingEvents' => :search_surrounding_events, :as => 'search_surrounding_events'
     match 'locationSearch' => :get_events_by_geocoding, :as => 'get_events_by_geocoding'
+    match 'userlist' => :get_user_list, :as => 'get_user_list'
   end
   
   controller :Ajax do
