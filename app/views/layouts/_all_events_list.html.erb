@@ -33,7 +33,7 @@
               <% if event.image_content_type %>
                 <%= image_tag event.image.url(:thumb), :style => 'float:left' %>
               <% end %>
-              <p><%= event.description.html_safe %></p>
+              <p><%= raw truncate(event.description, :length => 40) %></p>
               <p><%= link_to 'Zeigen', event_path(event.id) %></td>
               <%= link_to 'Als PDF anzeigen', pdf_event_path(event.id) %>
               <%= link_to_if (current_user && event.user && current_user.id == event.user.id) || current_admin, 'Bearbeiten', edit_event_path(event.id) %>

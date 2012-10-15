@@ -5,9 +5,9 @@
   def index
     if (params[:cat] == 'federal' || params[:cat] == 'regional') && params[:highlight] == 'true'
       if params[:cat] == 'federal'
-        @events = Event.where( :federal_highlight => true ).order('start_date')
+        @events = Event.where( :federal_highlight => true ).order('start_date asc')
       elsif params[:cat] == 'regional'
-        @events = Event.where( :regional_highlight => true ).order('start_date')
+        @events = Event.where( :regional_highlight => true ).order('start_date asc')
       end
     else
       @events = Event.search(params[:search])
@@ -15,26 +15,26 @@
   end
   
   def get_main_cat_events
-    @events = Event.find(:all, :conditions => ['main_category = ?',params[:cat]], :order => "title asc")
+    @events = Event.find(:all, :conditions => ['main_category = ?',params[:cat]], :order => "start_date asc")
     @main_cat_clicked = params[:cat]
     render 'index'
   end
   
   def get_sub_cat_events
-    @events = Event.find(:all, :conditions => ['sub_category = ?',params[:cat]], :order => "title asc")
+    @events = Event.find(:all, :conditions => ['sub_category = ?',params[:cat]], :order => "start_date asc")
     @main_cat_clicked = Categories.get_main_cat_by_sub_cat params[:cat]
     @sub_cat_clicked = params[:cat]
     render 'index'
   end
   
   def get_federal_country
-    @events = Event.find(:all, :conditions => ['province = ?',params[:country]], :order => "title asc")
+    @events = Event.find(:all, :conditions => ['province = ?',params[:country]], :order => "start_date asc")
     @federal_state_clicked = params[:country]
     render 'index'
   end
   
   def get_venue
-    @events = Event.find(:all, :conditions => ['city = ?',params[:city]], :order => "title asc")
+    @events = Event.find(:all, :conditions => ['city = ?',params[:city]], :order => "start_date asc")
     @federal_state_clicked = Venues.get_federal_countries_by_vene params[:city]
     @region_clicked = params[:city]
     render 'index'

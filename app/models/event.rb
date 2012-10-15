@@ -23,9 +23,9 @@
   def self.search(value)
     if value
       hits = []
-      hits += find(:all, :conditions => ["title like ? OR city like ? OR description like ?", '%' + value + '%', '%' + value + '%', '%' + value + '%'], :order => "title asc")
+      hits += find(:all, :conditions => ["title like ? OR city like ? OR description like ?", '%' + value + '%', '%' + value + '%', '%' + value + '%'], :order => "start_date asc")
       if hits.empty?
-        hits += find(:all, :conditions => ["title like ? OR city like ? OR description like ?", '%' + value.downcase + '%', '%' + value.downcase + '%', '%' + value.downcase + '%'], :order => "title asc")
+        hits += find(:all, :conditions => ["title like ? OR city like ? OR description like ?", '%' + value.downcase + '%', '%' + value.downcase + '%', '%' + value.downcase + '%'], :order => "start_date asc")
       end
       hits
     else
