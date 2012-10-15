@@ -1,1 +1,1 @@
-EventApp::Application.config.secret_token = '85ea937eb2d6821dd9c92d40dc2ddb7dc3c5d2a7f8ae0030915591101f00b6010888b6fff16c8a29500f8a63cf6fe246a228488149b54c84b2fc10b8dddbded5'
+EventApp::Application.config.secret_token = ''
