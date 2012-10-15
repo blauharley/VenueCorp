@@ -87,7 +87,7 @@
       return 
     end
     
-    @users = User.all
+    @users = User.find(:all, :order => "email asc")
   end
   
   def contact

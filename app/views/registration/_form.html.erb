@@ -1,0 +1,23 @@
+﻿<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |u| %>
+      
+    <% if resource && resource.id %>
+    <%= u.hidden_field :id %>
+    <% end %>
+    
+    <p><%= u.label :email %><br />
+      <%= u.email_field :email %></p>
+
+    <p><%= u.label :password %><br />
+      <%= u.password_field :password %></p>
+
+    <p><%= u.label :password_confirmation %><br />
+      <%= u.password_field :password_confirmation %></p>
+    
+    <p>
+      <p><%= label_tag :userkind, 'Bundes-User:' %><%= radio_button("userkind", "right", "federal_user") %></p>
+       <p><%= label_tag :userkind, 'Regional-User:' %><%= radio_button("userkind", "right", "regional_user") %></p></p>
+    
+    <br>
+    <p><%= u.submit "OK" %></p>
+
+<% end %>

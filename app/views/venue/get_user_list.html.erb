@@ -1,4 +1,6 @@
-﻿<h3>Userliste</h3>
+﻿<%= link_to 'Home', root_path %>
+
+<h3>Userliste</h3>
 
 <%= render 'layouts/navibar', :all_venues => @all_venues, :all_cats => @all_event_cats %>
 <%= render 'layouts/user_panel' %>
@@ -7,7 +9,11 @@
 
 <ul>
 <% for user in @users %>
-  <li><b><%= 'Username:' << user.email %></b></li>
+  <li>
+    <b><%= 'Username:' << user.email %></b>
+    <%= button_to "User bearbeiten", edit_user_registration_path(user.id), :method => :get %>
+    <%= button_to "User löschen", { :controller => 'registration', :action => 'destroy', :id => user.id }, :confirm => "Wirklich löschen?", :method => :delete %>
+  </li>
   <% if !user.events.empty? %>
     <li>
       <ul>
