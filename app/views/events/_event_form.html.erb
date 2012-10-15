@@ -166,7 +166,7 @@
 <p><p><%= label_tag :costs, 'Kosten (optional)' %></p>
 <p id="Kosten"><%= e.text_field :costs, :size => '130' %></p></p>
 
-<% if admin_signed_in? && !user_signed_in? %>
+<% if admin_signed_in? || (user_signed_in? && current_user.federal_user) %>
   <p><p><%= label_tag :federal_highlight, 'Bundes-Highlight' %></p>
   <p id="Bundes-Highlight"><%= e.check_box :federal_highlight  %></p></p>
 <% end %>
