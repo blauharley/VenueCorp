@@ -2,7 +2,7 @@
 
 <h3>Userliste</h3>
 
-<%= render 'layouts/navibar', :all_venues => @all_venues, :all_cats => @all_event_cats, :federal_clicked => nil, :regional_clicked => nil %>
+<%= render 'layouts/navibar', :all_venues => @all_venues, :all_cats => @all_event_cats, :federal_clicked => @federal_state_clicked, :regional_clicked => @region_clicked, :main_cat_clicked => @main_cat_clicked, :sub_cat_clicked => @sub_cat_clicked %>
 <%= render 'layouts/user_panel' %>
 <br/>
 <br/>

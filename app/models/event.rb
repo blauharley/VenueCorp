@@ -5,7 +5,6 @@
   validates :province, :presence => true
   validates :city, :presence => true
   validates :main_category, :presence => true
-  validates :sub_category, :presence => true
   validates :venue, :presence => true
   validates :description, :presence => true
   validates :start_date, :presence => true
