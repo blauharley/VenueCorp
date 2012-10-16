@@ -9,8 +9,15 @@
   end
   
   def new
-    @event = Event.new
     check_logged_in_user
+    
+    @event = Event.new
+    
+    if request.location.city.length > 0
+      @location = request.location.city + ', ' + request.location.country
+    else
+      @location = ''
+    end
   end
   
   def create

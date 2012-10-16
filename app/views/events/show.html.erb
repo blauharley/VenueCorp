@@ -32,12 +32,11 @@
 <h5 style="margin-top:55px"><%= @event.description.html_safe %></h5>
 
 <br />
-<h5>Location</h5>
-
-<p><%= @event.province %></p>
-<p><%= @event.region %></p>
-<p><%= @event.city %></p>
+<h5>Veranstaltungsort</h5>
 <p><%= @event.venue %></p>
+
+<h5>Adresse</h5>
+
 <p><%= @event.address %></p>
 <p id="address" style="display:none"><%= raw @event.latitude.to_s << " "<< @event.longitude.to_s %></p>
 
@@ -68,7 +67,7 @@
 <p><b><%= link_to_if (current_user && @event.user && current_user.id == @event.user.id) || current_admin, 'Bearbeiten', edit_event_path(@event.id) %></b></p>
 <p><b><%= link_to_if (current_user && @event.user && current_user.id == @event.user.id) || current_admin, 'Löschen', event_path(@event.id), :method => 'delete' %></b></p>
 
-<% url = "window.open('https://www.google.com/calendar/render?action=TEMPLATE&dates=" + @event.start_date.strftime('%Y%m%d') + @event.start_date_time.strftime('T%H%M%SZ') + "/" + @event.end_date.strftime('%Y%m%d') + @event.end_date_time.strftime('T%H%M%SZ') + "&details=" + @event.description.split(/\r\n/).join + "&sprop=website:" + @event.venue_url.html_safe + "&text=" + @event.title.html_safe + "&pli=1&sf=true&output=xml', '_blank'); return false" %>
+<% url = "window.open('https://www.google.com/calendar/render?action=TEMPLATE&dates=" + @event.start_date.strftime('%Y%m%d') + @event.start_date_time.strftime('T%H%M%SZ') + "/" + @event.end_date.strftime('%Y%m%d') + @event.end_date_time.strftime('T%H%M%SZ') + "&details=" + @event.description.split(/\r\n|\"/).join + "&sprop=website:" + @event.venue_url.html_safe + "&text=" + @event.title.html_safe + "&pli=1&sf=true&output=xml', '_blank'); return false" %>
 
 <p><b><%= link_to 'Google Cal', '#', :onclick => url.html_safe %></b></p>
 <p><b><%= link_to 'ICal & Outlook', ics_event_path(@event.id) %></b></p>
