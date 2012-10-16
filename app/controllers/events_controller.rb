@@ -9,8 +9,6 @@
   end
   
   def new
-    check_logged_in_user
-    
     @event = Event.new
     
     if request.location.city.length > 0
@@ -18,6 +16,7 @@
     else
       @location = ''
     end
+    check_logged_in_user
   end
   
   def create
