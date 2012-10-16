@@ -1,6 +1,6 @@
 ﻿<%= link_to 'Home', root_path %>
 
-<h3>User bearbeiten</h3>
+<h3>User <b><%= @user.email %></b> bearbeiten <% if @user.locked %> (Gesperrt) <% end %></h3>
 
 <br />
 

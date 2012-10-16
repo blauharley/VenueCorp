@@ -12,7 +12,7 @@
   <li>
     <b><%= 'Username:' << user.email %></b>
     <%= button_to "User bearbeiten", edit_user_registration_path(user.id), :method => :get %>
-    <%= button_to "User löschen", { :controller => 'registration', :action => 'destroy', :id => user.id }, :confirm => "Wirklich löschen?", :method => :delete %>
+    <%= button_to "User löschen (Veranstaltungen werden mitgelöscht)", { :controller => 'registration', :action => 'destroy', :id => user.id }, :confirm => "Wirklich löschen?", :method => :delete %>
   </li>
   <% if !user.events.empty? %>
     <li>

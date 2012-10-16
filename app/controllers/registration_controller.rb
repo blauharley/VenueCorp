@@ -35,7 +35,7 @@
       user.regional_user = true
     end
     user.save!
-    redirect_to :root, :notice => 'User erfolgreich bearbeitet!'
+    redirect_to get_user_list_path, :notice => 'User erfolgreich bearbeitet!'
   end
   
   def destroy

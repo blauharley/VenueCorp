@@ -5,17 +5,20 @@
     <% end %>
     
     <p><%= u.label :email %><br />
-      <%= u.email_field :email %></p>
+      <%= u.email_field :email, :value => if resource then resource.email else '' end %></p>
 
-    <p><%= u.label :password %><br />
+    <p><%= u.label (if resource then 'Passwort erneut eingeben oder verändern' else 'Passwort' end) %><br />
       <%= u.password_field :password %></p>
 
-    <p><%= u.label :password_confirmation %><br />
+    <p><%= u.label (if resource then 'Passwort erneut bestätigen' else 'Passwort bestätigen' end)  %><br />
       <%= u.password_field :password_confirmation %></p>
     
     <p>
       <p><%= label_tag :userkind, 'Bundes-User:' %><%= radio_button("userkind", "right", "federal_user") %></p>
        <p><%= label_tag :userkind, 'Regional-User:' %><%= radio_button("userkind", "right", "regional_user") %></p></p>
+    
+    <p><%= u.label :locked, 'sperren' %><br />
+      <%= u.check_box :locked %></p>
     
     <br>
     <p><%= u.submit "OK" %></p>
