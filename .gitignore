@@ -15,4 +15,6 @@
 /tmp
 public/system/events
 *.pdf
-public/images/
+*.jpg
+*.png
+*.gif
