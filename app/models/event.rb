@@ -17,7 +17,11 @@
   geocoded_by :address
   after_validation :geocode
   
-  has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }
+  has_attached_file :image, 
+                    :styles => { :medium => "300x300>", :thumb => "100x100>" },
+                    :default_style => :thumb,
+                    :url => "/images/:basename.:extension",
+                    :path => ":rails_root/public/images/:basename.:extension"
   
   def self.search(value)
     if value

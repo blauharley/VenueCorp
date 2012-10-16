@@ -5,7 +5,10 @@
   
   <% for event in events %>
     
-    <% if federal_state_clicked && !region_clicked && event.federal_highlight %>
+    <% if event.sponsored %>
+      <% sponsored_events << event %>
+    
+    <% elsif federal_state_clicked && !region_clicked && event.federal_highlight %>
       <% highlight_events << event %>
     
     <% elsif region_clicked && event.regional_highlight %>
@@ -16,8 +19,6 @@
         <% highlight_events << event %>
       <% end %>
       
-    <% elsif event.sponsored %>
-      <% sponsored_events << event %>
     <% end %>
     
     <% all_events << event %>
@@ -25,39 +26,26 @@
   <% end %>
   
   <% if !highlight_events.empty? %>
-    <h3>Highlight Veranstaltungen</h3>
-    <ul class="example2">				
-      <% highlight_events.each do |e| %>
-        <li>
-          <b><%= e.title %></b>
-          <p><%= raw truncate(e.description, :length => 40) %></p>
-          <p><%= image_tag event.image.url(:thumb) %></p>
-          <p><%= link_to 'Zeigen', event_path(e.id) %></p>
-          <p><%= link_to 'Als PDF anzeigen', pdf_event_path(e.id) %></p>
-          <p><%= link_to_if (current_user && event.user && e.user && current_user.id == e.user.id) || current_admin, 'Bearbeiten', edit_event_path(e.id) %></p>
-          <p><%= link_to_if (current_user && event.user && e.user && current_user.id == e.user.id) || current_admin, 'Löschen', event_path(e.id), :method => :delete %></p></p>
-        </li>
-      <% end %>
-    </ul>
-    
-    <span class="prev">prev</span>
-    <span class="next">next</span>
+    <h3>Highlights</h3>
+    <%= render 'layouts/carousel', :events => highlight_events %>
   <% end %>
   
   <br />
   <br />
   
   <% if !sponsored_events.empty? %>
-    <div id="sponsored_events">
-      <h3>Gesponsorte Veranstaltungen</h3>
-      <%# render "layouts/carousel", :tag_id => 'carousel2', :events => sponsored_events %>
-    </div>
+    <h3>Gesponserte Veranstaltungen</h3>
+    <% sponsored_events.each do |event| %>
+      <p><%= event.title %></p>
+    <% end %>
   <% end %>
   
   <br />
   <br />
   
-  <%= render 'layouts/all_events_list', :events => all_events %>
+  <% if !all_events.empty? %>
+    <%= render 'layouts/all_events_list', :events => all_events %>
+  <% end %>
   
 </div>
 
