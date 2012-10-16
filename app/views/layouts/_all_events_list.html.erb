@@ -30,7 +30,7 @@
               <% if event.main_category && event.sub_category %>
                 <p><%= event.main_category << '/' << event.sub_category %></p>
               <% end %>
-              <% if event.image_content_type %>
+              <% if event.image.exists? %>
                 <%= image_tag event.image.url(:thumb), :style => 'float:left' %>
               <% end %>
               <p><%= raw truncate(event.description, :length => 40) %></p>

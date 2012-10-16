@@ -26,7 +26,22 @@
   
   <% if !highlight_events.empty? %>
     <h3>Highlight Veranstaltungen</h3>
-    <%= render "layouts/carousel", :tag_id => 'carousel', :events => highlight_events %>
+    <ul class="example2">				
+      <% highlight_events.each do |e| %>
+        <li>
+          <b><%= e.title %></b>
+          <p><%= raw truncate(e.description, :length => 40) %></p>
+          <p><%= image_tag event.image.url(:thumb) %></p>
+          <p><%= link_to 'Zeigen', event_path(e.id) %></p>
+          <p><%= link_to 'Als PDF anzeigen', pdf_event_path(e.id) %></p>
+          <p><%= link_to_if (current_user && event.user && current_user.id == e.user.id) || current_admin, 'Bearbeiten', edit_event_path(e.id) %></p>
+          <p><%= link_to_if (current_user && event.user && current_user.id == e.user.id) || current_admin, 'Löschen', event_path(e.id), :method => :delete %></p></p>
+        </li>
+      <% end %>
+    </ul>
+    
+    <span class="prev">prev</span>
+    <span class="next">next</span>
   <% end %>
   
   <br />
@@ -35,7 +50,7 @@
   <% if !sponsored_events.empty? %>
     <div id="sponsored_events">
       <h3>Gesponsorte Veranstaltungen</h3>
-      <%= render "layouts/carousel", :tag_id => 'carousel2', :events => sponsored_events %>
+      <%# render "layouts/carousel", :tag_id => 'carousel2', :events => sponsored_events %>
     </div>
   <% end %>
   
@@ -50,6 +65,21 @@
 
   $(document).ready(function() {
     
+    
+    $("ul.example2").simplecarousel({
+        next: $('.next'),
+        prev: $('.prev'),
+        slidespeed: 700,
+        auto: 5000,
+        width: 250,
+        height: 400,
+        fade: 400,
+        pagination: true,
+        next: $('.next'),
+        prev: $('.prev')
+    });
+
+    /*
     $('#carousel').movingBoxes({
       startPanel   : 1,      // start with this panel
       reducedSize  : 0.8,    // non-current panel size: 80% of panel size
@@ -66,7 +96,7 @@
       startPanel   : 1,      // start with this panel
       reducedSize  : 0.8,    // non-current panel size: 80% of panel size
       buildNav     : true,   // if true, navigation links will be added
-    });
+    });*/
     
     
     
@@ -99,7 +129,7 @@
     var originalDomain = "http://" + window.location.host + '/';
     if( window.location.href.length > originalDomain.length )
       $('#main_notifier').html("<%= @events.count.to_s + ' Treffer'%>");
-      
+    
   });
   
 </script>

@@ -1,4 +1,6 @@
-﻿<h3>Sende uns eine Mail</h3>
+﻿<%= link_to 'Home', root_path %>
+
+<h3>Sende uns eine Mail</h3>
 <%= form_tag send_contact_mail_path, :method => :get do %>
 
   <p><p><%= label_tag 'Betreff' %></p>
