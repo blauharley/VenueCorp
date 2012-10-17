@@ -27,7 +27,7 @@
   
   <% if !highlight_events.empty? %>
     <h3>Highlights</h3>
-    <%= render 'layouts/carousel', :events => highlight_events %>
+    <%= render 'layouts/carousel', :events => highlight_events, :classname => 'carousel' %>
   <% end %>
   
   <br />
@@ -35,9 +35,7 @@
   
   <% if !sponsored_events.empty? %>
     <h3>Gesponserte Veranstaltungen</h3>
-    <% sponsored_events.each do |event| %>
-      <p><%= event.title %></p>
-    <% end %>
+    <%= render 'layouts/carousel', :events => sponsored_events, :classname => 'carousel2' %>
   <% end %>
   
   <br />
@@ -54,7 +52,7 @@
   $(document).ready(function() {
     
     
-    $("ul.example2").simplecarousel({
+    $("ul.carousel").simplecarousel({
         next: $('.next'),
         prev: $('.prev'),
         slidespeed: 700,
@@ -66,26 +64,19 @@
         next: $('.next'),
         prev: $('.prev')
     });
-
-    /*
-    $('#carousel').movingBoxes({
-      startPanel   : 1,      // start with this panel
-      reducedSize  : 0.8,    // non-current panel size: 80% of panel size
-      buildNav     : true,   // if true, navigation links will be added
-      //navFormatter : function(index, panel){ return panel.find('h2 span').text(); } // function which gets nav text from span inside the panel header
-
-      // width and panelWidth options removed in v2.2.2, but still backwards compatible
-      // width        : 500,    // overall width of movingBoxes (not including navigation arrows)
-      // panelWidth   : 0.7,    // current panel width
-
+    
+    $("ul.carousel2").simplecarousel({
+        next: $('.next'),
+        prev: $('.prev'),
+        slidespeed: 700,
+        auto: 5000,
+        width: 250,
+        height: 400,
+        fade: 400,
+        pagination: true,
+        next: $('.next'),
+        prev: $('.prev')
     });
-    
-    $('#carousel2').movingBoxes({
-      startPanel   : 1,      // start with this panel
-      reducedSize  : 0.8,    // non-current panel size: 80% of panel size
-      buildNav     : true,   // if true, navigation links will be added
-    });*/
-    
     
     
     // tabbar

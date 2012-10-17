@@ -1,10 +1,4 @@
-﻿.example1 {
-    margin:0;
-    padding:0;
-    list-style:none;
-}
-
-li {
+﻿li {
     text-align:center;
 }
 
@@ -19,7 +13,7 @@ li span {
     cursor:pointer;
 }
 
-.example2 {
+.carousel {
     margin:0;
     padding:0;
     list-style:none;
@@ -28,7 +22,23 @@ li span {
     overflow:hidden;
 }
 
-.example2 li {
+.carousel li {
+    text-align:left;
+    display:block;
+    width:697px;
+    height:400px;
+}
+
+.carousel2 {
+    margin:0;
+    padding:0;
+    list-style:none;
+    width:697px;
+    height:400px;
+    overflow:hidden;
+}
+
+.carousel2 li {
     text-align:left;
     display:block;
     width:697px;
