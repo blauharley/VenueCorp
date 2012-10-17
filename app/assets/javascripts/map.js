@@ -100,16 +100,9 @@ window.onload = function(){
     var marker;
     
     if(document.getElementById('currentLocation').value.length){
+      console.log('currentLocation found');
       autoLocation(map,marker);
-      
-      google.maps.event.addListener(marker, 'dragend', function(event){
-        marker.setAnimation(google.maps.Animation.BOUNCE);
-        infoWindowText.innerHTML = 'Suche wird gestartet, bitte warten...';
-        infoWindow.setPosition( event.latLng );
-        infoWindow.open( map )
-        window.location = "http://" + window.location.host + "/locationSearch?latlng=" + event.latLng;
-      });
-    }
+      }
     else{
     
       var start_address = new google.maps.LatLng(48.20833, 16.373064);
@@ -130,15 +123,16 @@ window.onload = function(){
       
       map.setCenter(start_address);
       
-      google.maps.event.addListener(marker, 'dragend', function(event){
-        marker.setAnimation(google.maps.Animation.BOUNCE);
-        infoWindowText.innerHTML = 'Suche wird gestartet, bitte warten...';
-        infoWindow.setPosition( event.latLng );
-        infoWindow.open( map )
-        window.location = "http://" + window.location.host + "/locationSearch?latlng=" + event.latLng;
-      });
-      
     }
+    
+    google.maps.event.addListener(marker, 'dragend', function(event){
+      console.log('dragend event fired');
+      marker.setAnimation(google.maps.Animation.BOUNCE);
+      infoWindowText.innerHTML = 'Suche wird gestartet, bitte warten...';
+      infoWindow.setPosition( event.latLng );
+      infoWindow.open( map )
+      window.location = "http://" + window.location.host + "/locationSearch?latlng=" + event.latLng;
+    });
     
   }
   
@@ -147,19 +141,8 @@ window.onload = function(){
     
     var marker;
     
-    if(document.getElementById('currentLocation').value.length){
+    if(document.getElementById('currentLocation').value.length)
       autoLocation(map,marker);
-      
-      google.maps.event.addListener(marker, 'dragend', function(event){
-    
-        geocoder.geocode( { 'latLng': new google.maps.LatLng(event.latLng.Xa,event.latLng.Ya) }, function(results, status) {
-        
-          document.getElementById('event_address').value = results[0].formatted_address;
-        });
-        
-      });
-      
-    }
     else{
     
       var start_address = new google.maps.LatLng(48.20833, 16.373064);
@@ -179,18 +162,18 @@ window.onload = function(){
       });
       
       map.setCenter(start_address);
-      
-      google.maps.event.addListener(marker, 'dragend', function(event){
     
-        geocoder.geocode( { 'latLng': new google.maps.LatLng(event.latLng.Xa,event.latLng.Ya) }, function(results, status) {
-        
-          document.getElementById('event_address').value = results[0].formatted_address;
-        });
-        
-      });
-      
     }
     
+    google.maps.event.addListener(marker, 'dragend', function(event){
+    
+      geocoder.geocode( { 'latLng': new google.maps.LatLng(event.latLng.Xa,event.latLng.Ya) }, function(results, status) {
+      
+        document.getElementById('event_address').value = results[0].formatted_address;
+      });
+      
+    });
+  
   }
   
   
