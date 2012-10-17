@@ -99,10 +99,8 @@ window.onload = function(){
     
     var marker;
     
-    if(document.getElementById('currentLocation').value.length){
-      console.log('currentLocation found');
+    if(document.getElementById('currentLocation').value.length)
       autoLocation(map,marker,'searchMap');
-      }
     else{
     
       var start_address = new google.maps.LatLng(48.20833, 16.373064);
@@ -124,7 +122,6 @@ window.onload = function(){
       map.setCenter(start_address);
       
       google.maps.event.addListener(marker, 'dragend', function(event){
-        console.log('dragend event fired');
         marker.setAnimation(google.maps.Animation.BOUNCE);
         infoWindowText.innerHTML = 'Suche wird gestartet, bitte warten...';
         infoWindow.setPosition( event.latLng );
@@ -178,7 +175,6 @@ window.onload = function(){
     geocoder.geocode( { 'address': document.getElementById('currentLocation').value }, function(results, status) {
       
       if (status == google.maps.GeocoderStatus.OK){
-        console.log('results successfully');
         var start_address = results[0].geometry.location;
         start_address = new google.maps.LatLng(start_address.Xa, start_address.Ya)
         
@@ -203,7 +199,6 @@ window.onload = function(){
         
         if(maptype == 'searchMap'){
           google.maps.event.addListener(marker, 'dragend', function(event){
-            console.log('dragend event fired');
             marker.setAnimation(google.maps.Animation.BOUNCE);
             infoWindowText.innerHTML = 'Suche wird gestartet, bitte warten...';
             infoWindow.setPosition( event.latLng );
