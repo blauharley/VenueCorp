@@ -100,7 +100,7 @@ window.onload = function(){
     var marker;
     
     if(document.getElementById('currentLocation').value.length)
-      autoLocation(map,marker,'searchMap');
+      autoLocation(map,marker,document.getElementById('currentLocation').value,'searchMap');
     else{
     
       var start_address = new google.maps.LatLng(48.20833, 16.373064);
@@ -138,8 +138,12 @@ window.onload = function(){
     
     var marker;
     
-    if(document.getElementById('currentLocation').value.length)
-      autoLocation(map,marker,'addressMap');
+    if(document.getElementById('currentLocation').value.length || document.getElementById('event_address').value.length){
+      if(document.getElementById('currentLocation').value.length)
+        autoLocation(map,marker,document.getElementById('currentLocation').value,'searchMap');
+      else
+        autoLocation(map,marker,document.getElementById('event_address').value,'searchMap');
+    }
     else{
     
       var start_address = new google.maps.LatLng(48.20833, 16.373064);
@@ -170,9 +174,9 @@ window.onload = function(){
   }
   
   
-  function autoLocation(map,marker,maptype){
+  function autoLocation(map,marker,address,maptype){
       
-    geocoder.geocode( { 'address': document.getElementById('currentLocation').value }, function(results, status) {
+    geocoder.geocode( { 'address': address }, function(results, status) {
       
       if (status == google.maps.GeocoderStatus.OK){
         var start_address = results[0].geometry.location;
