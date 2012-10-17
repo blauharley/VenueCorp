@@ -165,8 +165,13 @@
 <p><p><%= label_tag :end_date_time, 'Ende-Tageszeit' %></p>
 <p id="Ende-Tageszeit"><%= e.text_field :end_date_time, :size => '130', :pattern => '^\d{2}:\d{2}:\d{2}$', :value => if @event.end_date_time != nil then @event.end_date_time.strftime('%H:%M:%S') else '' end  %> Format: HH:MM:SS</p></p>
 
-<p><p><%= label_tag :image, 'Bild (optional)' %></p>
-<p id="Bild"><%= e.file_field :image %></p></p>
+<!-- paperclip foto, deactivated because of heroku 
+<p><p><%# label_tag :image, 'Bild (optional)' %></p>
+<p id="Bild"><%# e.file_field :image %></p></p>
+-->
+
+<p><p><%= label_tag :image_url, 'Bild-Url (optional)' %></p>
+<p id="Bild"><%= e.text_field :image_url, :size => '130' %></p></p>
 
 <p><p><%= label_tag :costs, 'Kosten (optional)' %></p>
 <p id="Kosten"><%= e.text_field :costs, :size => '130' %></p></p>
