@@ -27,7 +27,9 @@
               <p>
                 <%= render 'layouts/formatted_dates', :event => event, :max_num => 3 %>
               </p>
-              <% if event.main_category && event.sub_category %>
+              <% if carousel_activated %>
+                <p><%= event.main_category %></p>
+              <% else %>
                 <p><%= event.main_category << '/' << event.sub_category %></p>
               <% end %>
               <!--<p><%# image_tag event.image.url(:thumb) %></p>-->

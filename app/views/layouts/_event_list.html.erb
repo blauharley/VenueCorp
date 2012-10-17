@@ -42,7 +42,7 @@
   <br />
   
   <% if !all_events.empty? %>
-    <%= render 'layouts/all_events_list', :events => all_events %>
+    <%= render 'layouts/all_events_list', :events => all_events, :carousel_activated => if !highlight_events.empty? || !sponsored_events.empty? then true else false end %>
   <% end %>
   
 </div>
