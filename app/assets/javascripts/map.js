@@ -125,14 +125,7 @@ window.onload = function(){
       
     }
     
-    google.maps.event.addListener(marker, 'dragend', function(event){
-      console.log('dragend event fired');
-      marker.setAnimation(google.maps.Animation.BOUNCE);
-      infoWindowText.innerHTML = 'Suche wird gestartet, bitte warten...';
-      infoWindow.setPosition( event.latLng );
-      infoWindow.open( map )
-      window.location = "http://" + window.location.host + "/locationSearch?latlng=" + event.latLng;
-    });
+    
     
   }
   
@@ -182,6 +175,7 @@ window.onload = function(){
     geocoder.geocode( { 'address': document.getElementById('currentLocation').value }, function(results, status) {
       
       if (status == google.maps.GeocoderStatus.OK){
+        console.log('results successfully');
         var start_address = results[0].geometry.location;
         start_address = new google.maps.LatLng(start_address.Xa, start_address.Ya)
         
@@ -204,6 +198,14 @@ window.onload = function(){
         });
         map.setCenter(start_address);
         
+        google.maps.event.addListener(marker, 'dragend', function(event){
+          console.log('dragend event fired');
+          marker.setAnimation(google.maps.Animation.BOUNCE);
+          infoWindowText.innerHTML = 'Suche wird gestartet, bitte warten...';
+          infoWindow.setPosition( event.latLng );
+          infoWindow.open( map )
+          window.location = "http://" + window.location.host + "/locationSearch?latlng=" + event.latLng;
+        });
       }
       
     });
