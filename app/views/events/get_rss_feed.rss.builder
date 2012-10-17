@@ -11,7 +11,7 @@ xml.rss :version => "2.0", "xmlns:xsi" => "http://www.w3.org/2001/XMLSchema-inst
         xml.id event.id
         xml.title event.title
         xml.description event.description
-        
+        xml.link ('http://event-corp.herokuapp.com' << event_path(event.id))
       end
     end
   end

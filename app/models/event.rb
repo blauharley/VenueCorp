@@ -3,7 +3,6 @@
   validates :title, :presence => true
   validates :region, :presence => true
   validates :province, :presence => true
-  validates :city, :presence => true
   validates :main_category, :presence => true
   validates :venue, :presence => true
   validates :description, :presence => true

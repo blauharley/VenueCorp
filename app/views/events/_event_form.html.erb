@@ -60,9 +60,9 @@
             
             if(inputs[input].children[i].name && inputs[input].children[i].name.search(/event/) == 0){
               
-              if( (inputs[input].children[i].value.length == 0 && inputs[input].children[i].tagName != 'TEXTAREA' && document.getElementById('event_sub_category').children.length > 1) || (inputs[input].children[i].tagName == 'TEXTAREA' && CKEDITOR.instances['event_description'].getData().length == 0) ){
+              if( (inputs[input].children[i].value.length == 0 && inputs[input].children[i].tagName != 'TEXTAREA') || (inputs[input].children[i].tagName == 'TEXTAREA' && CKEDITOR.instances['event_description'].getData().length == 0) ){
               
-                if(inputs[input].children[i].id != 'event_image' && inputs[input].children[i].id != 'event_costs' && inputs[input].children[i].id != 'event_venue_url' && inputs[input].children[i].id != 'event_email' && inputs[input].children[i].id != 'event_tel_nr' && inputs[input].children[i].id != 'repeat_choice' && inputs[input].children[i].id != 'repeat_counter'){
+                if(inputs[input].children[i].id != 'event_sub_category' && inputs[input].children[i].id != 'event_city' && inputs[input].children[i].id != 'event_image_url' && inputs[input].children[i].id != 'event_image' && inputs[input].children[i].id != 'event_costs' && inputs[input].children[i].id != 'event_venue_url' && inputs[input].children[i].id != 'event_email' && inputs[input].children[i].id != 'event_tel_nr' && inputs[input].children[i].id != 'repeat_choice' && inputs[input].children[i].id != 'repeat_counter'){
                   alert('Achtung das Feld: ' + inputs[input].id + ' ist nicht ausgefüllt!')
                   return false;
                 }
