@@ -11,7 +11,7 @@
 <div style="margin-top:70px; width:300px">
   <!-- paperclip image, deactivated because of heroku 
   <p><%# image_tag @event.image.url(:medium), :style => 'width:300px; height:300px' %></p>-->
-  <% if @event.image_url.length %>
+  <% if @event.image_url && @event.image_url.length %>
     <p><img src="<%= @event.image_url %>" width="300" height="300" /></p>
   <% end %>
   <div id="event_map" style="width:300px; height:300px; margin-right:50px;"></div>
