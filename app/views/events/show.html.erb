@@ -23,13 +23,10 @@
 
 <h7 style="font-size:10px; float:right">
   
-  <% if @event.repeat_dates == 'never' %>
-    <%= @event.start_date %>-<%= @event.end_date %>
-  <% else %>
-    <p>Nächste Daten:
-    <%= render 'layouts/formatted_dates', :event => @event, :max_num => 5 %>
-    </p>
-  <% end %>
+<p>
+  <b>Nächstes Datum:</b>
+  <%= render 'layouts/formatted_dates', :event => @event, :max_num => 5 %>
+</p>
   
 </h7>
 

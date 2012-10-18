@@ -25,27 +25,27 @@
     
   <% end %>
   
-  <% if !highlight_events.empty? %>
-    <h3>Highlights</h3>
-    <%= render 'layouts/carousel', :events => highlight_events, :classname => 'carousel' %>
-  <% end %>
-  
-  <br />
-  <br />
-  
-  <% if !sponsored_events.empty? %>
-    <h3>Gesponserte Veranstaltungen</h3>
-    <%= render 'layouts/carousel', :events => sponsored_events, :classname => 'carousel2' %>
-  <% end %>
-  
-  <br />
-  <br />
-  
-  <% if !all_events.empty? %>
-    <%= render 'layouts/all_events_list', :events => all_events, :carousel_activated => if !highlight_events.empty? || !sponsored_events.empty? then true else false end %>
-  <% end %>
+  <div>
+    <% if !highlight_events.empty? %>
+      <h3>Highlights</h3>
+      <%= render 'layouts/carousel', :events => highlight_events, :classname => 'carousel' %>
+    <% end %>
+    
+    <br />
+    <br />
+    
+    <% if !sponsored_events.empty? %>
+      <h3>Gesponserte Veranstaltungen</h3>
+      <%= render 'layouts/carousel', :events => sponsored_events, :classname => 'carousel2' %>
+    <% end %>
+  </div>
   
 </div>
+
+<% if !all_events.empty? %>
+  <%= render 'layouts/all_events_list', :events => all_events, :carousel_activated => if !highlight_events.empty? || !sponsored_events.empty? then true else false end %>
+<% end %>
+
 
 <script type="text/javascript">
 

@@ -1,6 +1,5 @@
 ﻿ 
 <p><%= link_to 'Home', root_path %></p>
-<p><%# render 'layouts/user_login_form' %></p>
 
 <h1>Veranstaltungen</h1>
 
@@ -8,9 +7,8 @@
 
 <%= render 'layouts/user_panel' %>
 
-<div style="margin-top:70px; width:500px; float:left">
+<div style="margin-top:70px; width:500px">
   <%= render 'layouts/event_list', :events => @events, :federal_state_clicked => @federal_state_clicked, :region_clicked => @region_clicked %>
-  <p><%= link_to 'Alle als PDF ansehen', pdf_events_path( get_event_ids(@events) ) %></p>
 <div>
 
 <div style="position:absolute; top:80%; left:850px; width:300px">
@@ -34,3 +32,4 @@
   </table>
   
 </div>
+<p><%= link_to 'Alle als PDF ansehen', pdf_events_path( get_event_ids(@events) ) %></p>

@@ -2,36 +2,36 @@
 <% old_event = true %>
 
 <% if event.start_date && event.start_date >= Date.today %>
-    <b style="float:right; margin-right:10px"><%= event.start_date.to_s << ' '<< event.start_date_time.strftime('%H:%M:%S') %></b>
+    <b style=""><%= event.start_date.to_s << ' '<< event.start_date_time.strftime('%H:%M:%S') %></b>
     <% old_event = false %>
-<% else %>
+<% end %>
 
-  <% if event.repeat_dates != 'nie' %>
+<% if event.repeat_dates && event.repeat_dates.length != 0 %>
     
-    <% num = 0 %>
+  <% num = 0 %>
+  <p><b>
     <% event.repeat_dates.split(' ').each do |date| %>
       
-      <% if date >= Date.today.to_s %>
-        <% if num == 0 %>
-          <b style="float:right; margin-right:10px">
-        <% end %>
+      
+        <% if date >= Date.today.to_s %>
         
-        <% num += 1 %>
-        <% old_event = false %>
-        
-        <% if (num + 1) != max_num || date != event.repeat_dates.split(' ').last %>
+          <% if num == 0 %>
+            folgende Daten:
+          <% end %>
+          
+          <% num += 1 %>
+          <% old_event = false %>
+          
           <%= date.to_s + '/' %>
-        <% else %>
-          <%= date.to_s + ' ab' %>
+          
+          <% if num == max_num %>
+            <% break %>
+          <% end %>
+          
         <% end %>
-        
-        <% if num < max_num || date != event.repeat_dates.split(' ').last %>
-          <%= event.start_date_time.strftime('%H:%M:%S') %></b>
-          <% break %>
-        <% end %>
-      <% end %>
     <% end %>
-  <% end %>
+  </b></p>
+  
 <% end %>
 
 <% if old_event %>

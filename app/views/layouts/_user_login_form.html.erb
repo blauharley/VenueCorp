@@ -1,9 +1,0 @@
-﻿<% if !user_signed_in? %>
-  <div id="signup_form">
-     <%= form_for("user", :url => user_session_path) do |f| %>
-       <%= f.submit 'Sign in', :class =>"float_right" %><br />
-       <%= f.text_field :email, :placeholder => "e-mail" %><br />
-       <%= f.password_field :password, :placeholder => "password" %><br />
-     <% end %>
-  </div>
-<% end %>
