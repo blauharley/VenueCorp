@@ -140,9 +140,9 @@ window.onload = function(){
     
     if(document.getElementById('currentLocation').value.length || document.getElementById('event_address').value.length){
       if(document.getElementById('currentLocation').value.length)
-        autoLocation(map,marker,document.getElementById('currentLocation').value,'searchMap');
+        autoLocation(map,marker,document.getElementById('currentLocation').value,'addressMap');
       else
-        autoLocation(map,marker,document.getElementById('event_address').value,'searchMap');
+        autoLocation(map,marker,document.getElementById('event_address').value,'addressMap');
     }
     else{
     
