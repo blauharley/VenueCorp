@@ -27,7 +27,7 @@
     if event.save
       redirect_to :root, :notice => 'Veranstaltung erfolgreich hinzugefügt'
     else
-      redirect_to :back, :notice => 'Veranstaltung konnte nicht angelegt werden'
+      render 'new'
     end
   end
   
@@ -44,7 +44,7 @@
     if event.save
       redirect_to :root, :notice => 'Veranstaltung erfolgreich bearbeitet.'
     else
-      redirect_to :back, :notice => 'Veranstaltung konnte nicht bearbeitet werden.'
+      render 'edit'
     end
   end
   
