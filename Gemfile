@@ -48,6 +48,7 @@ end
 
 group :development do
   gem 'sqlite3'
+  gem 'mongrel', '1.2.0.pre2'
 end
 
 group :production do
