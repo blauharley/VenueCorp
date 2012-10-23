@@ -27,7 +27,7 @@
     if event.save
       redirect_to :root, :notice => 'Veranstaltung erfolgreich hinzugefügt'
     else
-      redirect_to :root, :notice => 'Veranstaltung konnte nicht angelegt werden'
+      redirect_to :back, :notice => 'Veranstaltung konnte nicht angelegt werden'
     end
   end
   
@@ -44,7 +44,7 @@
     if event.save
       redirect_to :root, :notice => 'Veranstaltung erfolgreich bearbeitet.'
     else
-      redirect_to :root, :notice => 'Veranstaltung konnte nicht bearbeitet werden.'
+      redirect_to :back, :notice => 'Veranstaltung konnte nicht bearbeitet werden.'
     end
   end
   
@@ -233,7 +233,7 @@
       end
     end
     
-    if current_user
+    if current_user && event.user.nil?
       event.user = current_user
     end
     

@@ -5,7 +5,7 @@
         
         <% if (num % 10) == 0 %>
           <li>
-          <h2><%= num %></h2>
+          <h2><%= ('ab ' << num.to_s << ' bis ' << (num+9).to_s) %></h2>
           <div style="overflow-y:auto">
         <% end %>
         
@@ -25,11 +25,11 @@
                 <% if event.image_url && event.image_url.length %>
                   <p><img src="<%= event.image_url %>" width="300" height="300" /></p>
                 <% end %>
-                <p><%= raw truncate(event.description, :length => 40) %></p>
+                <p><%= raw truncate(event.description, :length => 300) %></p>
                 <p><%= link_to 'Zeigen', event_path(event.id) %></td>
                 <%= link_to 'Als PDF anzeigen', pdf_event_path(event.id) %>
-                <%= link_to_if (current_user && event.user && current_user.id == event.user.id) || current_admin, 'Bearbeiten', edit_event_path(event.id) %>
-                <%= link_to_if (current_user && event.user && current_user.id == event.user.id) || current_admin, 'Löschen', event_path(event.id), :method => :delete %></p>
+                <%= link_to_if (current_user && event.user && current_user.id == event.user.id) || (current_user && current_user.federal_user && event.user && event.user.regional_user) || current_admin, 'Bearbeiten', edit_event_path(event.id) %>
+                <%= link_to_if (current_user && event.user && current_user.id == event.user.id) || (current_user && current_user.federal_user && event.user && event.user.regional_user) || current_admin, 'Löschen', event_path(event.id), :method => :delete %></p>
               </div>
             </p>
         

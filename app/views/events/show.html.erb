@@ -42,27 +42,31 @@
 <p id="address" style="display:none"><%= raw @event.latitude.to_s << " "<< @event.longitude.to_s %></p>
 
 <h5>Kosten</h5>
-<p><%= @event.costs %></p>
+<% if @event.venue_url.length > 0 %>
+  <p><%= @event.costs %></p>
+<% else %>
+  <p>Keine Kosten angegeben</p>
+<% end %>
 
 <h5>Website</h5>
 <% if @event.venue_url.length > 0 %>
-  <p><%= @event.venue_url %></p>
+  <p><%= link_to 'Zur Webseite', (if @event.venue_url.index('http://') == 0 then @event.venue_url else ('http://' << @event.venue_url) end) %></p>
 <% else %>
-  <p>Keine Website</p>
+  <p>Keine Webseite angegeben</p>
 <% end %>
 
 <h5>E-Mail</h5>
 <% if @event.email.length > 0 %>
   <p><%= @event.email %></p>
 <% else %>
-  <p>Keine E-Mail Adresse</p>
+  <p>Keine E-Mail Adresse angegeben</p>
 <% end %>
 
 <h5>Tel. Nr.</h5>
 <% if @event.tel_nr.length > 0 %>
   <p><%= @event.tel_nr %></p>
 <% else %>
-  <p>Keine Tel. Nr.</p>
+  <p>Keine Tel. Nr. angegeben</p>
 <% end %>
 
 <p><b><%= link_to_if (current_user && @event.user && current_user.id == @event.user.id) || current_admin, 'Bearbeiten', edit_event_path(@event.id) %></b></p>

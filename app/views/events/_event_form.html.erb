@@ -86,6 +86,8 @@
 
 <%= form_for(@event, :html => { :multipart => true }) do  |e| %>
 
+<h3 style="color:red"><%= @event.errors.full_messages.to_sentence %></h3>
+
 <p><p><%= label_tag :title, 'Titel' %></p>
 <p id="Titel"><%= e.text_field :title, :size => '130' %></p></p>
 
