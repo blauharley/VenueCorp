@@ -26,11 +26,11 @@
   <% end %>
   
   <% if !highlight_events.empty? %>
-    <%= render 'layouts/carousel', :events => highlight_events, :title => 'Top Veranstaltungen', :classname => 'car_high', :classname_carousel => 'carousel' %>
+    <%= render 'layouts/carousel', :events => highlight_events, :title => 'Top Veranstaltungen', :classname => 'car_high', :classname_carousel => 'carousel', :classname_next_button => 'carousel_next', :classname_prev_button => 'carousel_prev' %>
   <% end %>
   
   <% if !sponsored_events.empty? %>
-    <%= render 'layouts/carousel', :events => sponsored_events, :title => 'Empfohlene Veranstaltungen', :classname => 'car_sponsor', :classname_carousel => 'carousel2' %>
+    <%= render 'layouts/carousel', :events => sponsored_events, :title => 'Empfohlene Veranstaltungen', :classname => 'car_sponsor', :classname_carousel => 'carousel2', :classname_next_button => 'carousel2_next', :classname_prev_button => 'carousel2_prev' %>
   <% end %>
  
 </div>
@@ -72,29 +72,25 @@
   $(document).ready(function() {
     
     $("ul.carousel").simplecarousel({
-        next: $('.next'),
-        prev: $('.prev'),
         slidespeed: 700,
         auto: 5000,
         fade: 400,
         height: '240px',
         width: '680px',
         pagination: true,
-        next: $('.next'),
-        prev: $('.prev')
+        next: $('.carousel_next'),
+        prev: $('.carousel_prev')
     });
     
     $("ul.carousel2").simplecarousel({
-        next: $('.next'),
-        prev: $('.prev'),
         slidespeed: 700,
         auto: 5000,
         fade: 400,
         height: '240px',
         width: '680px',
         pagination: true,
-        next: $('.next'),
-        prev: $('.prev')
+        next: $('.carousel2_next'),
+        prev: $('.carousel2_prev')
     });
     
     //$("#section-divider").liteAccordion();
