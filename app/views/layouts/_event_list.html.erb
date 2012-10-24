@@ -25,21 +25,14 @@
     
   <% end %>
   
-  <div>
-    <% if !highlight_events.empty? %>
-      <h3>Highlights</h3>
-      <%= render 'layouts/carousel', :events => highlight_events, :title => 'Top Veranstaltungen', :classname => 'car_high' %>
-    <% end %>
-    
-    <br />
-    <br />
-    
-    <% if !sponsored_events.empty? %>
-      <h3>Gesponserte Veranstaltungen</h3>
-      <%= render 'layouts/carousel', :events => sponsored_events, :title => 'Empfohlene Veranstaltungen', :classname => 'carousel2' %>
-    <% end %>
-  </div>
+  <% if !highlight_events.empty? %>
+    <%= render 'layouts/carousel', :events => highlight_events, :title => 'Top Veranstaltungen', :classname => 'car_high' %>
+  <% end %>
   
+  <% if !sponsored_events.empty? %>
+    <%= render 'layouts/carousel', :events => sponsored_events, :title => 'Empfohlene Veranstaltungen', :classname => 'carousel2' %>
+  <% end %>
+ 
 </div>
 
 <% if !all_events.empty? %>
@@ -83,8 +76,6 @@
         prev: $('.prev'),
         slidespeed: 700,
         auto: 5000,
-        width: 250,
-        height: 400,
         fade: 400,
         pagination: true,
         next: $('.next'),
@@ -96,8 +87,6 @@
         prev: $('.prev'),
         slidespeed: 700,
         auto: 5000,
-        width: 250,
-        height: 400,
         fade: 400,
         pagination: true,
         next: $('.next'),

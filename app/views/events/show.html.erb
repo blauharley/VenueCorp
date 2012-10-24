@@ -69,8 +69,10 @@
   <p>Keine Tel. Nr. angegeben</p>
 <% end %>
 
-<p><b><%= link_to_if (current_user && @event.user && current_user.id == @event.user.id) || current_admin, 'Bearbeiten', edit_event_path(@event.id) %></b></p>
-<p><b><%= link_to_if (current_user && @event.user && current_user.id == @event.user.id) || current_admin, 'Löschen', event_path(@event.id), :method => 'delete' %></b></p>
+<% if (current_user && @event.user && current_user.id == @event.user.id) || current_admin %>
+  <%= link_to 'Bearbeiten', edit_event_path(@event.id) %></b></p>
+  <%= link_to 'Löschen', event_path(@event.id), :method => 'delete' %>
+<% end %>
 
 <% url = "window.open('https://www.google.com/calendar/render?action=TEMPLATE&dates=" + @event.start_date.strftime('%Y%m%d') + @event.start_date_time.strftime('T%H%M%SZ') + "/" + @event.end_date.strftime('%Y%m%d') + @event.end_date_time.strftime('T%H%M%SZ') + "&details=" + @event.description.split(/\r\n|\"/).join + "&sprop=website:" + @event.venue_url.html_safe + "&text=" + @event.title.html_safe + "&pli=1&sf=true&output=xml', '_blank'); return false" %>
 
