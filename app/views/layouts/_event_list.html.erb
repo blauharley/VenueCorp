@@ -11,7 +11,7 @@
     <% elsif federal_state_clicked && !region_clicked && event.federal_highlight %>
       <% highlight_events << event %>
     
-    <% elsif region_clicked && event.regional_highlight %>
+    <% elsif region_clicked && !federal_state_clicked && event.regional_highlight %>
       <% highlight_events << event %>
     
     <% elsif !federal_state_clicked && !region_clicked %>
@@ -74,9 +74,9 @@
     $("ul.carousel").simplecarousel({
         slidespeed: 700,
         auto: 5000,
+        width: 250,
+        height: 400,
         fade: 400,
-        height: '240px',
-        width: '680px',
         pagination: true,
         next: $('.carousel_next'),
         prev: $('.carousel_prev')
@@ -85,9 +85,9 @@
     $("ul.carousel2").simplecarousel({
         slidespeed: 700,
         auto: 5000,
+        width: 250,
+        height: 400,
         fade: 400,
-        height: '240px',
-        width: '680px',
         pagination: true,
         next: $('.carousel2_next'),
         prev: $('.carousel2_prev')

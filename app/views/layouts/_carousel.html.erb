@@ -16,10 +16,11 @@
         <p><%= link_to 'Weiterlesen', event_path(event.id) %></p>
         <div class="ch_act"><p><%= link_to 'Als PDF anzeigen', pdf_event_path(event.id) %>
         
-        <% if (current_user && event.user && current_user.id == event.user.id) || (current_user && current_user.federal_user && event.user && event.user.regional_user) || current_admin %>
-          <%= link_to 'Bearbeiten', edit_event_path(event.id) %>
-          <%= link_to 'Löschen', event_path(event.id), :method => :delete %></p>
-        <% end %>
+          <% if (current_user && event.user && current_user.id == event.user.id) || (current_user && current_user.federal_user && event.user && event.user.regional_user) || current_admin %>
+            <%= link_to 'Bearbeiten', edit_event_path(event.id) %>
+            <%= link_to 'Löschen', event_path(event.id), :method => :delete %></p>
+          <% end %>
+        </div>
       </li>
     <% end %>
   </ul>
