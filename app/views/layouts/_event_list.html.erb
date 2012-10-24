@@ -26,11 +26,11 @@
   <% end %>
   
   <% if !highlight_events.empty? %>
-    <%= render 'layouts/carousel', :events => highlight_events, :title => 'Top Veranstaltungen', :classname => 'car_high' %>
+    <%= render 'layouts/carousel', :events => highlight_events, :title => 'Top Veranstaltungen', :classname => 'car_high', :classname_carousel => 'carousel' %>
   <% end %>
   
   <% if !sponsored_events.empty? %>
-    <%= render 'layouts/carousel', :events => sponsored_events, :title => 'Empfohlene Veranstaltungen', :classname => 'carousel2' %>
+    <%= render 'layouts/carousel', :events => sponsored_events, :title => 'Empfohlene Veranstaltungen', :classname => 'car_sponsor', :classname_carousel => 'carousel2' %>
   <% end %>
  
 </div>
@@ -46,7 +46,7 @@
             <div class="event_h"><%= event.title %><span class="feat_date"><%= event.start_date %></span></div>
                                 
             <% if event.image_url && event.image_url.length %>
-              <img src="<%= event.image_url %>" width="270px" height="180px" />
+              <img src="<%= event.image_url %>" width="180px" height="120px" />
             <% end %>
             <h6><%= event.main_category %> - <%= event.sub_category %></h6>
             <p><%= raw truncate(event.description, :length => 230) %></p>
@@ -77,6 +77,8 @@
         slidespeed: 700,
         auto: 5000,
         fade: 400,
+        height: '240px',
+        width: '680px',
         pagination: true,
         next: $('.next'),
         prev: $('.prev')
@@ -88,6 +90,8 @@
         slidespeed: 700,
         auto: 5000,
         fade: 400,
+        height: '240px',
+        width: '680px',
         pagination: true,
         next: $('.next'),
         prev: $('.prev')

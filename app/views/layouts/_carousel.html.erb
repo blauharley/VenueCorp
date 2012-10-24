@@ -2,7 +2,7 @@
 <div id="<%= classname %>">
   <h2><%= title %></h2>
   
-  <ul class="carousel">				
+  <ul class="<%= classname_carousel %>">				
     <% events.each do |event| %>
       <li>
         <% if event.image_url && event.image_url.length %>
@@ -14,7 +14,7 @@
         <h6><%= event.main_category %> - <%= event.sub_category %></h6>
    			<p><%= raw truncate(event.description, :length => 230) %></p>
         <p><%= link_to 'Weiterlesen', event_path(event.id) %></p>
-        <div class="ch_act"><p><%= link_to 'Als PDF anzeigen', pdf_event_path(event.id) %></p>
+        <div class="ch_act"><p><%= link_to 'Als PDF anzeigen', pdf_event_path(event.id) %>
         
         <% if (current_user && event.user && current_user.id == event.user.id) || (current_user && current_user.federal_user && event.user && event.user.regional_user) || current_admin %>
           <%= link_to 'Bearbeiten', edit_event_path(event.id) %>
