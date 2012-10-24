@@ -28,7 +28,7 @@
   <div>
     <% if !highlight_events.empty? %>
       <h3>Highlights</h3>
-      <%= render 'layouts/carousel', :events => highlight_events, :classname => 'carousel' %>
+      <%= render 'layouts/carousel', :events => highlight_events, :title => 'Top Veranstaltungen', :classname => 'car_high' %>
     <% end %>
     
     <br />
@@ -36,14 +36,41 @@
     
     <% if !sponsored_events.empty? %>
       <h3>Gesponserte Veranstaltungen</h3>
-      <%= render 'layouts/carousel', :events => sponsored_events, :classname => 'carousel2' %>
+      <%= render 'layouts/carousel', :events => sponsored_events, :title => 'Empfohlene Veranstaltungen', :classname => 'carousel2' %>
     <% end %>
   </div>
   
 </div>
 
 <% if !all_events.empty? %>
-  <%= render 'layouts/all_events_list', :events => all_events, :carousel_activated => if !highlight_events.empty? || !sponsored_events.empty? then true else false end %>
+
+    <div id="section-divider">
+      
+      <ul class="eventlistener">
+        <% all_events.each do |event| %>
+        
+          <li class="event">
+            <div class="event_h"><%= event.title %><span class="feat_date"><%= event.start_date %></span></div>
+                                
+            <% if event.image_url && event.image_url.length %>
+              <img src="<%= event.image_url %>" width="270px" height="180px" />
+            <% end %>
+            <h6><%= event.main_category %> - <%= event.sub_category %></h6>
+            <p><%= raw truncate(event.description, :length => 230) %></p>
+            <p><%= link_to 'Weiterlesen', event_path(event.id) %></p>
+            <div class="ch_act"><p><%= link_to 'Als PDF anzeigen', pdf_event_path(event.id) %></p>
+            
+            <% if (current_user && event.user && current_user.id == event.user.id) || (current_user && current_user.federal_user && event.user && event.user.regional_user) || current_admin %>
+              <%= link_to 'Bearbeiten', edit_event_path(event.id) %>
+              <%= link_to 'Löschen', event_path(event.id), :method => :delete %></p>
+            <% end %>
+          </li>
+          
+        <% end %>
+      </ul>
+    </div>
+
+  <%# render 'layouts/all_events_list', :events => all_events, :carousel_activated => if !highlight_events.empty? || !sponsored_events.empty? then true else false end %>
 <% end %>
 
 
@@ -77,7 +104,7 @@
         prev: $('.prev')
     });
     
-    $("#section-divider").liteAccordion();
+    //$("#section-divider").liteAccordion();
     
     // show hits altogether
     var originalDomain = "http://" + window.location.host + '/';
@@ -88,3 +115,4 @@
   
 </script>
 
+</div>

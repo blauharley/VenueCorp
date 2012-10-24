@@ -1,49 +1,32 @@
-﻿li {
-    text-align:center;
-}
+﻿#car_high,#car_sponsor	{width:100%;margin:30px 0 0 0;}
+
 
 li span {
     display:block;
     margin:5px;
-    background:red;
 }
 
 .next,
 .prev {
     cursor:pointer;
 }
-
-.carousel {
-    margin:0;
+.ch_h	{font-size:1.4em;font-weight:bold;}
+.ch_act	a{padding:0 5px 0 0;}
+.feat_date	{float:right; text-align:right;}
+.carousel, .carousel2 {
+    margin:0 0 20px 0;
     padding:0;
     list-style:none;
-    width:697px;
-    height:400px;
+    width:100%;
     overflow:hidden;
 }
-
-.carousel li {
+.carousel img,.carousel2 img {height:180px; width:; float:left;padding-right:15px;}
+.carousel li, carousel2 li {
     text-align:left;
     display:block;
-    width:697px;
-    height:400px;
 }
+.carousel li p,.carousel2 li p	{padding:0 0 1em 0;}
 
-.carousel2 {
-    margin:0;
-    padding:0;
-    list-style:none;
-    width:697px;
-    height:400px;
-    overflow:hidden;
-}
-
-.carousel2 li {
-    text-align:left;
-    display:block;
-    width:697px;
-    height:400px;
-}
 
 .carousel-pagination li {
     display:block;

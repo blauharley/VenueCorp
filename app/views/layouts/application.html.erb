@@ -25,11 +25,14 @@
 </head>
 <body>
 
-<div id="main_notifier"><p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p></div>
+<div id="main">
 
-<%= yield %>
+  <div id="main_notifier"><p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p></div>
 
+  <%= yield %>
+
+</div>
 </body>
 <script type="text/javascript">
 

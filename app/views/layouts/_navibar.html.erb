@@ -1,46 +1,105 @@
-﻿<div style="padding:20px 40px; height:30px; width:750px; border:1px solid grey">
+﻿
+<div id="leftcol">
 
-<ul class="menu" id="menu">
-	
-  <!-- federal and regional categories -->
-  
-      <% if federal_clicked || regional_clicked %>
-        
-        <% if regional_clicked %>
-          <li><a href="#" class="menulink"><%= regional_clicked %></a>
-            <ul>
-            
-        <% else %>
-          
-          <li><a href="#" class="menulink"><%= federal_clicked %></a>
-            <ul>
-            
-              <% all_venues[federal_clicked].each do |venues| %>
-                <li><%= link_to (venues[:name].to_s + '(' + venues[:number].to_s + ')'), get_venue_path(venues[:name]) %></li>
-              <% end %>
-              
-        <% end %>
-      <% else %>
+<div id="nav_search">
+
+    <ul class="menu" id="menu">
       
-        <li><a href="#" class="menulink">Bundesland/Ort</a>
-            <ul>
+      <!-- federal and regional categories -->
+      
+          <% if federal_clicked || regional_clicked %>
             
-              <% all_venues.each do |fed_name,venues| %>
+            <% if regional_clicked %>
+              <li><a href="#" class="menulink"><%= regional_clicked %></a>
+                <ul>
+                
+            <% else %>
+              
+              <li><a href="#" class="menulink"><%= federal_clicked %></a>
+                <ul>
+                
+                  <% all_venues[federal_clicked].each do |venues| %>
+                    <li><%= link_to (venues[:name].to_s + '(' + venues[:number].to_s + ')'), get_venue_path(venues[:name]) %></li>
+                  <% end %>
+                  
+            <% end %>
+          <% else %>
+          
+            <li><a href="#" class="menulink">Bundesland/Ort</a>
+                <ul>
+                
+                  <% all_venues.each do |fed_name,venues| %>
+                    
+                    <% num = 0 %>
+                    <% for number_alt in venues %>
+                      <% num += number_alt[:number].to_i %>
+                    <% end %>
+                    
+                    <li><%= link_to (fed_name + '(' + num.to_s + ')'), get_federal_country_path(fed_name), :class  => 'sub' %>
+                    
+                      <ul>
+                        <% for venue in venues %>
+                        
+                          <% if venues.first == venue %>
+                            <li class="topline"><%= link_to (venue[:name] + '(' + venue[:number].to_s + ')'), get_venue_path(venue[:name]) %></li>
+                          <% else %>
+                            <li><%= link_to (venue[:name] + '(' + venue[:number].to_s + ')'), get_venue_path(venue[:name]) %></li>
+                          <% end %>
+                            
+                        <% end %>
+                      </ul>
+                      
+                    </li>
+                  <% end %>
+            
+          <% end %>
+      
+        </ul>
+      </li>
+      
+      
+      <!-- main and sub categories -->
+      
+          <% if main_cat_clicked || sub_cat_clicked %>
+            
+            <% if sub_cat_clicked %>
+              <li><a href="#" class="menulink"><%= sub_cat_clicked %></a>
+                <ul>
+                
+            <% else %>
+              
+              <li><a href="#" class="menulink"><%= main_cat_clicked %></a>
+                <ul>
+                
+                  <% all_cats[main_cat_clicked].each do |sub| %>
+                    <li><%= link_to (sub[:name].to_s + '(' + sub[:number].to_s + ')'), get_sub_cat_events_path(sub[:name]) %></li>
+                  <% end %>
+                  
+            <% end %>
+          <% else %>
+          
+            <li><a href="#" class="menulink">Kategorie</a>
+            <ul>
+              <% all_cats.each do |cat_name,sub_cats| %>
                 
                 <% num = 0 %>
-                <% for number_alt in venues %>
+                <% for number_alt in sub_cats %>
                   <% num += number_alt[:number].to_i %>
                 <% end %>
                 
-                <li><%= link_to (fed_name + '(' + num.to_s + ')'), get_federal_country_path(fed_name), :class  => 'sub' %>
+                <% if num == 0 %>
+                  <% num = Event.find(:all, :conditions => ['main_category = ?',cat_name]).count %>
+                <% end %>
+                
+                <li><%= link_to (cat_name + '(' + num.to_s + ')'), get_main_cat_events_path(cat_name), :class  => 'sub' %>
                 
                   <ul>
-                    <% for venue in venues %>
+                    <% for sub_cat in sub_cats %>
                     
-                      <% if venues.first == venue %>
-                        <li class="topline"><%= link_to (venue[:name] + '(' + venue[:number].to_s + ')'), get_venue_path(venue[:name]) %></li>
+                      <% if sub_cats.first == sub_cat %>
+                        <li class="topline"><%= link_to (sub_cat[:name] + '(' + sub_cat[:number].to_s + ')'), get_sub_cat_events_path(sub_cat[:name]) %></li>
                       <% else %>
-                        <li><%= link_to (venue[:name] + '(' + venue[:number].to_s + ')'), get_venue_path(venue[:name]) %></li>
+                        <li><%= link_to (sub_cat[:name] + '(' + sub_cat[:number].to_s + ')'), get_sub_cat_events_path(sub_cat[:name]) %></li>
                       <% end %>
                         
                     <% end %>
@@ -48,79 +107,23 @@
                   
                 </li>
               <% end %>
-        
-      <% end %>
-  
-    </ul>
-  </li>
-  
-  
-  <!-- main and sub categories -->
-  
-      <% if main_cat_clicked || sub_cat_clicked %>
-        
-        <% if sub_cat_clicked %>
-          <li><a href="#" class="menulink"><%= sub_cat_clicked %></a>
-            <ul>
             
-        <% else %>
-          
-          <li><a href="#" class="menulink"><%= main_cat_clicked %></a>
-            <ul>
-            
-              <% all_cats[main_cat_clicked].each do |sub| %>
-                <li><%= link_to (sub[:name].to_s + '(' + sub[:number].to_s + ')'), get_sub_cat_events_path(sub[:name]) %></li>
-              <% end %>
-              
-        <% end %>
-      <% else %>
-      
-        <li><a href="#" class="menulink">Kategorie</a>
-        <ul>
-          <% all_cats.each do |cat_name,sub_cats| %>
-            
-            <% num = 0 %>
-            <% for number_alt in sub_cats %>
-              <% num += number_alt[:number].to_i %>
-            <% end %>
-            
-            <% if num == 0 %>
-              <% num = Event.find(:all, :conditions => ['main_category = ?',cat_name]).count %>
-            <% end %>
-            
-            <li><%= link_to (cat_name + '(' + num.to_s + ')'), get_main_cat_events_path(cat_name), :class  => 'sub' %>
-            
-              <ul>
-                <% for sub_cat in sub_cats %>
-                
-                  <% if sub_cats.first == sub_cat %>
-                    <li class="topline"><%= link_to (sub_cat[:name] + '(' + sub_cat[:number].to_s + ')'), get_sub_cat_events_path(sub_cat[:name]) %></li>
-                  <% else %>
-                    <li><%= link_to (sub_cat[:name] + '(' + sub_cat[:number].to_s + ')'), get_sub_cat_events_path(sub_cat[:name]) %></li>
-                  <% end %>
-                    
-                <% end %>
-              </ul>
-              
-            </li>
           <% end %>
+      
+        </ul>
+      </li>
+      
+      
+      <li>
+        <%= form_tag root_path, :method => 'get', :onsubmit => 'return false' do %>
+     
+          <p><%= text_field_tag :search, params[:search], :placeholder => 'Suche', :id => 'searchField', :style => "width:250px; height:28px" %>
+          <p><div id ='searchResults' style="position: absolute; display:none;"></div></p>
+        <% end %>
         
-      <% end %>
-  
-		</ul>
-  </li>
-  
-  
-	<li>
-		<%= form_tag root_path, :method => 'get', :onsubmit => 'return false' do %>
- 
-      <p><%= text_field_tag :search, params[:search], :placeholder => 'Suche', :id => 'searchField', :style => "width:250px; height:28px" %>
-      <p><div id ='searchResults' style="position: absolute; display:none;"></div></p>
-    <% end %>
-    
-  </li>
-  
-</ul>
+      </li>
+      
+    </ul>
 
 </div>
 
