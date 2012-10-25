@@ -14,11 +14,7 @@ margin: 30px auto;
 .feat_date	{float:right; text-align:right;font: normal 0.8em Verdana, Geneva, sans-serif;}
 li.event	{clear:left;margin:1em 0;overflow:hidden;}
 li.event img {height:120px; width:; float:left;padding-right:15px;}
-.eventlistener li {
-    text-align:left;
-    display:block;
-	
-}
+.eventlistener li {   text-align:left;   display:block;}
 .eventlistener li p	{padding:0 0 1em 0;}
 a, a:visited, a:hover {color:#0000ff;}
 h1, h2, h3, h6 { color: #000; font-size:2em; font-weight:bold; margin:0.5em 0; padding:0; }
@@ -27,10 +23,15 @@ h3  {font-size:1.2em;}
 h6	{font-size:0.8em;}
 p	{margin:0;padding:0;}
 
+#rightcol h5	{width:inherit;border:1px solid #999;text-align:center;font-size:1em;background:#9CF;padding:0.5em;margin:0;}
+#rightcol p	{width:inherit;font-size:1.9em;padding:0.5em;background:#CCC;}
+.event_single	{width:100%;}
+img.event_single	{width:270px;height:180px;float:left;padding:0 20px 20px 0;}
+.event_info	{float:left;}
+.event_desc	{clear:left;margin:2em 0;}
 input.time, input.date { font-size: 13px; }
 input.time { width: 80px; }
 input.date { width: 90px; }
-
 image { border: 0; }
 
 .example { border: 1px solid #ddd; background: #f4f4f4; padding: 10px; margin: 10px 0 30px 0; }
