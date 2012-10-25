@@ -165,8 +165,10 @@ window.onload = function(){
       map.setCenter(start_address);
       
       google.maps.event.addListener(marker, 'dragend', function(event){
-        geocoder.geocode( { 'latLng': new google.maps.LatLng(event.latLng.Xa,event.latLng.Ya) }, function(results, status) {
-          document.getElementById('event_address').value = results[0].formatted_address;
+        geocoder.geocode( { 'latLng': event.latLng }, function(results, status) {
+          if (status == google.maps.GeocoderStatus.OK) {
+            document.getElementById('event_address').value = results[0].formatted_address;
+          }
         });
       });
     }

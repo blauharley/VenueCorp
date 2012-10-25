@@ -5,7 +5,7 @@
 <%= form_tag get_events_by_geocoding_path, :method => 'get' do %>
   <%= hidden_field_tag 'latlng', '', :id => 'latlng' %>
   <%= hidden_field_tag 'currentLocation', @location, :id => 'currentLocation' %>
-  <%= text_field_tag 'adresse', '', :placeholder => 'Suche Veranstaltungen durch Adresse', :onkeyup => 'document.getElementById("latlng").value = this.value', :size => '130' %>
+  <%= text_field_tag 'adresse', '', :placeholder => 'Suche Veranstaltungen nach Adresse', :onkeyup => 'document.getElementById("latlng").value = this.value', :size => '130' %>
   <%= submit_tag 'Suchen', :name => nil %>
 <% end %>
 

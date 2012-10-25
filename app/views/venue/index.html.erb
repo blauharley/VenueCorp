@@ -22,11 +22,15 @@
       <tr><td><%= link_to 'Alle Bundes-Highlights', event_highlight_path('federal', 'true') %></td></tr>
       <tr><td><%= link_to 'Alle Regional-Highlights', event_highlight_path('regional', 'true') %></td></tr>
       <tr><td><%= link_to 'Umfeldsuche', search_surrounding_events_path %></td></tr>
-      <tr><td><%= link_to_if current_user || current_admin, 'Verstanstaltung hinzufügen', new_event_path %></td></tr>
-      <tr><td><%= link_to_if current_admin, 'User hinzufügen', new_user_registration_path %></td></tr>
-      <tr><td><%= link_to_if current_admin, 'Userliste', get_user_list_path %></td></tr>
-      <tr><td><%= link_to_if !current_admin, 'Admin Login', new_admin_session_path %></tr>
-      <tr><td><%= link_to_if !current_user && !current_admin, 'Login', new_user_session_path %></tr>
+      
+      <% if current_user || current_admin %>
+        <tr><td><%= link_to_if current_user || current_admin, 'Verstanstaltung hinzufügen', new_event_path %></td></tr>
+        <tr><td><%= link_to_if current_admin, 'User hinzufügen', new_user_registration_path %></td></tr>
+        <tr><td><%= link_to_if current_admin, 'Userliste', get_user_list_path %></td></tr>
+      <% else %>
+        <tr><td><%= link_to_if !current_admin, 'Admin Login', new_admin_session_path %></tr>
+        <tr><td><%= link_to_if !current_user && !current_admin, 'Login', new_user_session_path %></tr>
+      <% end %>
       
       <tr><td><%= link_to 'RSS Feed', event_feed_path( get_event_ids(@events) ) << '.rss' %></td></tr>
       <tr><td><%= link_to 'Kontakt', contact_path %></td></tr>
