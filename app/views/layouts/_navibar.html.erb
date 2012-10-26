@@ -80,14 +80,7 @@
             <ul>
               <% all_cats.each do |cat_name,sub_cats| %>
                 
-                <% num = 0 %>
-                <% for number_alt in sub_cats %>
-                  <% num += number_alt[:number].to_i %>
-                <% end %>
-                
-                <% if num == 0 %>
-                  <% num = Event.find(:all, :conditions => ['main_category = ?',cat_name]).count %>
-                <% end %>
+                <% num = Event.find(:all, :conditions => ['main_category = ?',cat_name]).count %>
                 
                 <li><%= link_to (cat_name + '(' + num.to_s + ')'), get_main_cat_events_path(cat_name), :class  => 'sub' %>
                 
