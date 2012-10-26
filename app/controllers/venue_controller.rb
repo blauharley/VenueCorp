@@ -1,6 +1,7 @@
 ﻿class VenueController < ApplicationController
   
   before_filter :get_navi_vars, :only => [:index, :get_main_cat_events, :get_sub_cat_events, :get_federal_country, :get_venue, :get_events_by_date, :get_events_by_geocoding, :get_user_list]
+  before_filter :get_sponsored_events
   
   def index
     if (params[:cat] == 'federal' || params[:cat] == 'regional') && params[:highlight] == 'true'
@@ -110,6 +111,13 @@
     else
       @location = ''
     end
+  end
+  
+  
+  private
+  
+  def get_sponsored_events
+    @sponsored_events = Event.where( :sponsored => true ).order('start_date asc')
   end
   
 end

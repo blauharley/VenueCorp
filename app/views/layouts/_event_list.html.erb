@@ -1,14 +1,10 @@
 ﻿<div>
   <% highlight_events = [] %>
-  <% sponsored_events = [] %>
   <% all_events = [] %>
   
   <% for event in events %>
     
-    <% if event.sponsored %>
-      <% sponsored_events << event %>
-    
-    <% elsif federal_state_clicked && !region_clicked && event.federal_highlight %>
+    <% if federal_state_clicked && !region_clicked && event.federal_highlight %>
       <% highlight_events << event %>
     
     <% elsif region_clicked && !federal_state_clicked && event.regional_highlight %>
@@ -29,8 +25,8 @@
     <%= render 'layouts/carousel', :events => highlight_events, :title => 'Top Veranstaltungen', :classname => 'car_high', :classname_carousel => 'carousel', :classname_next_button => 'carousel_next', :classname_prev_button => 'carousel_prev' %>
   <% end %>
   
-  <% if !sponsored_events.empty? %>
-    <%= render 'layouts/carousel', :events => sponsored_events, :title => 'Empfohlene Veranstaltungen', :classname => 'car_sponsor', :classname_carousel => 'carousel2', :classname_next_button => 'carousel2_next', :classname_prev_button => 'carousel2_prev' %>
+  <% if !@sponsored_events.empty? %>
+    <%= render 'layouts/carousel', :events => @sponsored_events, :title => 'Empfohlene Veranstaltungen', :classname => 'car_sponsor', :classname_carousel => 'carousel2', :classname_next_button => 'carousel2_next', :classname_prev_button => 'carousel2_prev' %>
   <% end %>
  
 </div>
