@@ -1,11 +1,8 @@
-﻿
-<div id="jcal"></div>
-
-<script type='text/javascript'>
-
-$(document).ready(function() {
-  
-  $.calendars.picker.regional['de'] = {
+﻿/* http://keith-wood.name/calendars.html
+   German localisation for calendars datepicker for jQuery.
+   Written by Milian Wolff (mail@milianw.de). */
+(function($) {
+	$.calendars.picker.regional['de'] = {
 		renderer: $.calendars.picker.defaultRenderer,
 		prevText: '&#x3c;zurück', prevStatus: 'letzten Monat zeigen',
 		prevJumpText: '&#x3c;&#x3c;', prevJumpStatus: '',
@@ -21,14 +18,4 @@ $(document).ready(function() {
 		isRTL: false
 	};
 	$.calendars.picker.setDefaults($.calendars.picker.regional['de']);
-
-  $('#jcal').calendarsPicker({ 
-    calendar: $.calendars.instance('gregorian', 'de'),
-    onSelect: function(dates) {
-      window.location = "http://" + window.location.host + "/date/" + dates;
-    }
-  });
-  
-});
-
-</script>
+})(jQuery);
