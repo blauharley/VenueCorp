@@ -118,7 +118,7 @@ window.onload = function(){
                        ),
           draggable: true
       });
-      
+      console.log('autoLocation not called');
       map.setCenter(start_address);
       
       google.maps.event.addListener(marker, 'dragend', function(event){
@@ -177,7 +177,7 @@ window.onload = function(){
   
   
   function autoLocation(map,marker,address,maptype){
-      
+      console.log('autoLocation called');
     geocoder.geocode( { 'address': address }, function(results, status) {
       
       if (status == google.maps.GeocoderStatus.OK){
@@ -202,7 +202,7 @@ window.onload = function(){
             draggable: true
         });
         map.setCenter(start_address);
-        
+        console.log('before searchMap and addressMap');
         if(maptype == 'searchMap'){
           google.maps.event.addListener(marker, 'dragend', function(event){
             marker.setAnimation(google.maps.Animation.BOUNCE);
