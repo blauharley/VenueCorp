@@ -21,14 +21,14 @@ $(document).ready(function() {
 		isRTL: false
 	};
 	$.calendars.picker.setDefaults($.calendars.picker.regional['de']);
-
+  
   $('#jcal').calendarsPicker({ 
     calendar: $.calendars.instance('gregorian', 'de'),
     onSelect: function(dates) {
       window.location = "http://" + window.location.host + "/date/" + dates;
     }
   });
-  
+
 });
 
 </script>
