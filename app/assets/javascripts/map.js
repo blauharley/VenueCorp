@@ -182,7 +182,7 @@ window.onload = function(){
       
       if (status == google.maps.GeocoderStatus.OK){
         var start_address = results[0].geometry.location;
-        start_address = new google.maps.LatLng(start_address);
+        //start_address = new google.maps.LatLng(start_address);
         
         
         if(marker)
