@@ -118,7 +118,7 @@ window.onload = function(){
                        ),
           draggable: true
       });
-      console.log('autoLocation not called');
+      
       map.setCenter(start_address);
       
       google.maps.event.addListener(marker, 'dragend', function(event){
@@ -177,7 +177,7 @@ window.onload = function(){
   
   
   function autoLocation(map,marker,address,maptype){
-      console.log('autoLocation called');
+      
     geocoder.geocode( { 'address': address }, function(results, status) {
       
       if (status == google.maps.GeocoderStatus.OK){
@@ -202,7 +202,7 @@ window.onload = function(){
             draggable: true
         });
         map.setCenter(start_address);
-        console.log('before searchMap and addressMap');
+        
         if(maptype == 'searchMap'){
           google.maps.event.addListener(marker, 'dragend', function(event){
             marker.setAnimation(google.maps.Animation.BOUNCE);
@@ -214,7 +214,7 @@ window.onload = function(){
         }
         else if(maptype == 'addressMap'){
           google.maps.event.addListener(marker, 'dragend', function(event){
-            geocoder.geocode( { 'latLng': new google.maps.LatLng(event.latLng.Xa,event.latLng.Ya) }, function(results, status) {
+            geocoder.geocode( { 'latLng': event.latLng }, function(results, status) {
               document.getElementById('event_address').value = results[0].formatted_address;
             });
           });
