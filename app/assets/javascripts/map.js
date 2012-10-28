@@ -24,7 +24,7 @@ window.onload = function(){
          ,opacity: 0.9
          ,width: "280px"
         }
-        ,closeBoxMargin: "20px -6px 2px 2px"
+        ,closeBoxMargin: "20px 52px 2px 2px"
         ,closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif"
         ,infoBoxClearance: new google.maps.Size(1, 1)
         ,isHidden: false
