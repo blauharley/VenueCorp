@@ -11,7 +11,7 @@ window.onload = function(){
        
       var infoWindowText = document.createElement("div");
       infoWindowText.className = 'infobox';
-      infoWindowText.style.cssText = "width:310px; height:75px; border:1px solid grey; border-radius:23px; margin-top: 8px; background: white; padding: 10px; text-align:center";
+      infoWindowText.style.cssText = "width:215px; height:45px; border:1px solid grey; border-radius:23px; margin-top: 8px; background: white; padding: 10px; text-align:center";
 
       var infoWindowOptions = {
         content: infoWindowText
