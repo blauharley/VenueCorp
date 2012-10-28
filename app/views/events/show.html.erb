@@ -2,82 +2,93 @@
 <p><%= link_to 'Home', root_path %></p>
 <h4 id="map_notifier" style="display:none"></h4>
 
-<h2>Veranstaltung <%= @event.title %></h2>
 
-<%= render 'layouts/navibar', :all_venues => @all_venues, :all_cats => @all_event_cats, :federal_clicked => @federal_state_clicked, :regional_clicked => @region_clicked, :main_cat_clicked => @main_cat_clicked, :sub_cat_clicked => @sub_cat_clicked %>
+<div style="margin-top:70px; width:800px; float:left">
+  <%= render 'layouts/navibar', :all_venues => @all_venues, :all_cats => @all_event_cats, :federal_clicked => @federal_state_clicked, :regional_clicked => @region_clicked, :main_cat_clicked => @main_cat_clicked, :sub_cat_clicked => @sub_cat_clicked %>
 
-<%= render 'layouts/user_panel' %>
+  <%= render 'layouts/user_panel' %>
 
-<div style="margin-top:70px; width:300px">
-  <!-- paperclip image, deactivated because of heroku 
-  <p><%# image_tag @event.image.url(:medium), :style => 'width:300px; height:300px' %></p>-->
-  <% if @event.image_url && @event.image_url.length %>
-    <p><img src="<%= @event.image_url %>" width="300" height="300" /></p>
+</div>
+
+
+<div style="float:right; margin-top:-10%; width:300px; text-align:center">
+  <div id="event_map" style="width:400px; height:300px"></div>
+  
+  <h3>Veranstaltungsort</h3>
+  <p><%= @event.venue %></p>
+  
+  <h3>Adresse</h3>
+  <p><%= @event.address %></p>
+  <p id="address" style="display:none"><%= raw @event.latitude.to_s << " "<< @event.longitude.to_s %></p>
+  
+  <h3>Kosten</h3>
+  <% if @event.venue_url.length > 0 %>
+    <p><%= @event.costs %></p>
+  <% else %>
+    <p>Keine Kosten angegeben</p>
   <% end %>
-  <div id="event_map" style="width:300px; height:300px; margin-right:50px;"></div>
-</div>
 
-<div style="margin-top:-620px; margin-right:500px; width:350px; float:right">
-<h3><%= @event.title %><h3>
-<h5><%= @event.main_category %>/<%= @event.sub_category %></h5>
+  <h3>Website</h3>
+  <% if @event.venue_url.length > 0 %>
+    <p><%= link_to 'Zur Webseite', (if @event.venue_url.index('http://') == 0 then @event.venue_url else ('http://' << @event.venue_url) end) %></p>
+  <% else %>
+    <p>Keine Webseite angegeben</p>
+  <% end %>
 
-<h7 style="font-size:10px; float:right">
-  
-<p>
-  <b>Nächstes Datum:</b>
-  <%= render 'layouts/formatted_dates', :event => @event, :max_num => 5 %>
-</p>
-  
-</h7>
+  <h3>E-Mail</h3>
+  <% if @event.email.length > 0 %>
+    <p><%= @event.email %></p>
+  <% else %>
+    <p>Keine E-Mail Adresse angegeben</p>
+  <% end %>
 
-<h5 style="margin-top:55px"><%= @event.description.html_safe %></h5>
+  <h3>Tel. Nr.</h3>
+  <% if @event.tel_nr.length > 0 %>
+    <p><%= @event.tel_nr %></p>
+  <% else %>
+    <p>Keine Tel. Nr. angegeben</p>
+  <% end %>
 
-<br />
-<h5>Veranstaltungsort</h5>
-<p><%= @event.venue %></p>
-
-<h5>Adresse</h5>
-
-<p><%= @event.address %></p>
-<p id="address" style="display:none"><%= raw @event.latitude.to_s << " "<< @event.longitude.to_s %></p>
-
-<h5>Kosten</h5>
-<% if @event.venue_url.length > 0 %>
-  <p><%= @event.costs %></p>
-<% else %>
-  <p>Keine Kosten angegeben</p>
-<% end %>
-
-<h5>Website</h5>
-<% if @event.venue_url.length > 0 %>
-  <p><%= link_to 'Zur Webseite', (if @event.venue_url.index('http://') == 0 then @event.venue_url else ('http://' << @event.venue_url) end) %></p>
-<% else %>
-  <p>Keine Webseite angegeben</p>
-<% end %>
-
-<h5>E-Mail</h5>
-<% if @event.email.length > 0 %>
-  <p><%= @event.email %></p>
-<% else %>
-  <p>Keine E-Mail Adresse angegeben</p>
-<% end %>
-
-<h5>Tel. Nr.</h5>
-<% if @event.tel_nr.length > 0 %>
-  <p><%= @event.tel_nr %></p>
-<% else %>
-  <p>Keine Tel. Nr. angegeben</p>
-<% end %>
-
-<% if (current_user && @event.user && current_user.id == @event.user.id) || current_admin %>
-  <%= link_to 'Bearbeiten', edit_event_path(@event.id) %></b></p>
-  <%= link_to 'Löschen', event_path(@event.id), :method => 'delete' %>
-<% end %>
-
-<% url = "window.open('https://www.google.com/calendar/render?action=TEMPLATE&dates=" + @event.start_date.strftime('%Y%m%d') + @event.start_date_time.strftime('T%H%M%SZ') + "/" + @event.end_date.strftime('%Y%m%d') + @event.end_date_time.strftime('T%H%M%SZ') + "&details=" + @event.description.split(/\r\n|\"/).join + "&sprop=website:" + @event.venue_url.html_safe + "&text=" + @event.title.html_safe + "&pli=1&sf=true&output=xml', '_blank'); return false" %>
-
-<p><b><%= link_to 'Google Cal', '#', :onclick => url.html_safe %></b></p>
-<p><b><%= link_to 'ICal & Outlook', ics_event_path(@event.id) %></b></p>
-<p><b><%= link_to 'Als PDF anzeigen', pdf_event_path(@event.id) %></b></p>
+  <% if (current_user && @event.user && current_user.id == @event.user.id) || current_admin %>
+    <%= link_to 'Bearbeiten', edit_event_path(@event.id) %></b></p>
+    <%= link_to 'Löschen', event_path(@event.id), :method => 'delete' %>
+  <% end %>
 
 </div>
+
+
+<div style="margin-top:70px; width:650px; float:left">
+  <h2><%= @event.title %></h2>
+  
+  <!-- paperclip image, deactivated because of heroku 
+  <p><%# image_tag @event.image.url(:medium), :style => 'width:250px; height:190px; float:left' %></p>-->
+  <% if @event.image_url && @event.image_url.length %>
+    <p><img src="<%= @event.image_url %>" width="250px" height="190px" style="float:left" /></p>
+  <% end %>
+  
+  <div style="width:170px; float:right; margin-right:35%">
+  
+    <h3><%= @event.main_category %>/<%= @event.sub_category %></h3>
+    
+    <p>
+      <b>Nächstes Datum:</b>
+      <%= render 'layouts/formatted_dates', :event => @event, :max_num => 5 %>
+      <% url = "window.open('https://www.google.com/calendar/render?action=TEMPLATE&dates=" + @event.start_date.strftime('%Y%m%d') + @event.start_date_time.strftime('T%H%M%SZ') + "/" + @event.end_date.strftime('%Y%m%d') + @event.end_date_time.strftime('T%H%M%SZ') + "&details=" + @event.description.split(/\r\n|\"/).join + "&sprop=website:" + @event.venue_url.html_safe + "&text=" + @event.title.html_safe + "&pli=1&sf=true&output=xml', '_blank'); return false" %>
+    </p>
+    
+    <b><%= link_to 'Google Cal', '#', :onclick => url.html_safe %></b>
+    <b><%= link_to 'ICal & Outlook', ics_event_path(@event.id) %></b>
+    <p><b><%= link_to 'Als PDF anzeigen', pdf_event_path(@event.id) %></b></p>
+    
+  </div>
+  
+  <h4 style="margin-top:35%"><%= @event.description.html_safe %></h4>
+  
+  <br />
+  <div id="fb-root"></div>
+  <script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script>
+  <fb:comments href="http://event-corp.herokuapp.com/"></fb:comments>
+  
+  </div>
+
+
