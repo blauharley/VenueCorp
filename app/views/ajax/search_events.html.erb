@@ -2,9 +2,7 @@
 <div id="eventResults" style="background-color:#C3C3C3; width:250px">
 
   <% @events.each do |event| %>
-    <% if event.title && event.main_category && event.sub_category %>
-      <p style="font-size:10px" id="<%= event.id %>"><b><%= link_to event.title << ' Kat.: ' << event.main_category << '/'<< event.sub_category, event_path(event.id) %></b></p>
-    <% end %>
+    <p style="font-size:10px" id="<%= event.id %>"><b><%= link_to event.title, event_path(event.id) %></b></p>
   <% end %>
 
 </div>

@@ -106,7 +106,7 @@
       
       
       <li>
-        <%= form_tag root_path, :method => 'get', :onsubmit => 'return false' do %>
+        <%= form_tag root_path, :method => 'get', :onsubmit => '//return false' do %>
      
           <p><%= text_field_tag :search, params[:search], :placeholder => 'Suche', :id => 'searchField', :style => "width:250px; height:28px" %>
           <p><div id ='searchResults' style="position: absolute; display:none;"></div></p>
@@ -126,13 +126,15 @@
   
   $(document).ready(function(){
      
-     
+    
     // navi:auto-selection field
     var arrowLoc = 0;
     var arrowMoved = false;
     var currentChildren = null;
     
     $('#searchField').keyup(function(event) {
+      
+      // arrow-buttons feature deactivated
       
       arrowMoved = false;
       
@@ -144,6 +146,7 @@
         $('#searchResults').css('display', 'inline');
         $('#searchResults').css('width', $('#searchField').css('width'));
         
+        /*
         var results = (document.getElementById('searchResults').children && document.getElementById('searchResults').children[0] && document.getElementById('searchResults').children[0].children) ? document.getElementById('searchResults').children[0].children : false;
           console.log(event.keyCode);
         if(event.keyCode == 40){ // arrow down
@@ -188,7 +191,9 @@
           window.location = "http://" + window.location.host + "/events/" + currentChildren.id;
           currentChildren = null;
         }
+        */
       }
+      
       
       if(!arrowMoved && $('#searchField').val().length){
         arrowLoc = 0;
@@ -200,7 +205,7 @@
       
     });
     
-    // fade out search results
+    // fade out search result-div
     $(document).mouseover(function(event){
       
       if(event.target && event.target.nodeName != 'A')

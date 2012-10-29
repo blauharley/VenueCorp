@@ -29,10 +29,7 @@
 <body>
 
 <div id="main">
-
-  <div id="main_notifier"><p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p></div>
-
+  
   <%= yield %>
 
 </div>
@@ -41,7 +38,10 @@
 
   $(document).ready(function() {
     
-    $('#main_notifier').fadeOut(8000);
+    if( document.getElementById('main_notifier') && $('#main_notifier').html().length ){
+      $('#main_notifier').css('display','inline');
+      $('#main_notifier').fadeOut(8000);
+    }
     
   });
   

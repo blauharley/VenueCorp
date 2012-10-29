@@ -1,5 +1,14 @@
 <%= link_to 'Home', root_path %>
 
+<br />
+
+<div id="main_notifier" style="display: none; font-size: 20px; font-weight:bold">
+  <%= notice %>
+  <%= alert %>
+</div>
+
+<br />
+
 <div id="sign_in_form">
    <%= form_for("admin", :url => new_admin_session_path) do |f| %>
      <%= f.text_field :email, :placeholder => "e-mail" %><br />

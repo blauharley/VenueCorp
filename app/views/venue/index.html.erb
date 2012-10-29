@@ -6,7 +6,11 @@
 <div id="leftcol">
 
 <%= render 'layouts/navibar', :all_venues => @all_venues, :all_cats => @all_event_cats, :federal_clicked => @federal_state_clicked, :regional_clicked => @region_clicked, :main_cat_clicked => @main_cat_clicked, :sub_cat_clicked => @sub_cat_clicked %>
-<%= render 'layouts/user_panel' %>
+
+<% if current_user || current_admin %>
+  <%= render 'layouts/user_panel' %>
+<% end %>
+
 <%= render 'layouts/event_list', :events => @events, :federal_state_clicked => @federal_state_clicked, :region_clicked => @region_clicked %>
 
 </div>

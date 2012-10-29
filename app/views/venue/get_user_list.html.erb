@@ -4,13 +4,11 @@
 
 <%= render 'layouts/navibar', :all_venues => @all_venues, :all_cats => @all_event_cats, :federal_clicked => @federal_state_clicked, :regional_clicked => @region_clicked, :main_cat_clicked => @main_cat_clicked, :sub_cat_clicked => @sub_cat_clicked %>
 <%= render 'layouts/user_panel' %>
-<br/>
-<br/>
 
-<ul>
+<ul style="margin-top:100px">
 <% for user in @users %>
   <li>
-    <b><%= 'Username:' << user.email %></b>
+    <h3><%= 'Username:' << user.email %></h3>
     <%= button_to "User bearbeiten", edit_user_registration_path(user.id), :method => :get %>
     <%= button_to "User löschen (Veranstaltungen werden mitgelöscht)", { :controller => 'registration', :action => 'destroy', :id => user.id }, :confirm => "Wirklich löschen?", :method => :delete %>
   </li>
