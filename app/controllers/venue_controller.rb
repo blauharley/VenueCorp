@@ -106,7 +106,7 @@
   end
   
   def search_surrounding_events
-    if request.location.city.length > 0
+    if request.location && request.location.city.length > 0
       @location = request.location.city + ', ' + request.location.country
     else
       @location = ''
