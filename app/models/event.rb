@@ -10,7 +10,7 @@
   validates :end_date, :presence => true
   validates :start_date_time, :presence => true
   validates :address, :presence => true
- 
+  
   belongs_to :user
   
   geocoded_by :address

@@ -122,10 +122,17 @@ window.onload = function(){
       map.setCenter(start_address);
       
       google.maps.event.addListener(marker, 'dragend', function(event){
+      
+        var infoWindowText = document.createElement("div");
+        infoWindowText.className = 'infobox';
         infoWindowText.style.cssText = "width:215px; height:45px; border:1px solid grey; border-radius:23px; margin-top: 8px; background: white; padding: 10px; text-align:center";
-        infoWindow.pixelOffset_ =  new google.maps.Size(-140, 25);
-        infoWindow.closeBoxMargin_ = "20px 52px 2px 2px";
-          
+        infoWindowOptions.content = infoWindowText;
+        
+        infoWindowOptions.pixelOffset_ =  new google.maps.Size(-140, 25);
+        infoWindowOptions.closeBoxMargin_ = "20px 52px 2px 2px";
+        
+        var infoWindow = new InfoBox(infoWindowOptions);
+        
         marker.setAnimation(google.maps.Animation.BOUNCE);
         infoWindowText.innerHTML = 'Suche wird gestartet, bitte warten...';
         infoWindow.setPosition( event.latLng );
@@ -257,9 +264,15 @@ window.onload = function(){
         google.maps.event.addListener(marker, 'click', function(event){
           //marker.setAnimation(google.maps.Animation.BOUNCE);
           
+          var infoWindowText = document.createElement("div");
+          infoWindowText.className = 'infobox';
           infoWindowText.style.cssText = "width:350px; height:125px; border:1px solid grey; border-radius:23px; margin-top: 8px; background: white; padding: 10px; text-align:center";
-          infoWindow.pixelOffset_ =  new google.maps.Size(-140, -13);
-          infoWindow.closeBoxMargin_ = "20px -42px 2px 2px";
+          infoWindowOptions.content = infoWindowText;
+          
+          infoWindowOptions.pixelOffset_ =  new google.maps.Size(-140, 25);
+          infoWindowOptions.closeBoxMargin_ = "20px 2px 2px 2px";
+          
+          var infoWindow = new InfoBox(infoWindowOptions);
           
           infoWindowText.innerHTML = '<div style="cursor:pointer" onclick="window.location = \'http://\' + window.location.host + \'/events/\' + \'' + this.e_id + '\'">' + 
             '<h3>' + this.title + '</h3>' + 
