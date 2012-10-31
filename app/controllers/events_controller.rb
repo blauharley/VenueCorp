@@ -92,7 +92,7 @@
               
               if event.image.exists?
                 image event.image.path, :position => :right, :position => 240, :vposition => 10, :width => 150, :height => 100
-              elsif event.image_url.length > 0
+              elsif event.image_url && event.image_url.length > 0 && URI.parse(event.image_url).kind_of?(URI::HTTP)
                 image open(event.image_url).path, :position => :right, :position => 240, :vposition => 10, :width => 150, :height => 100
               end
            end).path
@@ -147,7 +147,7 @@
                 
                 if event.image.exists?
                   image event.image.path, :position => :right, :position => 240, :vposition => 10, :width => 150, :height => 100
-                elsif event.image_url.length > 0
+                elsif event.image_url && event.image_url.length > 0 && URI.parse(event.image_url).kind_of?(URI::HTTP)
                   image open(event.image_url).path, :position => :right, :position => 240, :vposition => 10, :width => 150, :height => 100
                 end
                 

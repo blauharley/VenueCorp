@@ -71,7 +71,7 @@
     <h3><%= @event.main_category %>/<%= @event.sub_category %></h3>
     
     <p>
-      <p><b>Start-Datum: <%= @event.start_date %></b></p>
+      <p><b>Start-Datum: <%= @event.start_date.strftime('%d.%b %Y') %></b></p>
       <% if @event.repeat_dates.length > 0 %>
         <b>Nächste Daten:</b>
         <%= render 'layouts/formatted_dates', :event => @event, :max_num => 5 %>
