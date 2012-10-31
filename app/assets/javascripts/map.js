@@ -108,7 +108,7 @@ window.onload = function(){
       marker = new google.maps.Marker({
           map: map,
           position: start_address,
-          title: 'drag Marker to search for Events',
+          title: 'Ziehe Marker an die gewünschte Stelle und lass ihn los, um Suche zu starten',
           icon: new google.maps.MarkerImage(
                       '/assets/event_star.png', // my 16x48 sprite with 3 circular icons
                       new google.maps.Size(25, 25), // desired size
@@ -123,6 +123,9 @@ window.onload = function(){
       
       google.maps.event.addListener(marker, 'dragend', function(event){
         infoWindowText.style.cssText = "width:215px; height:45px; border:1px solid grey; border-radius:23px; margin-top: 8px; background: white; padding: 10px; text-align:center";
+        infoWindow.pixelOffset_ =  new google.maps.Size(-140, 25);
+        infoWindow.closeBoxMargin_ = "20px 52px 2px 2px";
+          
         marker.setAnimation(google.maps.Animation.BOUNCE);
         infoWindowText.innerHTML = 'Suche wird gestartet, bitte warten...';
         infoWindow.setPosition( event.latLng );
@@ -253,11 +256,16 @@ window.onload = function(){
         
         google.maps.event.addListener(marker, 'click', function(event){
           //marker.setAnimation(google.maps.Animation.BOUNCE);
-          infoWindowText.style.cssText = "width:350px; height:75px; border:1px solid grey; border-radius:23px; margin-top: 8px; background: white; padding: 10px; text-align:center";
-          infoWindowText.innerHTML = '<div style="cursor:pointer" onclick="window.location = \'http://\' + window.location.host + \'/events/\' + \'' + this.e_id + '\'"><h3>' + this.title + '</h3><p>' + this.e_address + '</p></div>'; 
-          if(this.image_url.length)
-            infoWindowText.innerHTML += '<img scr="' + this.image_url + '" width="50" height="50" style="float:left" />';
           
+          infoWindowText.style.cssText = "width:350px; height:125px; border:1px solid grey; border-radius:23px; margin-top: 8px; background: white; padding: 10px; text-align:center";
+          infoWindow.pixelOffset_ =  new google.maps.Size(-140, -13);
+          infoWindow.closeBoxMargin_ = "20px -42px 2px 2px";
+          
+          infoWindowText.innerHTML = '<div style="cursor:pointer" onclick="window.location = \'http://\' + window.location.host + \'/events/\' + \'' + this.e_id + '\'">' + 
+            '<h3>' + this.title + '</h3>' + 
+            '<img src="' + this.image_url + '" width="50" height="50" style="float:left; margin-left:10px" />' +
+            '<p>' + this.e_address + '</p></div>';
+            
           infoWindow.setPosition( event.latLng );
           infoWindow.open( map );
         });
