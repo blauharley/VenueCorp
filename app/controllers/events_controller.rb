@@ -57,31 +57,43 @@
     event = Event.find(params[:id])
     pdf_path = (Prawn::Document.generate((event.title + ".pdf")) do
               move_down 10
-              text 'Veranstaltung:'
-              move_down 3
-              t = make_table([ ['Titel', event.title],
-                             ['Beschreibung', event.description.html_safe],
-                             ['Hauptkategorie', event.main_category],
-                             ['Unterkategorie', event.sub_category],
-                             ['Ort', event.venue],
+              if event.federal_highlight
+                text 'Bundes-Highlight:', :size => 20
+              elsif event.regional_highlight
+                text 'Regional-Highlight:', :size => 20
+              elsif !event.federal_highlight && !event.regional_highlight
+                text 'Veranstaltung:', :size => 20
+              end
+              
+              move_down 5
+              text event.title, :size => 18
+              move_down 2
+              text event.main_category << '/' << event.sub_category
+              move_down 2
+              text 'Start-Datum: ' << event.start_date.strftime('%Y/%m/%d')
+              
+              if event.repeat_dates.length > 0
+                move_down 2
+                text 'Nächste-Daten: ' << event.start_date.strftime('%Y/%m/%d')
+              end
+              
+              move_down 13
+              text event.description
+              
+              move_down 6
+              t = make_table([ 
                              ['Veranstaltungsort', event.venue],
-                             ['Region', event.region],
-                             ['Bundesland', event.province],
-                             ['Bundes-Highlight', event.federal_highlight.to_s],
-                             ['Regional-Highlight', event.regional_highlight.to_s],
-                             ['Gesponsort', event.sponsored.to_s],
-                             ['Start-Datum', event.start_date.strftime('%Y/%m/%d')],
-                             ['End-Datum', event.end_date.strftime('%Y/%m/%d')],
-                             ['Start-Tageszeit', event.start_date_time.strftime('%H:%M:%S')],
-                             ['Ende-Tageszeit', event.end_date_time.strftime('%H:%M:%S')],
-                             ['Veranstaltungsort-Url', event.venue_url],
-                             ['Email', event.email],
-                             ['Tel. Nr.', event.tel_nr],
                              ['Adresse', event.address],
-                             ['Kosten', event.costs] ])
+                             ['Kosten', if event.costs.length > 0 then event.costs else 'Keine Kosten angegeben' end],
+                             ['Website', if event.venue_url.length > 0 then event.venue_url else 'Keine Website angegeben' end],
+                             ['Email', if event.email.length > 0 then event.email else 'Keine Email angegeben' end],
+                             ['Tel. Nr.', if event.tel_nr.length > 0 then event.tel_nr else 'Keine Website angegeben' end] ])
               t.draw
+              
               if event.image.exists?
-                image event.image.path, :position => :right, :vposition => 20, :width => 100, :height => 100
+                image event.image.path, :position => :right, :position => 240, :vposition => 10, :width => 150, :height => 100
+              elsif event.image_url.length > 0
+                image open(event.image_url).path, :position => :right, :position => 240, :vposition => 10, :width => 150, :height => 100
               end
            end).path
     send_file( pdf_path, :type => 'application/pdf',:disposition => 'inline')
@@ -95,36 +107,51 @@
     
     pdf_path = (Prawn::Document.generate((events[0].title + ".pdf")) do
               move_down 10
-              text 'Veranstaltungen:'
+              text 'Alle Veranstaltungen: ', :size => 22
               move_down 3
               
               events.each do |event|
+                move_down 10
+                if event.federal_highlight
+                  text 'Bundes-Highlight:', :size => 20
+                elsif event.regional_highlight
+                  text 'Regional-Highlight:', :size => 20
+                elsif !event.federal_highlight && !event.regional_highlight
+                  text 'Veranstaltung:', :size => 20
+                end
+                
                 move_down 5
-                t = make_table([ ['Titel', event.title],
-                               ['Beschreibung', event.description],
-                               ['Hauptkategorie', event.main_category],
-                               ['Unterkategorie', event.sub_category],
-                               ['Ort', event.venue],
+                text event.title, :size => 18
+                move_down 2
+                text event.main_category << '/' << event.sub_category
+                move_down 2
+                text 'Start-Datum: ' << event.start_date.strftime('%Y/%m/%d')
+                
+                if event.repeat_dates.length > 0
+                  move_down 2
+                  text 'Nächste-Daten: ' << event.start_date.strftime('%Y/%m/%d')
+                end
+                
+                move_down 13
+                text event.description
+                
+                move_down 6
+                t = make_table([ 
                                ['Veranstaltungsort', event.venue],
-                               ['Region', event.region],
-                               ['Bundesland', event.province],
-                               ['Bundes-Highlight', event.federal_highlight.to_s],
-                               ['Regional-Highlight', event.regional_highlight.to_s],
-                               ['Gesponsort', event.sponsored.to_s],
-                               ['Start-Datum', event.start_date.strftime('%Y/%m/%d')],
-                               ['End-Datum', event.end_date.strftime('%Y/%m/%d')],
-                               ['Start-Tageszeit', event.start_date_time.strftime('%H:%M:%S')],
-                               ['Ende-Tageszeit', event.end_date_time.strftime('%H:%M:%S')],
-                               ['Veranstaltungsort-Url', event.venue_url],
-                               ['Email', event.email],
-                               ['Tel. Nr.', event.tel_nr],
                                ['Adresse', event.address],
-                               ['Kosten', event.costs] ])
-                  t.draw
-                  if event.image.exists?
-                    image event.image.path, :position => :right, :vposition => 20, :width => 100, :height => 100
-                  end 
-                  start_new_page
+                               ['Kosten', if event.costs.length > 0 then event.costs else 'Keine Kosten angegeben' end],
+                               ['Website', if event.venue_url.length > 0 then event.venue_url else 'Keine Website angegeben' end],
+                               ['Email', if event.email.length > 0 then event.email else 'Keine Email angegeben' end],
+                               ['Tel. Nr.', if event.tel_nr.length > 0 then event.tel_nr else 'Keine Website angegeben' end] ])
+                t.draw
+                
+                if event.image.exists?
+                  image event.image.path, :position => :right, :position => 240, :vposition => 10, :width => 150, :height => 100
+                elsif event.image_url.length > 0
+                  image open(event.image_url).path, :position => :right, :position => 240, :vposition => 10, :width => 150, :height => 100
+                end
+                
+                start_new_page
               end
            end).path
     send_file( pdf_path, :type => 'application/pdf',:disposition => 'inline')

@@ -9,7 +9,7 @@
           <img src="<%= event.image_url %>" width="270px" height="180px" />
         <% end %>
         
-        <span class="feat_date"><%= event.start_date %></span>
+        <span class="feat_date"><%= event.start_date.strftime('%d.%b %Y') %></span>
         <span class="ch_h"><%= event.title %></span>
         <h6><%= event.main_category %> - <%= event.sub_category %></h6>
    			<p><%= raw truncate(event.description, :length => 230) %></p>

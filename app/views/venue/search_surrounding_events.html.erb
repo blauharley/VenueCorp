@@ -1,7 +1,6 @@
 ﻿<%= link_to 'Home', root_path %>
 <h3>Suche Veranstaltungen mit Hilfe der Texteingabe oder der Map</h3>
 
-<%= @location %>
 <%= form_tag get_events_by_geocoding_path, :method => 'get' do %>
   <%= hidden_field_tag 'latlng', '', :id => 'latlng' %>
   <%= hidden_field_tag 'currentLocation', @location, :id => 'currentLocation' %>
@@ -9,6 +8,28 @@
   <%= submit_tag 'Suchen', :name => nil %>
 <% end %>
 
+<% if @location.length > 0 %>
+  <b>Sie sind in der Region <%= @location %> lokalisiert.</b>
+<% end %>
+
 <h3>Ziehe den Marker auf die gewünschte Stelle, wo nach Veranstaltungen gesucht werden soll</h3>
 <div id="search_map" style="height:800px; width:888px"></div>
 
+
+<% if !@sponsored_events.empty? %>
+  <!-- sponsored events -->
+
+  <table stlye="display:none" id="sponsoredEvents">
+    <% @sponsored_events.each do |e| %>
+      <tr>
+        <td><%= e.title %></td>
+        <td><%= e.latitude %></td>
+        <td><%= e.longitude %></td>
+        <td><%= e.address %></td>
+        <td><%= e.image_url %></td>
+        <td><%= e.id %></td>
+      </tr>
+    <% end %>
+  </table>
+
+<% end %>

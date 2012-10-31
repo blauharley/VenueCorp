@@ -122,6 +122,7 @@ window.onload = function(){
       map.setCenter(start_address);
       
       google.maps.event.addListener(marker, 'dragend', function(event){
+        infoWindowText.style.cssText = "width:215px; height:45px; border:1px solid grey; border-radius:23px; margin-top: 8px; background: white; padding: 10px; text-align:center";
         marker.setAnimation(google.maps.Animation.BOUNCE);
         infoWindowText.innerHTML = 'Suche wird gestartet, bitte warten...';
         infoWindow.setPosition( event.latLng );
@@ -131,6 +132,7 @@ window.onload = function(){
       
     }
     
+    showSponsoredEventsOnMap(map);
   }
   
   
@@ -176,6 +178,7 @@ window.onload = function(){
   }
   
   
+  /* common methods */
   function autoLocation(map,marker,address,maptype){
       
     geocoder.geocode( { 'address': address }, function(results, status) {
@@ -224,6 +227,43 @@ window.onload = function(){
       
     });
     
+  }
+  
+  
+  function showSponsoredEventsOnMap(map){
+    if( document.getElementById('sponsoredEvents') ){
+      var sponsoredEvents = document.getElementById('sponsoredEvents').children[0].children;
+      
+      for(var e=0; e < sponsoredEvents.length; e++){
+        var marker = new google.maps.Marker({
+            map: map,
+            position: new google.maps.LatLng(sponsoredEvents[e].children[1].innerHTML, sponsoredEvents[e].children[2].innerHTML),
+            title: sponsoredEvents[e].children[0].innerHTML
+            //icon: new google.maps.MarkerImage(
+            //            '/assets/event_star.png', // my 16x48 sprite with 3 circular icons
+            //            new google.maps.Size(25, 25), // desired size
+            //            new google.maps.Point(0, 0), // offset within the scaled sprite
+            //            new google.maps.Point(12.5,0), // anchor point is half of the desired size
+            //            new google.maps.Size(25, 25) // scaled size of the entire sprite
+            //             )
+        });
+        marker.image_url = sponsoredEvents[e].children[4].innerHTML;
+        marker.e_address = sponsoredEvents[e].children[3].innerHTML;
+        marker.e_id = sponsoredEvents[e].children[5].innerHTML;
+        
+        google.maps.event.addListener(marker, 'click', function(event){
+          //marker.setAnimation(google.maps.Animation.BOUNCE);
+          infoWindowText.style.cssText = "width:350px; height:75px; border:1px solid grey; border-radius:23px; margin-top: 8px; background: white; padding: 10px; text-align:center";
+          infoWindowText.innerHTML = '<div style="cursor:pointer" onclick="window.location = \'http://\' + window.location.host + \'/events/\' + \'' + this.e_id + '\'"><h3>' + this.title + '</h3><p>' + this.e_address + '</p></div>'; 
+          if(this.image_url.length)
+            infoWindowText.innerHTML += '<img scr="' + this.image_url + '" width="50" height="50" style="float:left" />';
+          
+          infoWindow.setPosition( event.latLng );
+          infoWindow.open( map );
+        });
+      }
+      
+    }
   }
   
 };

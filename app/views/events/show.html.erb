@@ -44,7 +44,7 @@
 
   <h3>Tel. Nr.</h3>
   <% if @event.tel_nr.length > 0 %>
-    <p><%= @event.tel_nr %></p>
+    <p><%= @event.tel_nr.sub(/^00/, '') %></p>
   <% else %>
     <p>Keine Tel. Nr. angegeben</p>
   <% end %>
@@ -71,9 +71,12 @@
     <h3><%= @event.main_category %>/<%= @event.sub_category %></h3>
     
     <p>
-      <b>Nächstes Datum:</b>
-      <%= render 'layouts/formatted_dates', :event => @event, :max_num => 5 %>
-      <% url = "window.open('https://www.google.com/calendar/render?action=TEMPLATE&dates=" + @event.start_date.strftime('%Y%m%d') + @event.start_date_time.strftime('T%H%M%SZ') + "/" + @event.end_date.strftime('%Y%m%d') + @event.end_date_time.strftime('T%H%M%SZ') + "&details=" + @event.description.split(/\r\n|\"/).join + "&sprop=website:" + @event.venue_url.html_safe + "&text=" + @event.title.html_safe + "&pli=1&sf=true&output=xml', '_blank'); return false" %>
+      <p><b>Start-Datum: <%= @event.start_date %></b></p>
+      <% if @event.repeat_dates.length > 0 %>
+        <b>Nächste Daten:</b>
+        <%= render 'layouts/formatted_dates', :event => @event, :max_num => 5 %>
+        <% url = "window.open('https://www.google.com/calendar/render?action=TEMPLATE&dates=" + @event.start_date.strftime('%Y%m%d') + @event.start_date_time.strftime('T%H%M%SZ') + "/" + @event.end_date.strftime('%Y%m%d') + @event.end_date_time.strftime('T%H%M%SZ') + "&details=" + @event.description.split(/\r\n|\"/).join + "&sprop=website:" + @event.venue_url.html_safe + "&text=" + @event.title.html_safe + "&pli=1&sf=true&output=xml', '_blank'); return false" %>
+      <% end %>
     </p>
     
     <b><%= link_to 'Google Cal', '#', :onclick => url.html_safe %></b>

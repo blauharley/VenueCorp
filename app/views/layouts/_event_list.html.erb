@@ -39,7 +39,7 @@
         <% all_events.each do |event| %>
         
           <li class="event">
-            <div class="event_h"><%= event.title %><span class="feat_date"><%= event.start_date %></span></div>
+            <div class="event_h"><%= event.title %><span class="feat_date"><%= event.start_date.strftime('%d.%b %Y') %></span></div>
                                 
             <% if event.image_url && event.image_url.length %>
               <img src="<%= event.image_url %>" width="180px" height="120px" />
@@ -79,11 +79,11 @@
     });
     
     $("ul.carousel2").simplecarousel({
-        slidespeed: 700,
+        //slidespeed: 700,
         auto: 5000,
         width: 680,
         height: 240,
-        //fade: 400,
+        fade: 400,
         pagination: true,
         next: $('.carousel2_next'),
         prev: $('.carousel2_prev')

@@ -2,7 +2,7 @@
 <% old_event = true %>
 
 <% if event.start_date && event.start_date >= Date.today %>
-    <b style=""><%= event.start_date.to_s << ' '<< event.start_date_time.strftime('%H:%M:%S') %></b>
+    <b style=""><%= event.start_date.strftime('%d.%b %Y') << ' '<< event.start_date_time.strftime('%H:%M:%S') %></b>
     <% old_event = false %>
 <% end %>
 
@@ -12,17 +12,12 @@
   <p><b>
     <% event.repeat_dates.split(' ').each do |date| %>
       
-      
         <% if date >= Date.today.to_s %>
         
-          <% if num == 0 %>
-            folgende Daten:
-          <% end %>
-          
           <% num += 1 %>
           <% old_event = false %>
           
-          <%= date.to_s + '/' %>
+          <%= DateTime.parse(date).strftime('%d.%b %Y') + '/' %>
           
           <% if num == max_num %>
             <% break %>
