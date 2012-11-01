@@ -282,7 +282,7 @@ window.onload = function(){
             '<h4 id="event_label_pdf" style="display:none; cursor:pointer" onclick="window.location = \'http://\' + window.location.host + \'/pdfEvent/\' + \'' + this.e_id + '\'"> | Als PDF anzeigen?</h4>';
             
           if(this.image_url.length)
-            infoWindowText.innerHTML += '<img src="' + this.image_url + '" width="50" height="50" style="float:left; margin-top:8px" /><b style="float:left; margin-top:8px">' + this.e_address + '</b></div>';
+            infoWindowText.innerHTML += '<img src="' + this.image_url + '" width="50" height="50" style="float:left; margin-top:8px" /><b>' + this.e_address + '</b></div>';
           else
             infoWindowText.innerHTML += '<b style="float:left; margin-top:8px">' + this.e_address + '</b></div>';
               
