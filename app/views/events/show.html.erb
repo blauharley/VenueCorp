@@ -71,10 +71,17 @@
     <h3><%= @event.main_category %>/<%= @event.sub_category %></h3>
     
     <p>
-      <p><b>Start-Datum: <%= @event.start_date.strftime('%d.%b %Y') %> um <%= @event.start_date_time.strftime('%H:%M:%S') %></b></p>
-      <% if @event.repeat_dates.length > 0 %>
-        <b>Nächste Daten:</b>
-        <%= render 'layouts/formatted_dates', :event => @event, :max_num => 5 %>
+      <% if @event.start_date >= Date.today %>
+        <p><b>Start-Datum: <%= @event.start_date.strftime('%d.%b %Y') %> um <%= @event.start_date_time.strftime('%H:%M:%S') %></b></p>
+        <p><b>Ende-Datum: <%= @event.end_date.strftime('%d.%b %Y') %> um <%= @event.end_date_time.strftime('%H:%M:%S') %></b></p>
+      <% else %>
+        
+        <% if @event.repeat_dates.length > 0 %>
+          <b>Das Start-Datum ist bereits abgelaufen, nächste Daten sind:</b>
+          <%= render 'layouts/formatted_dates', :event => @event, :max_num => 5 %>
+        <% else %>
+          <b>Veranstaltung ist bereits abgelaufen.</b>
+        <% end %>
       <% end %>
     </p>
     
@@ -83,6 +90,10 @@
     <b><%= link_to 'ICal & Outlook', ics_event_path(@event.id) %></b>
     <p><b><%= link_to 'Als PDF anzeigen', pdf_event_path(@event.id) %></b></p>
     
+    <% if (current_user && @event.user && current_user.id == @event.user.id) || (current_user && current_user.federal_user && @event.user && @event.user.regional_user) || current_admin %>
+      <p><b><%= link_to 'Bearbeiten', edit_event_path(@event.id) %></b></p>
+      <p><b><%= link_to 'Löschen', event_path(@event.id), :method => :delete %></b></p>
+    <% end %>
   </div>
   
   <h4 style="margin-top:35%"><%= @event.description.html_safe %></h4>

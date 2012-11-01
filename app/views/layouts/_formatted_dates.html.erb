@@ -1,11 +1,4 @@
 ﻿
-<% old_event = true %>
-
-<% if event.start_date && event.start_date >= Date.today %>
-    <b style=""><%= event.start_date.strftime('%d.%b %Y') << ' '<< event.start_date_time.strftime('%H:%M:%S') %></b>
-    <% old_event = false %>
-<% end %>
-
 <% if event.repeat_dates && event.repeat_dates.length != 0 %>
     
   <% num = 0 %>
@@ -15,9 +8,12 @@
         <% if date >= Date.today.to_s %>
         
           <% num += 1 %>
-          <% old_event = false %>
           
-          <%= DateTime.parse(date).strftime('%d.%b %Y') + '/' %>
+          <% if (num+1) < max_num && event.repeat_dates.split(' ').last != date %>
+            <%= DateTime.parse(date).strftime('%d.%b %Y') + '|' %>
+          <% else %>
+            <%= DateTime.parse(date).strftime('%d.%b %Y') %>
+          <% end %>
           
           <% if num == max_num %>
             <% break %>
@@ -27,8 +23,4 @@
     <% end %>
   </b></p>
   
-<% end %>
-
-<% if old_event %>
-  <b style="float:right; margin-right:10px">Veranstaltung ist veraltet</b>
 <% end %>
