@@ -133,12 +133,12 @@ window.onload = function(){
         infoWindowOptions.pixelOffset =  new google.maps.Size(-140, 25);
         infoWindowOptions.closeBoxMargin = "20px 52px 2px 2px";
         
-        infoWindow = new InfoBox(infoWindowOptions);
+        var newinfoWindow = new InfoBox(infoWindowOptions);
         
         marker.setAnimation(google.maps.Animation.BOUNCE);
         infoWindowText.innerHTML = 'Suche wird gestartet, bitte warten...';
-        infoWindow.setPosition( event.latLng );
-        infoWindow.open( map )
+        newinfoWindow.setPosition( event.latLng );
+        newinfoWindow.open( map )
         window.location = "http://" + window.location.host + "/locationSearch?latlng=" + event.latLng;
       });
       
