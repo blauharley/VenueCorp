@@ -165,7 +165,7 @@ window.onload = function(){
       var marker = new google.maps.Marker({
           map: map,
           position: start_address,
-          title: 'drag Marker to search for Events',
+          title: 'Ziehe Marker an die gewünschte Stelle, um nach Veranstaltungen zu suchen',
           icon: new google.maps.MarkerImage(
                       '/assets/event_star.png', // my 16x48 sprite with 3 circular icons
                       new google.maps.Size(25, 25), // desired size
@@ -206,7 +206,7 @@ window.onload = function(){
         marker = new google.maps.Marker({
             map: map,
             position: start_address,
-            title: 'drag Marker to search for Events',
+            title: 'Ziehe Marker an die gewünschte Stelle',
             icon: new google.maps.MarkerImage(
                         '/assets/event_star.png', // my 16x48 sprite with 3 circular icons
                         new google.maps.Size(25, 25), // desired size
@@ -220,11 +220,24 @@ window.onload = function(){
         
         if(maptype == 'searchMap'){
           google.maps.event.addListener(marker, 'dragend', function(event){
+            infoWindow.open( null );
+        
+            var infoWindowText = document.createElement("div");
+            infoWindowText.className = 'infobox';
+            infoWindowText.style.cssText = "width:215px; height:45px; border:1px solid grey; border-radius:23px; margin-top: 8px; background: white; padding: 10px; text-align:center";
+            infoWindowOptions.content = infoWindowText;
+            
+            infoWindowOptions.pixelOffset =  new google.maps.Size(-140, 25);
+            infoWindowOptions.closeBoxMargin = "20px 52px 2px 2px";
+            
+            var newinfoWindow = new InfoBox(infoWindowOptions);
+            
             marker.setAnimation(google.maps.Animation.BOUNCE);
             infoWindowText.innerHTML = 'Suche wird gestartet, bitte warten...';
-            infoWindow.setPosition( event.latLng );
-            infoWindow.open( map )
+            newinfoWindow.setPosition( event.latLng );
+            newinfoWindow.open( map )
             window.location = "http://" + window.location.host + "/locationSearch?latlng=" + event.latLng;
+            
           });
         }
         else if(maptype == 'addressMap'){
