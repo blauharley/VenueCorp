@@ -269,7 +269,7 @@ window.onload = function(){
           
           var infoWindowText = document.createElement("div");
           infoWindowText.className = 'infobox';
-          infoWindowText.style.cssText = "width:350px; height:105px; border:1px solid grey; border-radius:23px; margin-top: 8px; background: white; padding: 10px";
+          infoWindowText.style.cssText = "width:350px; height:125px; border:1px solid grey; border-radius:23px; margin-top: 8px; background: white; padding: 10px";
           infoWindowOptions.content = infoWindowText;
           
           infoWindowOptions.pixelOffset =  new google.maps.Size(-140, 5);

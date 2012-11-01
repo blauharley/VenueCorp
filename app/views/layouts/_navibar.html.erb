@@ -206,10 +206,17 @@
     });
     
     // fade out search result-div
+    var resultDivEntered = false;
     $(document).mouseover(function(event){
       
-      if(event.target && event.target.nodeName != 'A')
+      if(event.target.nodeName == 'A')
+        resultDivEntered = true;
+        
+      if(event.target && event.target.nodeName != 'A' && resultDivEntered){
         $('#searchResults').fadeOut(100);
+        resultDivEntered = false;
+      }
+      
     });
     
   });
