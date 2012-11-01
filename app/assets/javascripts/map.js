@@ -108,7 +108,7 @@ window.onload = function(){
       marker = new google.maps.Marker({
           map: map,
           position: start_address,
-          title: 'Ziehe Marker an die gewünschte Stelle und lass ihn los, um Suche zu starten',
+          title: 'Ziehe Marker an die gewünschte Stelle und lass ihn los, um die Suche zu starten',
           icon: new google.maps.MarkerImage(
                       '/assets/event_star.png', // my 16x48 sprite with 3 circular icons
                       new google.maps.Size(25, 25), // desired size
@@ -122,16 +122,18 @@ window.onload = function(){
       map.setCenter(start_address);
       
       google.maps.event.addListener(marker, 'dragend', function(event){
-      
+        
+        infoWindow.open( null );
+        
         var infoWindowText = document.createElement("div");
         infoWindowText.className = 'infobox';
         infoWindowText.style.cssText = "width:215px; height:45px; border:1px solid grey; border-radius:23px; margin-top: 8px; background: white; padding: 10px; text-align:center";
         infoWindowOptions.content = infoWindowText;
         
-        infoWindowOptions.pixelOffset_ =  new google.maps.Size(-140, 25);
-        infoWindowOptions.closeBoxMargin_ = "20px 52px 2px 2px";
+        infoWindowOptions.pixelOffset =  new google.maps.Size(-140, 25);
+        infoWindowOptions.closeBoxMargin = "20px 52px 2px 2px";
         
-        var infoWindow = new InfoBox(infoWindowOptions);
+        infoWindow = new InfoBox(infoWindowOptions);
         
         marker.setAnimation(google.maps.Animation.BOUNCE);
         infoWindowText.innerHTML = 'Suche wird gestartet, bitte warten...';
@@ -263,22 +265,27 @@ window.onload = function(){
         
         google.maps.event.addListener(marker, 'click', function(event){
           //marker.setAnimation(google.maps.Animation.BOUNCE);
+          infoWindow.open( null );
           
           var infoWindowText = document.createElement("div");
           infoWindowText.className = 'infobox';
-          infoWindowText.style.cssText = "width:350px; height:125px; border:1px solid grey; border-radius:23px; margin-top: 8px; background: white; padding: 10px; text-align:center";
+          infoWindowText.style.cssText = "width:350px; height:105px; border:1px solid grey; border-radius:23px; margin-top: 8px; background: white; padding: 10px";
           infoWindowOptions.content = infoWindowText;
           
-          infoWindowOptions.pixelOffset_ =  new google.maps.Size(-140, 25);
-          infoWindowOptions.closeBoxMargin_ = "20px 2px 2px 2px";
+          infoWindowOptions.pixelOffset =  new google.maps.Size(-140, 5);
+          infoWindowOptions.closeBoxMargin = "20px -79px 2px 2px";
           
-          var infoWindow = new InfoBox(infoWindowOptions);
+          infoWindow = new InfoBox(infoWindowOptions);
           
-          infoWindowText.innerHTML = '<div style="cursor:pointer" onclick="window.location = \'http://\' + window.location.host + \'/events/\' + \'' + this.e_id + '\'">' + 
-            '<h3>' + this.title + '</h3>' + 
-            '<img src="' + this.image_url + '" width="50" height="50" style="float:left; margin-left:10px" />' +
-            '<p>' + this.e_address + '</p></div>';
+          infoWindowText.innerHTML = '<div onmouseover="document.getElementById(\'event_label_read\').style.display = document.getElementById(\'event_label_pdf\').style.display = \'inline\'" onmouseout="document.getElementById(\'event_label_read\').style.display = document.getElementById(\'event_label_pdf\').style.display = \'none\'">' + 
+            '<h3>Empfohlene Versanstaltung: ' + this.title + '</h3><h4 id="event_label_read" style="display:none; cursor:pointer" onclick="window.location = \'http://\' + window.location.host + \'/events/\' + \'' + this.e_id + '\'">Weiterlesen?</h4>' + 
+            '<h4 id="event_label_pdf" style="display:none; cursor:pointer" onclick="window.location = \'http://\' + window.location.host + \'/pdfEvent/\' + \'' + this.e_id + '\'"> | Als PDF anzeigen?</h4>';
             
+          if(this.image_url.length)
+            infoWindowText.innerHTML += '<img src="' + this.image_url + '" width="50" height="50" style="float:left; margin-top:8px" /><b style="float:left; margin-top:8px">' + this.e_address + '</b></div>';
+          else
+            infoWindowText.innerHTML += '<b style="float:left; margin-top:8px">' + this.e_address + '</b></div>';
+              
           infoWindow.setPosition( event.latLng );
           infoWindow.open( map );
         });
