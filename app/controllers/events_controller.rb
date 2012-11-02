@@ -1,4 +1,5 @@
 ﻿class EventsController < ApplicationController
+  include ActionView::Helpers::SanitizeHelper 
   
   before_filter :get_event_cats_and_venues, :only => [:new, :edit]
   
@@ -55,6 +56,8 @@
   
   def pdf_event
     event = Event.find(params[:id])
+    html_stripped_description = strip_tags event.description
+    
     pdf_path = (Prawn::Document.generate((event.title + ".pdf")) do
               move_down 10
               if event.federal_highlight
@@ -70,17 +73,31 @@
               move_down 2
               text event.main_category << '/' << event.sub_category
               move_down 2
-              text 'Start-Datum: ' << event.start_date.strftime('%Y/%m/%d')
+              text 'Start-Datum: ' << event.start_date.strftime('%d.%b %Y')
               move_down 2
               text 'Start-Zeit: ' << event.start_date_time.strftime('%H:%M:%S')
+              move_down 2
+              text 'Ende-Datum: ' << event.end_date.strftime('%d.%b %Y')
+              move_down 2
+              text 'Ende-Zeit: ' << event.end_date_time.strftime('%H:%M:%S')
+              
+              if event.image.exists?
+                image event.image.path, :position => :right, :vposition => 10, :width => 150, :height => 100
+              elsif event.image_url && event.image_url.length > 0 && URI.parse(event.image_url).kind_of?(URI::HTTP)
+                begin 
+                  image open(event.image_url).path, :position => :right, :vposition => 10, :width => 150, :height => 100
+                rescue OpenURI::HTTPError => response
+                  Rails.logger.info 'fetching File: ' << event.image_url << ' resulted to http-status: ' << response.exception.io.status[0].to_s
+                end
+              end
               
               if event.repeat_dates.length > 0
                 move_down 2
                 text 'Nächste-Daten: ' << event.start_date.strftime('%Y/%m/%d')
               end
               
-              move_down 15
-              text event.description
+              move_down 6
+              text html_stripped_description
               
               move_down 6
               t = make_table([ 
@@ -92,24 +109,17 @@
                              ['Tel. Nr.', if event.tel_nr.length > 0 then event.tel_nr else 'Keine Website angegeben' end] ])
               t.draw
               
-              if event.image.exists?
-                image event.image.path, :position => :right, :position => 340, :vposition => 10, :width => 150, :height => 100
-              elsif event.image_url && event.image_url.length > 0 && URI.parse(event.image_url).kind_of?(URI::HTTP)
-                begin 
-                  image open(event.image_url).path, :position => :right, :position => 240, :vposition => 10, :width => 150, :height => 100
-                rescue OpenURI::HTTPError => response
-                  Rails.logger.info 'fetching File: ' << event.image_url << ' resulted to http-status: ' << response.exception.io.status[0].to_s
-                end
-              end
-              
            end).path
     send_file( pdf_path, :type => 'application/pdf',:disposition => 'inline')
   end
   
   def pdf_events
     events = []
+    html_stripped_descriptions = []
+    
     params[:ids].split(',').each do |id|
       events << Event.find(id)
+      html_stripped_descriptions << strip_tags(Event.find(id).description)
     end
     
     pdf_path = (Prawn::Document.generate((events[0].title + ".pdf")) do
@@ -117,7 +127,7 @@
               text 'Alle Veranstaltungen: ', :size => 22
               move_down 3
               
-              events.each do |event|
+              events.each_with_index do |event, index|
                 move_down 10
                 if event.federal_highlight
                   text 'Bundes-Highlight:', :size => 20
@@ -132,27 +142,13 @@
                 move_down 2
                 text event.main_category << '/' << event.sub_category
                 move_down 2
-                text 'Start-Datum: ' << event.start_date.strftime('%Y/%m/%d')
+                text 'Start-Datum: ' << event.start_date.strftime('%d.%b %Y')
                 move_down 2
                 text 'Start-Zeit: ' << event.start_date_time.strftime('%H:%M:%S')
-                
-                if event.repeat_dates.length > 0
-                  move_down 2
-                  text 'Nächste-Daten: ' << event.start_date.strftime('%Y/%m/%d')
-                end
-                
-                move_down 15
-                text event.description
-                
-                move_down 6
-                t = make_table([ 
-                               ['Veranstaltungsort', event.venue],
-                               ['Adresse', event.address],
-                               ['Kosten', if event.costs.length > 0 then event.costs else 'Keine Kosten angegeben' end],
-                               ['Website', if event.venue_url.length > 0 then event.venue_url else 'Keine Website angegeben' end],
-                               ['Email', if event.email.length > 0 then event.email else 'Keine Email angegeben' end],
-                               ['Tel. Nr.', if event.tel_nr.length > 0 then event.tel_nr else 'Keine Website angegeben' end] ])
-                t.draw
+                move_down 2
+                text 'Ende-Datum: ' << event.end_date.strftime('%d.%b %Y')
+                move_down 2
+                text 'Ende-Zeit: ' << event.end_date_time.strftime('%H:%M:%S')
                 
                 if event.image.exists?
                   image event.image.path, :position => :right, :position => 340, :vposition => 10, :width => 150, :height => 100
@@ -163,6 +159,24 @@
                     Rails.logger.info 'fetching File: ' << event.image_url << ' resulted to http-status: ' << response.exception.io.status[0].to_s
                   end
                 end
+                
+                if event.repeat_dates.length > 0
+                  move_down 2
+                  text 'Nächste-Daten: ' << event.start_date.strftime('%Y/%m/%d')
+                end
+                
+                move_down 6
+                text html_stripped_descriptions[index]
+                
+                move_down 6
+                t = make_table([ 
+                               ['Veranstaltungsort', event.venue],
+                               ['Adresse', event.address],
+                               ['Kosten', if event.costs.length > 0 then event.costs else 'Keine Kosten angegeben' end],
+                               ['Website', if event.venue_url.length > 0 then event.venue_url else 'Keine Website angegeben' end],
+                               ['Email', if event.email.length > 0 then event.email else 'Keine Email angegeben' end],
+                               ['Tel. Nr.', if event.tel_nr.length > 0 then event.tel_nr else 'Keine Website angegeben' end] ])
+                t.draw
                 
                 start_new_page
               end
