@@ -56,7 +56,7 @@
   
   def pdf_event
     event = Event.find(params[:id])
-    html_stripped_description = strip_tags event.description
+    html_stripped_description = strip_tags(event.description)
     
     pdf_path = (Prawn::Document.generate((event.title + ".pdf")) do
               move_down 10
@@ -81,6 +81,11 @@
               move_down 2
               text 'Ende-Zeit: ' << event.end_date_time.strftime('%H:%M:%S')
               
+              if event.repeat_dates.length > 0
+                move_down 2
+                text 'Nächste-Daten: ' << event.start_date.strftime('%Y/%m/%d')
+              end
+              
               if event.image.exists?
                 image event.image.path, :position => :right, :vposition => 10, :width => 150, :height => 100
               elsif event.image_url && event.image_url.length > 0 && URI.parse(event.image_url).kind_of?(URI::HTTP)
@@ -91,12 +96,7 @@
                 end
               end
               
-              if event.repeat_dates.length > 0
-                move_down 2
-                text 'Nächste-Daten: ' << event.start_date.strftime('%Y/%m/%d')
-              end
-              
-              move_down 6
+              move_down 3
               text html_stripped_description
               
               move_down 6
@@ -141,7 +141,7 @@
                 text event.title, :size => 18
                 move_down 2
                 text event.main_category << '/' << event.sub_category
-                move_down 2
+                move_down 4
                 text 'Start-Datum: ' << event.start_date.strftime('%d.%b %Y')
                 move_down 2
                 text 'Start-Zeit: ' << event.start_date_time.strftime('%H:%M:%S')
@@ -150,22 +150,14 @@
                 move_down 2
                 text 'Ende-Zeit: ' << event.end_date_time.strftime('%H:%M:%S')
                 
-                if event.image.exists?
-                  image event.image.path, :position => :right, :position => 340, :vposition => 10, :width => 150, :height => 100
-                elsif event.image_url && event.image_url.length > 0 && URI.parse(event.image_url).kind_of?(URI::HTTP)
-                  begin
-                    image open(event.image_url).path, :position => :right, :position => 240, :vposition => 10, :width => 150, :height => 100
-                  rescue OpenURI::HTTPError => response
-                    Rails.logger.info 'fetching File: ' << event.image_url << ' resulted to http-status: ' << response.exception.io.status[0].to_s
-                  end
-                end
-                
                 if event.repeat_dates.length > 0
                   move_down 2
-                  text 'Nächste-Daten: ' << event.start_date.strftime('%Y/%m/%d')
+                  text 'Nächste-Daten: ' << event.start_date.strftime('%d.%b %Y')
                 end
                 
-                move_down 6
+                
+                
+                move_down 3
                 text html_stripped_descriptions[index]
                 
                 move_down 6
@@ -178,7 +170,17 @@
                                ['Tel. Nr.', if event.tel_nr.length > 0 then event.tel_nr else 'Keine Website angegeben' end] ])
                 t.draw
                 
-                start_new_page
+                if event.image.exists?
+                  image event.image.path, :position => :right, :position => 340, :vposition => 10, :width => 150, :height => 100
+                elsif event.image_url && event.image_url.length > 0 && URI.parse(event.image_url).kind_of?(URI::HTTP)
+                  begin
+                    image open(event.image_url).path, :position => :right, :position => 240, :vposition => 10, :width => 150, :height => 100
+                  rescue OpenURI::HTTPError => response
+                    Rails.logger.info 'fetching File: ' << event.image_url << ' resulted to http-status: ' << response.exception.io.status[0].to_s
+                  end
+                end
+                
+                start_new_page if events.last != event
               end
            end).path
     send_file( pdf_path, :type => 'application/pdf',:disposition => 'inline')
