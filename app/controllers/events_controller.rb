@@ -124,8 +124,8 @@
     
     pdf_path = (Prawn::Document.generate((events[0].title + ".pdf")) do
               move_down 10
-              text 'Alle Veranstaltungen: ', :size => 22
-              move_down 3
+              text 'Gelistete Veranstaltungen: ', :size => 22
+              move_down 6
               
               events.each_with_index do |event, index|
                 move_down 10
