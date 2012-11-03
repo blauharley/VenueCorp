@@ -56,7 +56,7 @@
   
   def pdf_event
     event = Event.find(params[:id])
-    html_stripped_description = strip_tags(event.description)
+    html_stripped_description = CGI::unescapeHTML(strip_tags(event.description))
     
     pdf_path = (Prawn::Document.generate((event.title + ".pdf")) do
               move_down 10
@@ -119,7 +119,7 @@
     
     params[:ids].split(',').each do |id|
       events << Event.find(id)
-      html_stripped_descriptions << strip_tags(Event.find(id).description)
+      html_stripped_descriptions << CGI::unescapeHTML(strip_tags(Event.find(id).description))
     end
     
     pdf_path = (Prawn::Document.generate((events[0].title + ".pdf")) do
