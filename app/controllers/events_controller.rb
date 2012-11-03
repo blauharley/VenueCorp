@@ -56,7 +56,7 @@
   
   def pdf_event
     event = Event.find(params[:id])
-    html_stripped_description = CGI::unescapeHTML(strip_tags(event.description))
+    html_stripped_description = strip_tags(event.description)
     
     pdf_path = (Prawn::Document.generate((event.title + ".pdf")) do
               move_down 10
@@ -295,7 +295,9 @@
     
     event.update_attributes(params)
     event.update_attributes(:start_date_time => event_start_time, :end_date_time => event_end_time, :regional_highlight => reg_highlight, :federal_highlight => fed_highlight, :sponsored => sponsored, :repeat_dates => formated_dates)
-
+    
+    replace_umlauts event
+    
   end
   
   private
@@ -305,6 +307,22 @@
     if (!current_user && !current_admin) || (current_user && !@event.title.empty? && current_user.id != @event.user_id && !current_user.federal_user && @event.user && !@event.user.regional_user) || (current_user && !@event.title.empty? && @event.user_id == nil) || (current_user && current_user.id != @event.user_id && !@event.title.empty? && !current_user.federal_user && @event.user && !@event.user.regional_user)
       redirect_to :root, :notice => 'Sie müssen sich einloggen, um Veranstaltungen hinzuzufügen, bearbeiten oder löschen zu können.'
     end
+  end
+  
+  def replace_umlauts event
+    event.description = event.description.gsub(/&Auml;/,'Ä')
+    event.description = event.description.gsub(/&auml;/,'ä')
+    event.description = event.description.gsub(/&Euml;/,'Ë')
+    event.description = event.description.gsub(/&euml;/,'ë')
+    event.description = event.description.gsub(/&Iuml;/,'Ï')
+    event.description = event.description.gsub(/&iuml;/,'ï')
+    event.description = event.description.gsub(/&Ouml;/,'Ö')
+    event.description = event.description.gsub(/&ouml;/,'ö')
+    event.description = event.description.gsub(/&Uuml;/,'Ü')
+    event.description = event.description.gsub(/&uuml;/,'ü')
+    event.description = event.description.gsub(/&Yuml;/,'Ÿ')
+    event.description = event.description.gsub(/&yuml;/,'ÿ')
+    event.save
   end
   
 end
