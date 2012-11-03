@@ -310,6 +310,11 @@
   end
   
   def replace_umlauts event
+    event.description = event.description.gsub(/&trade;/,'™')
+    event.description = event.description.gsub(/&reg;/,'®')
+    event.description = event.description.gsub(/&copy;/,'©')
+    event.description = event.description.gsub(/&nbsp;/,' ')
+    event.description = event.description.gsub(/&euro;/,'€')
     event.description = event.description.gsub(/&sect;/,'§')
     event.description = event.description.gsub(/&amp;/,'&')
     event.description = event.description.gsub(/&szlig;/,'ß')
