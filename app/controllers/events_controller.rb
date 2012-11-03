@@ -310,6 +310,8 @@
   end
   
   def replace_umlauts event
+    event.description = event.description.gsub(/&sect;/,'§')
+    event.description = event.description.gsub(/&amp;/,'&')
     event.description = event.description.gsub(/&szlig;/,'ß')
     event.description = event.description.gsub(/&Auml;/,'Ä')
     event.description = event.description.gsub(/&auml;/,'ä')
