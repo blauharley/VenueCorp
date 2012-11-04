@@ -1,0 +1,773 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+<url>
+  <loc>http://event-corp.herokuapp.com/</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/federalCountry/Steiermark</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Schladming-Dachstein</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Ramsau%20am%20Dachstein</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Ausseerland-Salzkammergut</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Alpenregion%20Nationalpark%20Ges%C3%A4use</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Urlaubsregion%20Murtal</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Hochsteiermark</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Graz</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Region%20Graz</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Oststeiermark</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Thermenland%20Steiermark</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/S%C3%BCd-West%20Steiermark</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/federalCountry/Burgenland</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Neusiedler%20See</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Sonnenland%20Mittelburgenland</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/S%C3%BCdburgenland</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/federalCountry/K%C3%A4rnten</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Hohe%20Tauern</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Lieser-Maltatal</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Katschberg-Rennweg</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Region%20Nockberge%20Bad%20Kleinkirchheim</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Naturarena%20K%C3%A4rnten%20%E2%80%93%20Gail-,%20Gitsch-,%20Lesachtal,%20Weissensee</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Villach-Warmbad,%20Faaker%20See,%20Ossiacher%20See</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Millst%C3%A4tter%20See</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/W%C3%B6rthersee</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Outdoorpark%20Oberdrautal</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Erlebnisregion%20Hochosterwitz</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Carnica-Region%20Rosental</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Klopeiner%20See%20%E2%80%93%20S%C3%BCdk%C3%A4rnten</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Lavanttal</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Klagenfurt</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/federalCountry/Tirol</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Achensee</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Alpbachtal%20&amp;%20Tiroler%20Seenland</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Erste%20Ferienregion%20im%20Zillertal</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Ferienland%20Kufstein</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Ferienregion%20Hohe%20Salve</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Ferienregion%20TirolWest</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Imst%20Tourismus</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Innsbruck%20&amp;%20seine%20Feriend%C3%B6rfer</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Kaiserwinkl</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Kitzb%C3%BChel%20Tourismus</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Kitzb%C3%BCheler%20Alpen%20-%20Brixental</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Kitzb%C3%BCheler%20Alpen%20-%20St.%20Johann%20in%20Tirol</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Lechtal</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Mayrhofen</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Naturparkregion%20Reutte</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Osttirol</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/%C3%96tztal%20Tourismus</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Paznaun</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Pillerseetal</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Pitztal</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Region%20Hall-Wattens</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Seefeld</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Serfaus-Fiss-Ladis</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Silberregion%20Karwendel</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/St.%20Anton%20am%20Arlberg</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Stubai%20Tirol</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Tannheimer%20Tal</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Tiroler%20Oberland</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Tiroler%20Zugspitz%20Arena</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Tux%20-%20Finkenberg</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Wilder%20Kaiser</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Wildsch%C3%B6nau</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Wipptal</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Zell-Gerlos,%20Zillertal%20Arena</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/federalCountry/Salzburg</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Fuschlsee</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Gasteinertal</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Gro%C3%9Farltal</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Hochk%C3%B6nig</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Lungau</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Ferienregion%20Nationalpark%20Hohe%20Tauern</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Obertauern</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Saalbach%20Hinterglemm</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Saalfelden-Leogang</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Salzburg%20&amp;%20Umgebungsorte</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Salzburger%20Saalachtal</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Salzburger%20Seenland</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Salzburger%20Sonnenterrasse</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Salzburger%20Sportwelt</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Tennengau-Dachstein%20West</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Wolfgangsee</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Zell%20am%20See%20-%20Kaprun</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Bischofshofen</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Forstau</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Goldegg</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/H%C3%BCttau-Niedernfritz</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Maishofen</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Pfarrwerfen</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Viehhofen</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Werfen</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Werfenweng</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/B%C3%BCrmoos</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Nussdorf%20am%20Haunsberg</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Lamprechtshausen</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/St.%20Georgen%20bei%20Salzburg</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/federalCountry/Vorarlberg</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Kleinwalsertal</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Bregenzerwald</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Bodensee-Vorarlberg</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Montafon</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Alpenregion%20Bludenz</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Arlberg</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Biosph%C3%A4renpark%20Gro%C3%9Fes%20Walsertal</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/federalCountry/Ober%C3%B6sterreich</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Salzkammergut</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Donau%20Ober%C3%B6sterreich</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/M%C3%BChlviertel</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Innviertel</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Nationalpark%20Kalkalpen</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Dachstein%20Salzkammergut</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Pyhrn-Priel</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Vitalwelt%20-%20Bad%20Schallerbach</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Attersee</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Traunsee</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Mondsee</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Bad%20Hall%20-%20Kremsm%C3%BCnster</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/B%C3%B6hmerwald</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/federalCountry/Nieder%C3%B6sterreich</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Donau-Nieder%C3%B6sterreich</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Mostviertel</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Weinviertel</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Waldviertel</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Wienerwald</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/venue/Wiener%20Alpen</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/federalCountry/Wien</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/catMainEvents/Sport</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/catSubEvents/Wandern%20und%20Klettern</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/catSubEvents/Reiten</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/catSubEvents/Rad%20&amp;%20Mountainbike</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/catSubEvents/Motor</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/catSubEvents/Laufen%20&amp;%20Nordic%20Walking</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/catSubEvents/Luft%20&amp;%20Wasser</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/catSubEvents/Ski%20Nordisch</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/catSubEvents/Ski%20Alpin</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/catSubEvents/Sonstiges</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/catMainEvents/Kultur</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/catSubEvents/Ausstellungen</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/catSubEvents/Oper,%20Operette,%20Musical</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/catSubEvents/Musik</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/catSubEvents/Tanz,%20Ballet</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/catSubEvents/Film</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/catSubEvents/Literatur</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/catSubEvents/Neue%20Medien</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/catSubEvents/Festivals</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/catSubEvents/Kleinkunst</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/catSubEvents/Theater</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/catSubEvents/Vortrag,%20Diskussion</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/catMainEvents/Kinder%20&amp;%20Familie</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/catMainEvents/Brauchtum%20&amp;%20Feste</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/catSubEvents/Ostern</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/catSubEvents/Weihnachten</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/catSubEvents/Silvester</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/catSubEvents/Fasching</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/catSubEvents/Sonnenwende</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/catSubEvents/B%C3%A4lle</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/catSubEvents/Volksfeste</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/catSubEvents/Umz%C3%BCge</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/catSubEvents/Almauftrieb</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/catMainEvents/Kulinarium</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/catMainEvents/Sonstiges</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/events/10</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/pdfEvent/10</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/events/11</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/pdfEvent/11</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/pdfEvent/12</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/events/15</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/pdfEvent/15</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/events/13</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/pdfEvent/13</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/events/14</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/pdfEvent/14</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/eventHighlights/federal/true</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/eventHighlights/regional/true</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/searchSurroundingEvents</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/admins/sign_in</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/users/sign_in</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/contact</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/pdfEvents/10,11,14,12,15,13</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/pdfEvents/10,11,12,15,13</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/pdfEvents/10</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/pdfEvents/11,12,15,13</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/pdfEvents/14</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/pdfEvents/10,11,15,13</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/pdfEvents/11,15</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/pdfEvents/13</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/pdfEvents/12</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/pdfEvents/11</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://event-corp.herokuapp.com/pdfEvents/10,12,15,13</loc>
+  <changefreq>weekly</changefreq>
+</url>
+</urlset>
