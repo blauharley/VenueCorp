@@ -4,7 +4,7 @@
 <%= form_tag send_contact_mail_path, :method => :get do %>
 
   <p><p><%= label_tag 'Betreff' %></p>
-  <p><%= text_field_tag :subject, '', { :size => '130', :pattern => '\w+' } %></p></p>
+  <p><%= text_field_tag :subject, '', { :size => '130' } %></p></p>
   
   <p><p><%= label_tag 'Nachricht' %></p>
   <p><%= cktext_area_tag :body, '', :toolbar => 'Easy', :width => 888, :height => 270 %></p></p>

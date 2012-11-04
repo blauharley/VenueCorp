@@ -113,6 +113,9 @@
     end
   end
   
+  def sitemap
+    render :text => File.read(Dir.pwd << 'public/sitemap.xml')
+  end
   
   private
   

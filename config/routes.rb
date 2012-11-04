@@ -34,6 +34,7 @@ EventApp::Application.routes.draw do
     match 'searchSurroundingEvents' => :search_surrounding_events, :as => 'search_surrounding_events'
     match 'locationSearch' => :get_events_by_geocoding, :as => 'get_events_by_geocoding'
     match 'userlist' => :get_user_list, :as => 'get_user_list'
+    match 'sitemap.xml' => :sitemap
   end
   
   controller :Ajax do
