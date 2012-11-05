@@ -1,0 +1,14 @@
+﻿<table style="margin-left:180px; margin-top:-125px">
+<% qr = RQRCode::QRCode.new(string_to_encode, :size => 6, :level => :h ) %>
+<% qr.modules.each_index do |x| %>
+  <tr>  
+  <% qr.modules.each_index do |y| %>
+   <% if qr.dark?(x,y) %>
+    <td class="black"/>
+   <% else %>
+    <td class="white"/>
+   <% end %>
+  <% end %>
+  </tr>
+<% end %>
+</table>
