@@ -27,6 +27,7 @@ gem "icalendar", "~> 1.2.0"
 gem "geocoder"
 gem 'devise'
 gem "ckeditor", "3.7.1"
+gem 'rqrcode'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

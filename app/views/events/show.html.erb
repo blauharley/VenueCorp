@@ -1,4 +1,29 @@
-﻿
+﻿<style type="text/css">
+
+table {
+  border-width: 0;
+  border-style: none;
+  border-color: #0000ff;
+  border-collapse: collapse;
+  height:120px;
+  width:120px;
+ }
+td {
+  border-width: 0;
+  border-style: none;
+  border-color: #0000ff;
+  border-collapse: collapse;
+  padding: 0;
+  margin: 0;
+  width: 1px;
+  //height: 10px;
+}
+
+td.black { background-color: #000; }
+td.white { background-color: #fff; }
+
+</style>
+
 <p><%= link_to 'Home', root_path %></p>
 <h4 id="map_notifier" style="display:none"></h4>
 
@@ -49,11 +74,6 @@
     <p>Keine Tel. Nr. angegeben</p>
   <% end %>
 
-  <% if (current_user && @event.user && current_user.id == @event.user.id) || current_admin %>
-    <%= link_to 'Bearbeiten', edit_event_path(@event.id) %></b></p>
-    <%= link_to 'Löschen', event_path(@event.id), :method => 'delete' %>
-  <% end %>
-
 </div>
 
 
@@ -85,6 +105,8 @@
       <% end %>
     </p>
     
+    <%= render 'layouts/qr_coder', :string_to_encode => pdf_event_url(@event) %>
+  
     <% url = "window.open('https://www.google.com/calendar/render?action=TEMPLATE&dates=" + @event.start_date.strftime('%Y%m%d') + @event.start_date_time.strftime('T%H%M%SZ') + "/" + @event.end_date.strftime('%Y%m%d') + @event.end_date_time.strftime('T%H%M%SZ') + "&details=" + @event.description.split(/\r\n|\"/).join + "&sprop=website:" + @event.venue_url.html_safe + "&text=" + @event.title.html_safe + "&pli=1&sf=true&output=xml', '_blank'); return false" %>
     <b><%= link_to 'Google Cal', '#', :onclick => url.html_safe %></b>
     <b><%= link_to 'ICal & Outlook', ics_event_path(@event.id) %></b>

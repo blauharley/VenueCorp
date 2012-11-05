@@ -1,6 +1,7 @@
 require 'csv'
 require 'categories'
 require 'venues'
+require 'rqrcode'
 
 class ApplicationController < ActionController::Base
   protect_from_forgery
