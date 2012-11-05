@@ -155,7 +155,15 @@
                   text 'Nächste-Daten: ' << event.start_date.strftime('%d.%b %Y')
                 end
                 
-                
+                if event.image.exists?
+                  image event.image.path, :position => :right, :position => 340, :vposition => 10, :width => 150, :height => 100
+                elsif event.image_url && event.image_url.length > 0 && URI.parse(event.image_url).kind_of?(URI::HTTP)
+                  begin
+                    image open(event.image_url).path, :position => :right, :position => 240, :vposition => 10, :width => 150, :height => 100
+                  rescue OpenURI::HTTPError => response
+                    Rails.logger.info 'fetching File: ' << event.image_url << ' resulted to http-status: ' << response.exception.io.status[0].to_s
+                  end
+                end
                 
                 move_down 3
                 text html_stripped_descriptions[index]
@@ -169,16 +177,6 @@
                                ['Email', if event.email.length > 0 then event.email else 'Keine Email angegeben' end],
                                ['Tel. Nr.', if event.tel_nr.length > 0 then event.tel_nr else 'Keine Website angegeben' end] ])
                 t.draw
-                
-                if event.image.exists?
-                  image event.image.path, :position => :right, :position => 340, :vposition => 10, :width => 150, :height => 100
-                elsif event.image_url && event.image_url.length > 0 && URI.parse(event.image_url).kind_of?(URI::HTTP)
-                  begin
-                    image open(event.image_url).path, :position => :right, :position => 240, :vposition => 10, :width => 150, :height => 100
-                  rescue OpenURI::HTTPError => response
-                    Rails.logger.info 'fetching File: ' << event.image_url << ' resulted to http-status: ' << response.exception.io.status[0].to_s
-                  end
-                end
                 
                 start_new_page if events.last != event
               end
