@@ -5,7 +5,7 @@ width:980px;
 margin: 30px auto;
 }
 #leftcol	{float:left; width:680px;}
-#nav_search	{height:80px;vertical-align:bottom; }
+#nav_search	{vertical-align:bottom; }
 #rightcol	{float:left;width:270px;margin:50px 0 0 25px;}
 #eventlistener	{width:100%;margin:0;}
 .event_h	{font-size:1.4em;font-weight:bold;margin:0 0 0.5em 0;padding:0.2em;background:#FC0;}

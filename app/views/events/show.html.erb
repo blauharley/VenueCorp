@@ -36,7 +36,7 @@ td.white { background-color: #fff; }
 </div>
 
 
-<div style="float:right; margin-top:-10%; width:300px; text-align:center">
+<div style="float:right; margin-top:-3.5%; width:300px; text-align:center">
   <div id="event_map" style="width:400px; height:300px"></div>
   
   <h3>Veranstaltungsort</h3>
@@ -81,12 +81,12 @@ td.white { background-color: #fff; }
   <h2><%= @event.title %></h2>
   
   <!-- paperclip image, deactivated because of heroku 
-  <p><%# image_tag @event.image.url(:medium), :style => 'width:250px; height:190px; float:left' %></p>-->
+    <%# image_tag @event.image.url(:medium), :style => 'width:250px; height:190px; float:left' %>-->
   <% if @event.image_url && @event.image_url.length > 0 %>
-    <p><img src="<%= @event.image_url %>" width="250px" height="190px" style="float:left" /></p>
+    <img src="<%= @event.image_url %>" width="250px" height="190px" style="float:left" />
   <% end %>
   
-  <div style="width:170px; float:right; margin-right:35%">
+  <div style="width:170px; margin-left:8px; float:left">
   
     <h3><%= @event.main_category %>/<%= @event.sub_category %></h3>
     
