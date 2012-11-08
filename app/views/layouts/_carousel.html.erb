@@ -5,7 +5,7 @@
   <ul class="<%= classname_carousel %>">				
     <% events.each do |event| %>
       <li>
-        <% if event.image_url && event.image_url.length %>
+        <% if event.image_url && event.image_url.length > 0 %>
           <img src="<%= event.image_url %>" width="270px" height="180px" />
         <% end %>
         

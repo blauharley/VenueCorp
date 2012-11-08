@@ -294,7 +294,7 @@
     event.update_attributes(params)
     event.update_attributes(:start_date_time => event_start_time, :end_date_time => event_end_time, :regional_highlight => reg_highlight, :federal_highlight => fed_highlight, :sponsored => sponsored, :repeat_dates => formated_dates)
     
-    replace_umlauts event
+    replace_html event
     
   end
   
@@ -307,7 +307,12 @@
     end
   end
   
-  def replace_umlauts event
+  def replace_html event
+    event.description = sanitize(event.description, :tags => %w(table tr td div), :attributes => %w(id class style))
+    event.description = event.description.gsub(/&quot;/,'"')
+    event.description = event.description.gsub(/&bdquo;/,'„')
+    event.description = event.description.gsub(/&ldquo;/,'“')
+    event.description = event.description.gsub(/&ndash;/,'–')
     event.description = event.description.gsub(/&trade;/,'™')
     event.description = event.description.gsub(/&reg;/,'®')
     event.description = event.description.gsub(/&copy;/,'©')

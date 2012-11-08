@@ -41,7 +41,7 @@
           <li class="event">
             <div class="event_h"><%= event.title %><span class="feat_date"><%= event.start_date.strftime('%d.%b %Y') %></span></div>
                                 
-            <% if event.image_url && event.image_url.length %>
+            <% if event.image_url && event.image_url.length > 0 %>
               <img src="<%= event.image_url %>" width="180px" height="120px" />
             <% end %>
             <h6><%= event.main_category %> - <%= event.sub_category %></h6>

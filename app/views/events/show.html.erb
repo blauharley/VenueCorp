@@ -82,7 +82,7 @@ td.white { background-color: #fff; }
   
   <!-- paperclip image, deactivated because of heroku 
   <p><%# image_tag @event.image.url(:medium), :style => 'width:250px; height:190px; float:left' %></p>-->
-  <% if @event.image_url && @event.image_url.length %>
+  <% if @event.image_url && @event.image_url.length > 0 %>
     <p><img src="<%= @event.image_url %>" width="250px" height="190px" style="float:left" /></p>
   <% end %>
   
